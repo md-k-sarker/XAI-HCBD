@@ -1,0 +1,42 @@
+Possible Explanations:
+
+1.	Food or (Market and (imageContains some (not (Water))))
+
+2.	Food or (Market and (imageContains some (not (Swimming_Pool))))
+
+3.	Food or (Market and (imageContains some (not (Person)))) 
+
+4.	Food or (Market and (imageContains some (not (Market)))) 
+ 
+5.	 Food or (Market and (imageContains some (not (Food)))) 
+ 
+6.	 Food or (Market and (imageContains some (not (Apple)))) 
+
+7.	 (Food or (imageContains some Thing)) and (not (Swimming_Pool))
+ 
+8.	 Food or ((not (Swimming_Pool)) and (imageContains some (not (Food)))) 
+
+
+
+
+Raw Results:
+
+1: Food or (Market and (imageContains some Thing)) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+2: Food or ((not (Swimming_Pool)) and (imageContains some Thing)) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+3: Food or (Market and (imageContains some (not (Water)))) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+4: Food or (Market and (imageContains some (not (Swimming_Pool)))) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+5: Food or (Market and (imageContains some (not (Person)))) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+6: Food or (Market and (imageContains some (not (Market)))) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+7: Food or (Market and (imageContains some (not (Food)))) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+8: Food or (Market and (imageContains some (not (Apple)))) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+9: (Food or (imageContains some Thing)) and (not (Swimming_Pool)) (pred. acc.: 88.89%, F-measure: 88.89%)
+
+10: Food or ((not (Swimming_Pool)) and (imageContains some (not (Food)))) (pred. acc.: 88.89%, F-measure: 88.89%)

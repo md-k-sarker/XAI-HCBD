@@ -1,0 +1,1231 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://dase.org/hcbd/TestOnto#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://dase.org/hcbd/TestOnto#">
+    <Prefix name="" IRI="http://dase.org/hcbd/TestOnto#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="TestOnto" IRI="http://dase.org/hcbd/TestOnto#"/>
+    <Prefix name="testonto#" IRI="http://dase.org/hcbd/TestOnto#"/>
+    <Prefix name="untitled-ontology-535" IRI="http://www.semanticweb.org/sarker/ontologies/2017/1/untitled-ontology-535#"/>
+    <Declaration>
+        <ObjectProperty IRI="hasSteps"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Wall"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="thermometer_2"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasShelf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasPole"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_1"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSky"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSideWalk"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasFruit"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="road_2"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Ladder"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="shelf_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Broom"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Window"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasDesk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="food_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_4"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBag"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Pot"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="building_2"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Bottle"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSome"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasWall"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasWindowPane"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="sidewalk_2"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasChair"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="stall_2"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasPlant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Plant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Cabinet"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_3"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="partOf"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Stall"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Fruit"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasStairs"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="cabinet_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="pot_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="sidewalk_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="person_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="ladder_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="plant_1"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBroom"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="stall_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="fruit_2"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCabinet"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasFood"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Food"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="ceiling_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="broom_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="chair_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="windowpane_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Desk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="cabinet_2"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCeiling"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Storage_Room"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasPerson"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="thermometer_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="plant_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="light_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="road_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="fruit_1"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBuilding"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Road"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="tree_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="food_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="book_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="building_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Light"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasRoad"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="desk_1"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasDoor"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasLight"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="chair_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_5"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBottle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Thermometer"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasLadder"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="window_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Market"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Ceiling"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="door_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="tree_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="stair_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="pot_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Floor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Sky"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_6"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Chair"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Bag"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="fluorescent_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="WindowPane"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Building"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="floor_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="ladder_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="person_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="box_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="sky_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Stair"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasStall"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="broom_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="SuperMarket"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasFloor"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBox"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasBook"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="bag_1"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasThermometer"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_3"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="box_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Athletic_Facility"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="wall_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Shelf"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_4"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Tree"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Room"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="steps_1"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasWindow"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Grocery_Store"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_2"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Steps"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Box"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasTree"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="bottle_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="bag_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_4"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Door"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Fluorescent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Swimming_Pool"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_3"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="SideWalk"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Person"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasPot"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Book"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="isHidden"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="Fluorescent"/>
+        <Class IRI="Light"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Fruit"/>
+        <Class IRI="Food"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Grocery_Store"/>
+        <Class IRI="Market"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Storage_Room"/>
+        <Class IRI="Room"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Storage_Room"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="isHidden"/>
+            <Datatype abbreviatedIRI="xsd:boolean"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="SuperMarket"/>
+        <Class IRI="Market"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Swimming_Pool"/>
+        <Class IRI="Athletic_Facility"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Tree"/>
+        <Class IRI="Plant"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="Athletic_Facility"/>
+        <Class IRI="Market"/>
+        <Class IRI="Room"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="Bag"/>
+        <NamedIndividual IRI="bag_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Bag"/>
+        <NamedIndividual IRI="bag_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Book"/>
+        <NamedIndividual IRI="book_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Bottle"/>
+        <NamedIndividual IRI="bottle_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Box"/>
+        <NamedIndividual IRI="box_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Box"/>
+        <NamedIndividual IRI="box_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Broom"/>
+        <NamedIndividual IRI="broom_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Broom"/>
+        <NamedIndividual IRI="broom_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Building"/>
+        <NamedIndividual IRI="building_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Building"/>
+        <NamedIndividual IRI="building_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Cabinet"/>
+        <NamedIndividual IRI="cabinet_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Cabinet"/>
+        <NamedIndividual IRI="cabinet_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Ceiling"/>
+        <NamedIndividual IRI="ceiling_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Chair"/>
+        <NamedIndividual IRI="chair_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Chair"/>
+        <NamedIndividual IRI="chair_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Desk"/>
+        <NamedIndividual IRI="desk_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Door"/>
+        <NamedIndividual IRI="door_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Floor"/>
+        <NamedIndividual IRI="floor_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Fluorescent"/>
+        <NamedIndividual IRI="fluorescent_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Food"/>
+        <NamedIndividual IRI="food_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Food"/>
+        <NamedIndividual IRI="food_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Fruit"/>
+        <NamedIndividual IRI="fruit_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Fruit"/>
+        <NamedIndividual IRI="fruit_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Ladder"/>
+        <NamedIndividual IRI="ladder_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Ladder"/>
+        <NamedIndividual IRI="ladder_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Light"/>
+        <NamedIndividual IRI="light_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_3"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Person"/>
+        <NamedIndividual IRI="person_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Person"/>
+        <NamedIndividual IRI="person_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Plant"/>
+        <NamedIndividual IRI="plant_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Plant"/>
+        <NamedIndividual IRI="plant_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Pot"/>
+        <NamedIndividual IRI="pot_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Pot"/>
+        <NamedIndividual IRI="pot_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Road"/>
+        <NamedIndividual IRI="road_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Road"/>
+        <NamedIndividual IRI="road_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Shelf"/>
+        <NamedIndividual IRI="shelf_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="SideWalk"/>
+        <NamedIndividual IRI="sidewalk_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="SideWalk"/>
+        <NamedIndividual IRI="sidewalk_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Sky"/>
+        <NamedIndividual IRI="sky_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Stair"/>
+        <NamedIndividual IRI="stair_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Stall"/>
+        <NamedIndividual IRI="stall_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Stall"/>
+        <NamedIndividual IRI="stall_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Steps"/>
+        <NamedIndividual IRI="steps_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_3"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_6"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_3"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Thermometer"/>
+        <NamedIndividual IRI="thermometer_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Thermometer"/>
+        <NamedIndividual IRI="thermometer_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Tree"/>
+        <NamedIndividual IRI="tree_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Tree"/>
+        <NamedIndividual IRI="tree_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Wall"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Window"/>
+        <NamedIndividual IRI="window_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="WindowPane"/>
+        <NamedIndividual IRI="windowpane_1"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBag"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="bag_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="box_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="box_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasFood"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="food_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasFruit"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="fruit_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPerson"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="person_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasRoad"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="road_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasSky"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="sky_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasStall"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="stall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasStall"/>
+        <NamedIndividual IRI="market_1"/>
+        <NamedIndividual IRI="stall_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBuilding"/>
+        <NamedIndividual IRI="market_2"/>
+        <NamedIndividual IRI="building_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPerson"/>
+        <NamedIndividual IRI="market_2"/>
+        <NamedIndividual IRI="person_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasSideWalk"/>
+        <NamedIndividual IRI="market_2"/>
+        <NamedIndividual IRI="sidewalk_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasStall"/>
+        <NamedIndividual IRI="market_2"/>
+        <NamedIndividual IRI="stall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBuilding"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="building_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPerson"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="person_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPerson"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="person_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPlant"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="plant_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasSideWalk"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="sidewalk_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasSky"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="sky_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasStall"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="stall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasStall"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="stall_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasTree"/>
+        <NamedIndividual IRI="market_3"/>
+        <NamedIndividual IRI="tree_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBag"/>
+        <NamedIndividual IRI="market_4"/>
+        <NamedIndividual IRI="bag_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPerson"/>
+        <NamedIndividual IRI="market_4"/>
+        <NamedIndividual IRI="person_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasSideWalk"/>
+        <NamedIndividual IRI="market_4"/>
+        <NamedIndividual IRI="sidewalk_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasSky"/>
+        <NamedIndividual IRI="market_4"/>
+        <NamedIndividual IRI="sky_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasTree"/>
+        <NamedIndividual IRI="market_4"/>
+        <NamedIndividual IRI="tree_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="market_4"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="box_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="box_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasCabinet"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="cabinet_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasShelf"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="shelf_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasStairs"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="stair_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasSteps"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="steps_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWindow"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="window_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWindowPane"/>
+        <NamedIndividual IRI="storage_room_1"/>
+        <NamedIndividual IRI="windowpane_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBottle"/>
+        <NamedIndividual IRI="storage_room_2"/>
+        <NamedIndividual IRI="bottle_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="storage_room_2"/>
+        <NamedIndividual IRI="box_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasFloor"/>
+        <NamedIndividual IRI="storage_room_2"/>
+        <NamedIndividual IRI="floor_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasShelf"/>
+        <NamedIndividual IRI="storage_room_2"/>
+        <NamedIndividual IRI="shelf_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="storage_room_2"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="storage_room_3"/>
+        <NamedIndividual IRI="box_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasCeiling"/>
+        <NamedIndividual IRI="storage_room_3"/>
+        <NamedIndividual IRI="ceiling_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasFloor"/>
+        <NamedIndividual IRI="storage_room_3"/>
+        <NamedIndividual IRI="floor_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasLight"/>
+        <NamedIndividual IRI="storage_room_3"/>
+        <NamedIndividual IRI="light_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasShelf"/>
+        <NamedIndividual IRI="storage_room_3"/>
+        <NamedIndividual IRI="shelf_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="storage_room_3"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBook"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="book_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="box_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasCabinet"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="cabinet_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasCeiling"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="ceiling_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasChair"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="chair_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasDesk"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="desk_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasFloor"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="floor_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasLight"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="fluorescent_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasShelf"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="shelf_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="storage_room_4"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBox"/>
+        <NamedIndividual IRI="storage_room_5"/>
+        <NamedIndividual IRI="box_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasCeiling"/>
+        <NamedIndividual IRI="storage_room_5"/>
+        <NamedIndividual IRI="ceiling_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasDoor"/>
+        <NamedIndividual IRI="storage_room_5"/>
+        <NamedIndividual IRI="door_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasFloor"/>
+        <NamedIndividual IRI="storage_room_5"/>
+        <NamedIndividual IRI="floor_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasLight"/>
+        <NamedIndividual IRI="storage_room_5"/>
+        <NamedIndividual IRI="light_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPerson"/>
+        <NamedIndividual IRI="storage_room_5"/>
+        <NamedIndividual IRI="person_2"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="storage_room_5"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasCeiling"/>
+        <NamedIndividual IRI="storage_room_6"/>
+        <NamedIndividual IRI="ceiling_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasFloor"/>
+        <NamedIndividual IRI="storage_room_6"/>
+        <NamedIndividual IRI="floor_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasLight"/>
+        <NamedIndividual IRI="storage_room_6"/>
+        <NamedIndividual IRI="light_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="storage_room_6"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasBroom"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+        <NamedIndividual IRI="broom_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasLadder"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+        <NamedIndividual IRI="ladder_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPlant"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+        <NamedIndividual IRI="plant_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPot"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+        <NamedIndividual IRI="pot_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasThermometer"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+        <NamedIndividual IRI="thermometer_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasLadder"/>
+        <NamedIndividual IRI="swimming_pool_2"/>
+        <NamedIndividual IRI="ladder_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="swimming_pool_2"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasChair"/>
+        <NamedIndividual IRI="swimming_pool_3"/>
+        <NamedIndividual IRI="chair_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasDoor"/>
+        <NamedIndividual IRI="swimming_pool_3"/>
+        <NamedIndividual IRI="door_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasLight"/>
+        <NamedIndividual IRI="swimming_pool_3"/>
+        <NamedIndividual IRI="light_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPlant"/>
+        <NamedIndividual IRI="swimming_pool_3"/>
+        <NamedIndividual IRI="plant_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasWall"/>
+        <NamedIndividual IRI="swimming_pool_3"/>
+        <NamedIndividual IRI="wall_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasDoor"/>
+        <NamedIndividual IRI="swimming_pool_4"/>
+        <NamedIndividual IRI="door_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPerson"/>
+        <NamedIndividual IRI="swimming_pool_4"/>
+        <NamedIndividual IRI="person_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPlant"/>
+        <NamedIndividual IRI="swimming_pool_4"/>
+        <NamedIndividual IRI="plant_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="hasPot"/>
+        <NamedIndividual IRI="swimming_pool_4"/>
+        <NamedIndividual IRI="pot_1"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="box_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="box_2"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="cabinet_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="cabinet_2"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="chair_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="chair_2"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="person_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="person_2"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="window_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="isHidden"/>
+        <NamedIndividual IRI="windowpane_1"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasBox"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasChair"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasFloor"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasRoad"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasStall"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+

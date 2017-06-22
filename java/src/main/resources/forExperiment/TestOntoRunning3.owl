@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://dase.org/hcbd/TestOnto#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://dase.org/hcbd/TestOnto#">
+    <Prefix name="" IRI="http://dase.org/hcbd/TestOnto#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="TestOnto" IRI="http://dase.org/hcbd/TestOnto#"/>
+    <Prefix name="testonto#" IRI="http://dase.org/hcbd/TestOnto#"/>
+    <Prefix name="untitled-ontology-535" IRI="http://www.semanticweb.org/sarker/ontologies/2017/1/untitled-ontology-535#"/>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_6"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_4"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_5"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Storage_Room"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_3"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="storage_room_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_4"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_3"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="market_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_2"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_3"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="swimming_pool_4"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Market"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Swimming_Pool"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Pot"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSome"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="Market"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Person"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Market"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Person"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Market"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Person"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Market"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="hasSome"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Person"/>
+        <ObjectSomeValuesFrom>
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+            <Class IRI="Market"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Person"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+            <Class IRI="Market"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Person"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Pot"/>
+        <ObjectSomeValuesFrom>
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+            <Class IRI="Swimming_Pool"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Pot"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+            <Class IRI="Swimming_Pool"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Pot"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Swimming_Pool"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Pot"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Swimming_Pool"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Pot"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Swimming_Pool"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Pot"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Swimming_Pool"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="hasSome"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Person"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Pot"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Person"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Pot"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="hasSome"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+            <Class IRI="Market"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+            <Class IRI="Swimming_Pool"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectInverseOf>
+                <ObjectProperty IRI="hasSome"/>
+            </ObjectInverseOf>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Person"/>
+        </ObjectSomeValuesFrom>
+        <Class IRI="Market"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class IRI="Pot"/>
+        </ObjectSomeValuesFrom>
+        <Class IRI="Swimming_Pool"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class abbreviatedIRI="owl:Thing"/>
+        </ObjectSomeValuesFrom>
+        <Class IRI="Market"/>
+    </SubClassOf>
+    <SubClassOf>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="hasSome"/>
+            <Class abbreviatedIRI="owl:Thing"/>
+        </ObjectSomeValuesFrom>
+        <Class IRI="Swimming_Pool"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="Market"/>
+        <Class IRI="Person"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Market"/>
+        <Class IRI="Pot"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Market"/>
+        <Class IRI="Swimming_Pool"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Person"/>
+        <Class IRI="Pot"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Person"/>
+        <Class IRI="Swimming_Pool"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="Pot"/>
+        <Class IRI="Swimming_Pool"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_3"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Market"/>
+        <NamedIndividual IRI="market_4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_3"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Storage_Room"/>
+        <NamedIndividual IRI="storage_room_6"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_2"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_3"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="Swimming_Pool"/>
+        <NamedIndividual IRI="swimming_pool_4"/>
+    </ClassAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi -->
+
