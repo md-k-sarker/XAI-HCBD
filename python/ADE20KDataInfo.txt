@@ -1,0 +1,8 @@
+*_.txt: text file describing the content of each image (describing objects and parts). This information is redundant with other files. But in addition contains also information about object attributes. The function loadAde20K.m also parses the content of this file. Each line in the text file contains: 
+
+column 1=instance number, 
+column 2=part level (0 for objects), 
+column 3=occluded (1 for true), 
+column 4=class name (parsed using wordnet), 
+column 5=original raw name (might provide a more detailed categorization), 
+column 6=comma separated attributes list.

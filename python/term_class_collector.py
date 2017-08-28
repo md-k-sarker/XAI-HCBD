@@ -135,7 +135,10 @@ def cross_check_with_xie():
     print('len(all_terms_xie) :', len(all_terms_xie))
 
 
-start_iterating()
-# print_infos()
-write_infos()
-cross_check_with_xie()
+# start_iterating()
+# # print_infos()
+# write_infos()
+# cross_check_with_xie()
+
+
+print('working')
