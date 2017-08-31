@@ -1,0 +1,8 @@
+http://www.adampease.org/OP/SUMO.owl#OutdoorWareHouse_Indi_1_ADE_train_00019754,
+http://www.adampease.org/OP/SUMO.owl#OutdoorWareHouse_Indi_2_ADE_train_00019755, 
+http://www.adampease.org/OP/SUMO.owl#OutdoorWareHouse_Indi_3_ADE_train_00019756,
+http://www.adampease.org/OP/SUMO.owl#IndoorWarehouse_Indi_1_ADE_train_00019702,
+http://www.adampease.org/OP/SUMO.owl#IndoorWarehouse_Indi_2_ADE_train_00019703,
+http://www.adampease.org/OP/SUMO.owl#IndoorWarehouse_Indi_3_ADE_train_00019704,
+http://www.adampease.org/OP/SUMO.owl#IndoorWarehouse_Indi_4_ADE_train_00019705,
+http://www.adampease.org/OP/SUMO.owl#IndoorWarehouse_Indi_5_ADE_train_00019706

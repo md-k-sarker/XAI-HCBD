@@ -31,6 +31,14 @@
 			</exclusions>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.wcohen/com.wcohen.secondstring -->
+		<dependency>
+			<groupId>com.wcohen</groupId>
+			<artifactId>com.wcohen.secondstring</artifactId>
+			<version>0.1</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -142,12 +150,9 @@
 		</repository>
 
 		<!-- Snapshot version -->
-		<!-- <repository>
-			<snapshots />
-			<id>maven.aksw.snapshots</id>
-			<name>University Leipzig, AKSW Maven2 Repository</name>
-			<url>http://maven.aksw.org/repository/snapshots/</url>
-		</repository> -->
+		<!-- <repository> <snapshots /> <id>maven.aksw.snapshots</id> <name>University 
+			Leipzig, AKSW Maven2 Repository</name> <url>http://maven.aksw.org/repository/snapshots/</url> 
+			</repository> -->
 
 	</repositories>
 </project>
