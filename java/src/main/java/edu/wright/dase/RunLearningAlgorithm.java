@@ -110,7 +110,7 @@ public class RunLearningAlgorithm {
 		}
 	}
 
-	public static void maiin(String[] args)
+	public static void main_test(String[] args)
 			throws IOException, ComponentInitException, OWLOntologyCreationException, OWLOntologyStorageException {
 
 		logger.info("starting...");

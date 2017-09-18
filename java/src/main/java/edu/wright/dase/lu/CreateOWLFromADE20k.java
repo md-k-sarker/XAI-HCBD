@@ -28,8 +28,8 @@ import org.semanticweb.owlapi.vocab.XSDVocabulary;
 
 public class CreateOWLFromADE20k {
 
-	public static String prefix = "http://www.semanticweb.org/luzhou/ontologies/2017/5/ADE20K/hcbdwsu#";
-	public static String rootPath = "/home/sarker/MegaCloud/HCBD/Experiments/DLA/experiments/images/";
+	public static String prefix = "http://www.daselab.org/ontologies/ADE20K/hcbdwsu#";
+	public static String rootPath = "/home/sarker/MegaCloud/ProjectHCBD/Datas/ADE20K/images/";
 
 	public static String partLevelDataPropertyName = "partLevel";
 	public static String isOccludedDataPropertyName = "isOccluded";
