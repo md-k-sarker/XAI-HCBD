@@ -39,9 +39,9 @@ import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
  * @author sarker
  *
  */
-public class RunLearningAlgorithm {
+public class RunDLLearner {
 
-	private static final Logger logger = LoggerFactory.getLogger(RunLearningAlgorithm.class);
+	private static final Logger logger = LoggerFactory.getLogger(RunDLLearner.class);
 
 	public static final String ontoOrgnlFileName = "/Users/sarker/Dropbox/HCBD-Project/DL-Learner Approach/experiments/sumowithADE20K/warehouse (positive) vs workroom (negative)/sumo_hand_curated.owl";
 	public static final String posExamplesFilePath = "/Users/sarker/Dropbox/HCBD-Project/DL-Learner Approach/experiments/sumowithADE20K/warehouse (positive) vs workroom (negative)/positive_indivs.txt";
@@ -52,7 +52,7 @@ public class RunLearningAlgorithm {
 	private static OWLDataFactory df;
 	private static OWLOntologyManager ontologyManager;
 
-	public RunLearningAlgorithm() {
+	public RunDLLearner() {
 
 	}
 
