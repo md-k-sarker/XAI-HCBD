@@ -1,15 +1,23 @@
 package edu.wright.dase;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.dllearner.algorithms.celoe.CELOE;
+import org.dllearner.core.ComponentInitException;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -153,7 +161,7 @@ public class MakeExplanation {
 	}
 	
 	
-	public static void iterateOverFolders(Path path) throws OWLOntologyCreationException, OWLOntologyStorageException {
+	public static void iterateOverFolders(Path path) throws OWLOntologyCreationException, OWLOntologyStorageException, ComponentInitException {
 		
 		
 		// no need to do explanation because these folders do not have any instances
@@ -172,6 +180,8 @@ public class MakeExplanation {
 	
 		int classCounter = 0;
 		String folderName = path.getFileName().toString();
+		String writeTo = path.toAbsolutePath().toString() +"/"+folderName+ "_expl.txt";
+		System.out.println("writeTo: " + writeTo);
 		String parentFolderName = path.getParent().getFileName().toString();
 		String owl_class_name = folderName;
 		
@@ -214,10 +224,12 @@ public class MakeExplanation {
 				
 			}else if(randomClassIndex.contains(classCounter)){
 				
-				NodeSet<OWLNamedIndividual> negExamples_ = owlReasoner.getInstances(owlClass, false);
-				negExamples.add(negExamples_.getFlattened().iterator().next());
-				if(tookPositiveExamples && negExamples.size() >=10 ) {
-					break;
+				Set<OWLNamedIndividual> negExamples_ = owlReasoner.getInstances(owlClass, false).getFlattened();
+				if(negExamples_.size() > 0) {
+					negExamples.add(negExamples_.iterator().next());
+					if(tookPositiveExamples && negExamples.size() >=10 ) {
+						break;
+					}
 				}
 				
 			}
@@ -235,8 +247,12 @@ public class MakeExplanation {
 		
 		
 		//call to run dl-learner
+		DLLearner dlLearner = new DLLearner(combinedOntology, posExamples, posExamples);
+		CELOE expl = dlLearner.run();
 		
 		counter++;
+		
+		writeStatistics(expl, writeTo);
 		printStatus(path.toString());
 		
 		// setup configurations
@@ -265,6 +281,43 @@ public class MakeExplanation {
 
 	}
 
+	public static void writeStatistics(CELOE expl, String fileName) {
+		BufferedWriter writer;
+		try {
+			writer = new BufferedWriter( new FileWriter( fileName));
+		
+			writer.write("\n########################\n");
+			
+			LinkedList bestClassesDescription = (LinkedList) expl.getCurrentlyBestDescriptions();
+	
+			LinkedList best100Classes = (LinkedList) expl.getCurrentlyBestDescriptions(100);
+			writer.write("Best 100 Class- \n");
+			for (int i = 0; i < best100Classes.size(); i++) {
+				System.out.println("Best 100 Class- " + i + " :" + best100Classes.get(i));
+				writer.write(best100Classes.get(i) + "\n");
+			}
+			
+			TreeSet bestEvalClasses = (TreeSet) expl.getCurrentlyBestEvaluatedDescriptions();
+			Iterator it = bestEvalClasses.iterator();
+			writer.write("\nBest Eval Class- \n");
+			while (it.hasNext()) {
+				System.out.println("Best Eval Class- :" + it.next());
+				writer.write(it.next()+"\n");
+			}
+			
+			writer.close();
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * print status
+	 * @param status
+	 */
 	public static void printStatus(String status) {
 		try {
 			System.out.println("explaining instances from class : " + status + " is successfull");
@@ -301,10 +354,16 @@ public class MakeExplanation {
 				randomClassIndex.add( ThreadLocalRandom.current().nextInt(0, totalClasses));
 			}
 			
-			Files.walk(Paths.get(rootPath)).filter(d -> counter < 5).filter(d -> ! d.toFile().isFile()).forEach(d -> {
+			Files.walk(Paths.get(rootPath)).filter(d -> counter < 1).filter(d -> ! d.toFile().isFile()).forEach(d -> {
 						try {
-							iterateOverFolders(d);
-						} catch (OWLOntologyCreationException e) {
+							
+								iterateOverFolders(d);
+							
+						} catch (ComponentInitException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+						catch (OWLOntologyCreationException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (OWLOntologyStorageException e) {
