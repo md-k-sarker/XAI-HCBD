@@ -16,6 +16,8 @@ local.properties
 # Eclipse Core
 .project
 
+#log file
+*.log
 
 #Maven
 target/
