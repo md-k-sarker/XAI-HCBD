@@ -88,35 +88,6 @@ public class MakeExplanation {
 		reasonerFactory = new PelletReasonerFactory();
 	}
 	
-	/**
-	 * It takes the ontologies and combine them with super fullADE20KAsOntology.owl ontology.
-	 * @throws OWLOntologyCreationException 
-	 */
-	public static void combineOntology(String...owlFiles) throws OWLOntologyCreationException {
-		
-		if(owlFiles.length == 0) {
-			combinedOntology = null;
-			return;
-		}
-		
-		Set<OWLOntology> ontologies = new HashSet<OWLOntology>();
-		OWLOntology ontology;
-		File ontoFile;
-		
-		// add sumo ontology. Sumo ontology is already loaded to memory
-		// ontologies.add(sumoOntology);
-		
-		//load ontologies from files and add to set
-		for(int i=0;i<owlFiles.length;i++) {
-			ontoFile = new File(owlFiles[i]);
-			ontology = loadOntology(ontoFile);
-			ontologies.add(ontology);
-		}
-		
-		OntologyMerger merger = new OntologyMerger(owlOntologyManager, ontologies, combinedOntology);
-		merger.mergeOntologies();
-		
-	}
 	
 	/**
 	 * Combine sumo ontology with combinedOntology
@@ -161,6 +132,13 @@ public class MakeExplanation {
 	}
 	
 	
+	/**
+	 * Iterate over folders to make positive and negative instances and then run DL-Learner
+	 * @param path
+	 * @throws OWLOntologyCreationException
+	 * @throws OWLOntologyStorageException
+	 * @throws ComponentInitException
+	 */
 	public static void iterateOverFolders(Path path) throws OWLOntologyCreationException, OWLOntologyStorageException, ComponentInitException {
 		
 		
@@ -280,7 +258,12 @@ public class MakeExplanation {
 //		}
 
 	}
-
+	
+	/**
+	 * Write statistics to file/disk
+	 * @param expl
+	 * @param fileName
+	 */
 	public static void writeStatistics(CELOE expl, String fileName) {
 		BufferedWriter writer;
 		try {
@@ -344,7 +327,7 @@ public class MakeExplanation {
 			ontologies.add(sumoOntology);
 			ontologies.add(ade20KOntology);
 			
-			//combine ontoligies
+			//merge ontoligies
 			OntologyMerger merger = new OntologyMerger(owlOntologyManager, ontologies, combinedOntology);
 			merger.mergeOntologies();
 			
