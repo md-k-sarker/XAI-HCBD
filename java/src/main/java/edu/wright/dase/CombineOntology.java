@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -50,7 +51,9 @@ public class CombineOntology {
 	private static final Logger logger = LoggerFactory.getLogger(CombineOntology.class);
 
 	static String rootPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/";
-
+	
+	static String customLogFile = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/logs/";
+	
 	static OWLDataFactory owlDataFactory;
 	static String prefix = "http://www.daselab.org/ontologies/ADE20K/hcbdwsu#";
 	static OWLOntologyManager owlOntologyManager;
@@ -91,7 +94,7 @@ public class CombineOntology {
 
 		// Save Ontology
 		owlOntologyManager.saveOntology(ontology, owlDiskFileIRIForSave);
-		// System.out.println("File saved as: " + owlDiskFileIRIForSave);
+		System.out.println("File saved as: " + owlDiskFileIRIForSave);
 	}
 
 	/**
@@ -111,9 +114,13 @@ public class CombineOntology {
 	 * 
 	 * @throws OWLOntologyCreationException
 	 */
-	public static void initOWLAPI() throws OWLOntologyCreationException {
+	public static void init() throws OWLOntologyCreationException {
 		owlOntologyManager = OWLManager.createConcurrentOWLOntologyManager();
 		owlDataFactory = owlOntologyManager.getOWLDataFactory();
+		Long currentTimeinSeconds = System.currentTimeMillis()/1000;
+		LocalDate localdate = LocalDate.now();
+		
+		customLogFile = customLogFile+"CombineOntology_"+localdate.getMonth()+"_"+localdate.getDayOfMonth()+"_"+localdate.getYear()+"_"+currentTimeinSeconds+".txt";
 	}
 
 	/**
@@ -137,7 +144,7 @@ public class CombineOntology {
 
 		fileCounter++;
 
-		// printStatus(path.toString());
+		printStatus(path.toString());
 	}
 
 	/**
@@ -268,7 +275,7 @@ public class CombineOntology {
 		// TODO Auto-generated method stub
 		try {
 
-			initOWLAPI();
+			init();
 
 			runOneByOne();
 
