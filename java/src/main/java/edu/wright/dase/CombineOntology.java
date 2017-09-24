@@ -65,6 +65,8 @@ public class CombineOntology {
 
 	static String[] folders = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
 			"r", "s", "t", "u", "v", "w", "x", "y", "z", "misc", "outliers" };
+	
+	static String[] ningManualFolders = {  "b" };
 
 	static String[] excludedFolders = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
 			"q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "misc", "outliers" };
@@ -148,7 +150,7 @@ public class CombineOntology {
 	}
 
 	/**
-	 * This function will try to run each folders inside the a, b, c etc. like for a
+	 * This function will try to run each folders inside the a, b, c etc. like for a folders will be
 	 * abbey,access_road, .. etc
 	 * 
 	 * Caveat: some folders have multiple inner folder. like: arena folder has
@@ -223,7 +225,7 @@ public class CombineOntology {
 	 */
 	public static void runOneByOne() throws OWLOntologyCreationException {
 
-		for (String folder : folders) {
+		for (String folder : ningManualFolders) {
 			limit++;
 			if (limit > 1) {
 				break;

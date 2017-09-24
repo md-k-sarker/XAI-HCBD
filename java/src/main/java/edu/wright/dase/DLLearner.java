@@ -35,6 +35,7 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wright.dase.util.Writer;
 import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
 
 /**
@@ -60,6 +61,7 @@ public class DLLearner {
 	private Set<OWLIndividual> posExamples;
 	private Set<OWLIndividual> negExamples;
 	private OWLDataFactory owlDataFactory;
+	private String writeTo;
 	
 	/**
 	 * Configurations
@@ -71,8 +73,9 @@ public class DLLearner {
 	 * @param ontology
 	 * @param posExamples
 	 * @param negExamples
+	 * @param writeTo
 	 */
-	public DLLearner(OWLOntology ontology,Set<OWLNamedIndividual> posExamples, Set<OWLNamedIndividual> negExamples) {
+	public DLLearner(OWLOntology ontology,Set<OWLNamedIndividual> posExamples, Set<OWLNamedIndividual> negExamples,String writeTo) {
 		this.owlOntology = ontology;
 		this.owlDataFactory = ontology.getOWLOntologyManager().getOWLDataFactory();
 		
@@ -90,6 +93,8 @@ public class DLLearner {
 		this.negExamples = owlIndividuals;
 		
 		owlIndividuals.clear();
+		
+		this.writeTo = writeTo;
 	}
 	
 	
@@ -98,8 +103,12 @@ public class DLLearner {
 
 		ks.init();
 		logger.info("finished initializing knowledge source");
+		System.out.println("finished initializing knowledge source");
+		Writer.writeInDisk(writeTo, "\nfinished initializing knowledge source", true);
 
 		logger.info("initializing reasoner...");
+		System.out.println("initializing reasoner...");
+		Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
 		OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
 
 		baseReasoner.setReasonerImplementation(ReasonerImplementation.PELLET);
@@ -107,8 +116,12 @@ public class DLLearner {
 		baseReasoner.init();
 		// Logger.getLogger(PelletReasoner.class).setLevel(Level.INFO);
 		logger.info("finished initializing reasoner");
-
+		System.out.println("finished initializing reasoner");
+		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
+		
 		logger.info("initializing reasoner component...");
+		System.out.println("initializing reasoner component...");
+		Writer.writeInDisk(writeTo, "\ninitializing reasoner component...", true);
 		ClosedWorldReasoner rc = new ClosedWorldReasoner(ks);
 
 		// rc.setReasonerComponent(baseReasoner);
@@ -116,16 +129,25 @@ public class DLLearner {
 		// rc.setMaterializeExistentialRestrictions(true);
 		rc.init();
 		logger.info("finished initializing reasoner");
+		System.out.println("finished initializing reasoner");
+		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
 
 		logger.info("initializing learning problem...");
+		System.out.println("initializing learning problem...");
+		Writer.writeInDisk(writeTo, "\ninitializing learning problem...", true);
 		// PosOnlyLP lp = new PosOnlyLP(rc);
 		PosNegLPStandard lp = new PosNegLPStandard(rc);
 		lp.setPositiveExamples(this.posExamples);
 		lp.setNegativeExamples(this.negExamples);
 		lp.init();
 		logger.info("finished initializing learning problem");
+		System.out.println("finished initializing learning problem");
+		Writer.writeInDisk(writeTo, "\nfinished initializing learning problem", true);
 
 		logger.info("initializing learning algorithm...");
+		System.out.println("initializing learning algorithm...");
+		Writer.writeInDisk(writeTo, "\ninitializing learning algorithm...", true);
+		
 		AbstractCELA la;
 		// OEHeuristicRuntime heuristic = new OEHeuristicRuntime();
 		// heuristic.setExpansionPenaltyFactor(0.1);
@@ -148,11 +170,15 @@ public class DLLearner {
 		// ((CELOE) la).setHeuristic(heuristic);
 		((CELOE) la).init();
 		logger.info("finished initializing learning algorithm");
+		System.out.println("finished initializing learning algorithm");
+		Writer.writeInDisk(writeTo, "\nfinished initializing learning algorithm", true);
 		
 		long startTime = System.currentTimeMillis();
 		la.start();
 		long endTime = System.currentTimeMillis();
 		logger.info("Algorithm run for: " + (endTime - startTime)/1000 + " seconds");
+		System.out.println("Algorithm run for: " + (endTime - startTime)/1000 + " seconds");
+		Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime)/1000 + " seconds", true);
 		
 		return (CELOE) la;
 	}
@@ -213,7 +239,7 @@ long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
 
 	}
 
-	public static void main_(String[] args) {
+	public static void main_test_1(String[] args) {
 		TreeSet ts = new TreeSet<Integer>();
 		ts.add(1);
 		ts.add(2);

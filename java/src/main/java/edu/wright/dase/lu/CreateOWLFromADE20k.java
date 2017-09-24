@@ -29,7 +29,8 @@ import org.semanticweb.owlapi.vocab.XSDVocabulary;
 public class CreateOWLFromADE20k {
 
 	public static String prefix = "http://www.daselab.org/ontologies/ADE20K/hcbdwsu#";
-	public static String rootPath = "/home/sarker/MegaCloud/ProjectHCBD/Datas/ADE20K/images/";
+	public static String rootPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/";
+									//"/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/"
 
 	public static String partLevelDataPropertyName = "partLevel";
 	public static String isOccludedDataPropertyName = "isOccluded";
@@ -176,6 +177,8 @@ public class CreateOWLFromADE20k {
 		owlManager.applyChange(addAxiom);
 
 		// assign individual to class
+		// do not assign it the corresponding class
+		System.out.println("Individual Name: "+ namedIndiImage.getIRI().toString());
 		OWLClassAssertionAxiom owlClassAssertionAxiom = owlDataFactory.getOWLClassAssertionAxiom(owlClass, namedIndiImage);
 		addAxiom = new AddAxiom(ontology, owlClassAssertionAxiom);
 		owlManager.applyChange(addAxiom);
