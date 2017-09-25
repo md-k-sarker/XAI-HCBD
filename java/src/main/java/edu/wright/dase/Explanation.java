@@ -58,7 +58,7 @@ public class Explanation {
 	static int totalClasses = 7500;
 
 	// file storages
-	static String sumoFilePath = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo/sumo_full.owl";
+	static String sumoFilePath = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo/sumo_without_indi.owl";
 	// for ning manual
 	static String rootPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/b/";
 	static String rootOntoPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/b/";
@@ -72,6 +72,10 @@ public class Explanation {
 	static OWLOntologyManager owlOntologyManager;
 	static OWLReasonerFactory reasonerFactory; // = new PelletReasonerFactory();
 	static OWLReasoner owlReasoner;
+	static Set<OWLNamedIndividual> posExamples = new HashSet<OWLNamedIndividual>();
+	static Set<OWLNamedIndividual> negExamples = new HashSet<OWLNamedIndividual>();
+	static int negIndiCounter = 0;
+	static int posIndiCounter = 0;
 
 	static OWLOntology sumoOntology;
 	// static OWLOntology ade20KOntology;
@@ -80,7 +84,8 @@ public class Explanation {
 	static int counter = 0;
 	static String[] excludedFolders = { "images", "training", "validation", "a", "b", "c", "d", "e", "f", "g", "h", "i",
 			"j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-	static String[] ningManualFolders = { "bedroom", "bathroom", "butchers_shop", "bullpen", "bridge" };
+	static String[] ningManualFolders = { "bedroom" };
+	//, "bathroom", "butchers_shop", "bullpen", "bridge"
 	static String[] OntologyFolders = { "bedroom", "bathroom", "butchers_shop", "bullpen", "bridge" };
 
 	static ArrayList<Integer> randomClassIndex = new ArrayList<Integer>();
@@ -144,17 +149,20 @@ public class Explanation {
 
 	/**
 	 * This function calls dl-learner to run
+	 * 
 	 * @param path
-	 * @throws ComponentInitException 
+	 *            : folder
+	 * @throws ComponentInitException
 	 */
 	public static void tryToCreateExplanations(Path path) throws ComponentInitException {
-		
-		//variables 
+
+		// variables
 		boolean tookPositiveExamples = false;
-		Set<OWLNamedIndividual> posExamples = new HashSet<OWLNamedIndividual>();
-		Set<OWLNamedIndividual> negExamples = new HashSet<OWLNamedIndividual>();
+
 
 		int classCounter = 0;
+		negIndiCounter = 0;
+		posIndiCounter = 0;
 		String folderName = path.getFileName().toString();
 		String writeTo = path.toAbsolutePath().toString() + "/" + folderName + "_expl.txt";
 		System.out.println("writeTo: " + writeTo);
@@ -164,48 +172,84 @@ public class Explanation {
 		// String parentFolderName = path.getParent().getFileName().toString();
 		// String owl_super_class_name = "";
 
-		// Condition
-		// If parent name is misc, then parent folder name is misc
-		// If grandparent is not a....z or outliers then class name should be
-		// parent_name and grand_parent_name
-		if (folderName.equals("misc")) {
-			owl_class_name = "misc";
-		} else if ((parentFolderName.length() == 1 || parentFolderName.equals("outliers"))) {
-			owl_class_name = folderName;
-		} else {
-			owl_class_name = folderName + "_" + parentFolderName;
-			// owl_super_class_name = parentFolderName;
-		}
+//		// Condition
+//		// If parent name is misc, then parent folder name is misc
+//		// If grandparent is not a....z or outliers then class name should be
+//		// parent_name and grand_parent_name
+//		if (folderName.equals("misc")) {
+//			owl_class_name = "misc";
+//		} else if ((parentFolderName.length() == 1 || parentFolderName.equals("outliers"))) {
+//			owl_class_name = folderName;
+//		} else {
+//			owl_class_name = folderName + "_" + parentFolderName;
+//			// owl_super_class_name = parentFolderName;
+//		}
 
-		// make positive class
-		// create class
-		IRI iriClass = IRI.create(prefix + owl_class_name);
-		OWLClass thisOwlClass = owlDataFactory.getOWLClass(iriClass);
-		System.out.println("Class: " + thisOwlClass.getIRI().getShortForm());
+//		// make positive class
+//		// create class
+//		IRI iriClass = IRI.create(prefix + owl_class_name);
+//		OWLClass thisOwlClass = owlDataFactory.getOWLClass(iriClass);
+//		System.out.println("Class: " + thisOwlClass.getIRI().getShortForm());
+
+		/*
+		 * take instance for positive class i.e. from this folder/class
+		 */
+		// make positive instances
+		
+		try {
+			Files.walk(path).filter(f-> posIndiCounter <= 10).filter(f -> f.toFile().getAbsolutePath().endsWith(".owl")).forEach(f -> {
+				
+				String name = f.getFileName().toString().replaceAll(".owl", "");
+				IRI iriIndi = IRI.create(prefix + name);
+				OWLNamedIndividual namedIndi = owlDataFactory.getOWLNamedIndividual(iriIndi);
+				posExamples.add(namedIndi);
+				posIndiCounter++;
+			});
+			tookPositiveExamples = true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		/**
-		 * take instance for positive class i.e. from this class take negative instances
-		 * i.e. from all other classes without this class take 10 instances randomly
+		 * take negative instances
+		 * i.e. take 10 instances randomly
 		 */
-		for (OWLClass owlClass : combinedOntology.getClassesInSignature()) {
-			if (owlClass.getIRI().getShortForm().equals(thisOwlClass.getIRI().getShortForm())) {
-
-				posExamples = owlReasoner.getInstances(owlClass, false).getFlattened();
-				tookPositiveExamples = true;
-
-			} else if (randomClassIndex.contains(classCounter)) {
-
-				Set<OWLNamedIndividual> negExamples_ = owlReasoner.getInstances(owlClass, false).getFlattened();
-				if (negExamples_.size() > 0) {
-					negExamples.add(negExamples_.iterator().next());
-					if (tookPositiveExamples && negExamples.size() >= 10) {
-						break;
-					}
-				}
-
+		
+		for(OWLNamedIndividual indi: combinedOntology.getIndividualsInSignature()) {
+			if(negIndiCounter >= 10) {
+				break;
 			}
-			classCounter++;
+			if(! posExamples.contains(indi)) {
+				negExamples.add(indi);
+				negIndiCounter++;
+			}
 		}
+		
+//		/**
+//		 * take instance for positive class i.e. from this class take negative instances
+//		 * i.e. from all other classes without this class take 10 instances randomly
+//		 */
+//		for (OWLClass owlClass : combinedOntology.getClassesInSignature()) {
+////			if (owlClass.getIRI().getShortForm().equals(thisOwlClass.getIRI().getShortForm())) {
+////
+////				posExamples = owlReasoner.getInstances(owlClass, false).getFlattened();
+////				tookPositiveExamples = true;
+////
+////			} else if 
+//			if(randomClassIndex.contains(classCounter)) {
+//
+//				Set<OWLNamedIndividual> negExamples_ = owlReasoner.getInstances(owlClass, false).getFlattened();
+//				if (negExamples_.size() > 0) {
+//					negExamples.add(negExamples_.iterator().next());
+//					if (tookPositiveExamples && negExamples.size() >= 10) {
+//						break;
+//					}
+//				}
+//
+//			}
+//			classCounter++;
+//		}
 
 		// create explanation file
 		Writer.writeInDisk(writeTo, "####### Explanantion for " + folderName + " class ########", false);
@@ -233,7 +277,7 @@ public class Explanation {
 		writeStatistics(expl, writeTo);
 		printStatus(path.toString());
 	}
-	
+
 	/**
 	 * Iterate over folders to make positive and negative instances and then run
 	 * DL-Learner
@@ -257,10 +301,9 @@ public class Explanation {
 		// make explanation for only ning suggested folders
 		for (String folder : ningManualFolders) {
 			if (path.getFileName().toString().equals(folder)) {
-				
-				
+
 				tryToCreateExplanations(path);
-				
+
 			}
 		}
 
@@ -334,28 +377,29 @@ public class Explanation {
 		logger.info(" initializing combineOntology...");
 		System.out.println(" initializing combineOntology...");
 		Writer.writeInDisk(runDlConfWritings, "\n initializing combineOntology...", true);
-		
+
 		// declare ontology set
 		Set<OWLOntology> ontologies = new HashSet<OWLOntology>();
 
-		// load sumo
-		sumoOntology = loadOntology(new File(sumoFilePath));
-		ontologies.add(sumoOntology);
+		// TO-DO: later load sumo
+		//sumoOntology = loadOntology(new File(sumoFilePath));
+		//ontologies.add(sumoOntology);
 
 		// load specific ontology from ade20k dataset.
 		for (String folder : OntologyFolders) {
-			String ontoPath = rootOntoPath + folder +"/"+folder+ ".owl";
+			String ontoPath = rootOntoPath + folder + "/" + folder + ".owl";
 			File ontoFile = new File(ontoPath);
 			if (ontoFile.exists()) {
 				OWLOntology ontology = loadOntology(new File(ontoPath));
 				ontologies.add(ontology);
-				logger.info("\nOntoFile "+ ontoFile.getAbsolutePath() +" \n found. \n");
-				System.out.println("\n loading OntoFile "+ ontoFile.getAbsolutePath() +" \n");
-				Writer.writeInDisk(runDlConfWritings, "\n Adding OntoFile "+ ontoFile.getAbsolutePath() +" \n", true);
-			}else {
-				logger.info("\nOntoFile "+ ontoFile.getAbsolutePath() +" \n not found. \n");
-				System.out.println("\nOntoFile "+ ontoFile.getAbsolutePath() +" \n not found. \n");
-				Writer.writeInDisk(runDlConfWritings, "\nOntoFile "+ ontoFile.getAbsolutePath() +" \n not found. \n", true);
+				logger.info("\nOntoFile " + ontoFile.getAbsolutePath() + " \n found. \n");
+				System.out.println("\n loading OntoFile " + ontoFile.getAbsolutePath() + " \n");
+				Writer.writeInDisk(runDlConfWritings, "\n Adding OntoFile " + ontoFile.getAbsolutePath() + " \n", true);
+			} else {
+				logger.info("\nOntoFile " + ontoFile.getAbsolutePath() + " \n not found. \n");
+				System.out.println("\nOntoFile " + ontoFile.getAbsolutePath() + " \n not found. \n");
+				Writer.writeInDisk(runDlConfWritings, "\nOntoFile " + ontoFile.getAbsolutePath() + " \n not found. \n",
+						true);
 			}
 		}
 
@@ -373,12 +417,11 @@ public class Explanation {
 
 			long startTime = System.currentTimeMillis();
 
-
-			runDlConfWritings = runDlConfWritings+ "run_dl_in_b_folder.txt";
+			runDlConfWritings = runDlConfWritings + "run_dl_in_b_folder.txt";
 			logger.info("Program started...........");
 			System.out.println("Program started...........");
 			Writer.writeInDisk(runDlConfWritings, "\n Program started...........", false);
-			
+
 			init();
 
 			// combine necessary ontologies
@@ -409,14 +452,15 @@ public class Explanation {
 					e.printStackTrace();
 				}
 			});
-			
+
 			long endTime = System.currentTimeMillis();
-			
+
 			logger.info("Program finsihed");
 			System.out.println("Program finsihed");
 			Writer.writeInDisk(runDlConfWritings, "\n Program finsihed", true);
-			Writer.writeInDisk(runDlConfWritings, "\nProgram run for: " + (endTime - startTime)/1000 + " seconds", true);
-			
+			Writer.writeInDisk(runDlConfWritings, "\nProgram run for: " + (endTime - startTime) / 1000 + " seconds",
+					true);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

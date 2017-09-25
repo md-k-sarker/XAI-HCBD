@@ -40,7 +40,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
 
-import edu.wright.dase.util.Constants;
 
 public class ModifyOntology {
 
@@ -53,6 +52,9 @@ public class ModifyOntology {
 	protected File ontoModFile;
 	protected String defaultOntologyIRIPrefix;
 	protected List<OWLOntologyChange> ontologyChanges;
+	
+	String ontoOrgnlFileName ="/home/sarker/MegaCloud/ProjectHCBD/datas/sumo/SUMO.owl";
+	String ontoModFileName = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo/sumo_without_indi.owl";
 
 	/**
 	 * @return the ontologyChanges
@@ -161,9 +163,9 @@ public class ModifyOntology {
 
 	public void init() {
 		// IRI ontoOrgnFileIRI = IRI.create(Constants.ontoOrgnlFileName);
-		ontoOrgnFile = new File(Constants.ontoOrgnlFileName);
+		ontoOrgnFile = new File(ontoOrgnlFileName);
 
-		ontoModFile = new File(Constants.ontoModFileName);
+		ontoModFile = new File(ontoModFileName);
 		datafactory = OWLManager.getOWLDataFactory();
 		ontologyManager = OWLManager.createOWLOntologyManager();
 
@@ -322,74 +324,74 @@ public class ModifyOntology {
 	// String positiveIndividualInitial = "OutdoorMuseum_indi";
 	String positiveIndividualInitial = "OutdoorWareHouse_Indi_";
 
-	public void writeforConfigFiles() {
-		StringBuilder sbuilderPositive = new StringBuilder();
-		StringBuilder sbuilderNegative = new StringBuilder();
-		StringBuilder sbuilderPrefixes = new StringBuilder();
-		sbuilderPositive.append("{");
-		sbuilderNegative.append("{");
-		sbuilderPrefixes.append("[");
-
-		boolean firstofPos = true;
-		boolean firstofNeg = true;
-		for (OWLNamedIndividual indiv : ontology.getIndividualsInSignature()) {
-			String name = indiv.getIRI().getRemainder().get();
-
-			if (name.startsWith(positiveIndividualInitial)) {
-				if (firstofPos) {
-					firstofPos = false;
-					sbuilderPositive.append("\"ex:" + name + "\"");
-				} else {
-					sbuilderPositive.append(", " + "\"ex:" + name + "\"");
-				}
-			} else {
-				if (firstofNeg) {
-					firstofNeg = false;
-					sbuilderNegative.append("\"ex:" + name + "\"");
-				} else {
-					sbuilderNegative.append(", " + "\"ex:" + name + "\"");
-				}
-			}
-		}
-
-		// write prefixes
-		boolean firstofPrefix = true;
-		PrefixDocumentFormat prefixManager = getPrefixOWLOntologyFormat(ontology);
-		Map<String, String> prefixNameMapping = prefixManager.getPrefixName2PrefixMap();
-
-		for (String prefix : prefixNameMapping.keySet()) {
-			if (firstofPrefix) {
-				firstofPrefix = false;
-				sbuilderPrefixes.append("(\"ex\"," + "\"" + prefixNameMapping.get(prefix) + "\")");
-			} else {
-				sbuilderPrefixes.append(", (\"ex\"," + "\"" + prefixNameMapping.get(prefix) + "\")");
-			}
-		}
-
-		sbuilderPositive.append("}");
-		sbuilderNegative.append("}");
-		sbuilderPrefixes.append("]");
-
-		try {
-			// write positive
-			PrintWriter writer = new PrintWriter(Constants.posExamplesFilePath);
-			writer.append(sbuilderPositive);
-			writer.close();
-
-			// write negative
-			writer = new PrintWriter(Constants.negExamplesFilePath);
-			writer.append(sbuilderNegative);
-			writer.close();
-
-			// write prefixes
-			writer = new PrintWriter(Constants.prefixFilePath);
-			writer.append(sbuilderPrefixes);
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void writeforConfigFiles() {
+//		StringBuilder sbuilderPositive = new StringBuilder();
+//		StringBuilder sbuilderNegative = new StringBuilder();
+//		StringBuilder sbuilderPrefixes = new StringBuilder();
+//		sbuilderPositive.append("{");
+//		sbuilderNegative.append("{");
+//		sbuilderPrefixes.append("[");
+//
+//		boolean firstofPos = true;
+//		boolean firstofNeg = true;
+//		for (OWLNamedIndividual indiv : ontology.getIndividualsInSignature()) {
+//			String name = indiv.getIRI().getRemainder().get();
+//
+//			if (name.startsWith(positiveIndividualInitial)) {
+//				if (firstofPos) {
+//					firstofPos = false;
+//					sbuilderPositive.append("\"ex:" + name + "\"");
+//				} else {
+//					sbuilderPositive.append(", " + "\"ex:" + name + "\"");
+//				}
+//			} else {
+//				if (firstofNeg) {
+//					firstofNeg = false;
+//					sbuilderNegative.append("\"ex:" + name + "\"");
+//				} else {
+//					sbuilderNegative.append(", " + "\"ex:" + name + "\"");
+//				}
+//			}
+//		}
+//
+//		// write prefixes
+//		boolean firstofPrefix = true;
+//		PrefixDocumentFormat prefixManager = getPrefixOWLOntologyFormat(ontology);
+//		Map<String, String> prefixNameMapping = prefixManager.getPrefixName2PrefixMap();
+//
+//		for (String prefix : prefixNameMapping.keySet()) {
+//			if (firstofPrefix) {
+//				firstofPrefix = false;
+//				sbuilderPrefixes.append("(\"ex\"," + "\"" + prefixNameMapping.get(prefix) + "\")");
+//			} else {
+//				sbuilderPrefixes.append(", (\"ex\"," + "\"" + prefixNameMapping.get(prefix) + "\")");
+//			}
+//		}
+//
+//		sbuilderPositive.append("}");
+//		sbuilderNegative.append("}");
+//		sbuilderPrefixes.append("]");
+//
+//		try {
+//			// write positive
+//			PrintWriter writer = new PrintWriter(Constants.posExamplesFilePath);
+//			writer.append(sbuilderPositive);
+//			writer.close();
+//
+//			// write negative
+//			writer = new PrintWriter(Constants.negExamplesFilePath);
+//			writer.append(sbuilderNegative);
+//			writer.close();
+//
+//			// write prefixes
+//			writer = new PrintWriter(Constants.prefixFilePath);
+//			writer.append(sbuilderPrefixes);
+//			writer.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 
 	public static void main(String[] args)
@@ -402,7 +404,7 @@ public class ModifyOntology {
 		mdfOntology.init();
 		mdfOntology.loadOntology();
 
-		// mdfOntology.removeAnnot();
+		mdfOntology.removeAnnot();
 
 		mdfOntology.removeIndividuals();
 
@@ -412,7 +414,7 @@ public class ModifyOntology {
 		mdfOntology.writeChanges();
 		mdfOntology.saveOntology();
 		
-		mdfOntology.writeforConfigFiles();
+		//mdfOntology.writeforConfigFiles();
 
 		logger.info("finished");
 	}

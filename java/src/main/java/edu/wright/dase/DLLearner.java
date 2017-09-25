@@ -58,8 +58,8 @@ public class DLLearner {
 	private static OWLOntology ontology;
 	
 	private OWLOntology owlOntology;
-	private Set<OWLIndividual> posExamples;
-	private Set<OWLIndividual> negExamples;
+	private static Set<OWLIndividual> posExamples;
+	private static Set<OWLIndividual> negExamples;
 	private OWLDataFactory owlDataFactory;
 	private String writeTo;
 	
@@ -75,24 +75,36 @@ public class DLLearner {
 	 * @param negExamples
 	 * @param writeTo
 	 */
-	public DLLearner(OWLOntology ontology,Set<OWLNamedIndividual> posExamples, Set<OWLNamedIndividual> negExamples,String writeTo) {
+	public DLLearner(OWLOntology ontology,Set<OWLNamedIndividual> posExamples_, Set<OWLNamedIndividual> negExamples_,String writeTo) {
 		this.owlOntology = ontology;
 		this.owlDataFactory = ontology.getOWLOntologyManager().getOWLDataFactory();
+		posExamples = new HashSet<OWLIndividual>();
+		negExamples = new HashSet<OWLIndividual>();
 		
-		Set<OWLIndividual> owlIndividuals = new HashSet<OWLIndividual>();
-		for(OWLNamedIndividual indi: posExamples) {
-			owlIndividuals.add((OWLIndividual) indi);
+		//Set<OWLIndividual> owlIndividuals = new HashSet<OWLIndividual>();
+		for(OWLNamedIndividual indi: posExamples_) {
+			//owlIndividuals.add((OWLIndividual) indi);
+			posExamples.add((OWLIndividual) indi);
 		}
-		this.posExamples = owlIndividuals;
+		//this.posExamples = owlIndividuals;
 		
-		owlIndividuals.clear();
+		//owlIndividuals.clear();
 		
-		for(OWLNamedIndividual indi: negExamples) {
-			owlIndividuals.add((OWLIndividual) indi);
+		for(OWLNamedIndividual indi: negExamples_) {
+			//owlIndividuals.add((OWLIndividual) indi);
+			negExamples.add((OWLIndividual) indi); 
 		}
-		this.negExamples = owlIndividuals;
+		//this.negExamples = owlIndividuals;
 		
-		owlIndividuals.clear();
+		//owlIndividuals.clear();
+		
+//		for(OWLIndividual posIndi: posExamples) {
+//			System.out.println("Pos: "+ posIndi);
+//		}
+//		
+//		for(OWLIndividual negIndi: negExamples) {
+//			System.out.println("Neg: "+ negIndi);
+//		}
 		
 		this.writeTo = writeTo;
 	}
@@ -132,13 +144,14 @@ public class DLLearner {
 		System.out.println("finished initializing reasoner");
 		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
 
+		
 		logger.info("initializing learning problem...");
 		System.out.println("initializing learning problem...");
 		Writer.writeInDisk(writeTo, "\ninitializing learning problem...", true);
 		// PosOnlyLP lp = new PosOnlyLP(rc);
 		PosNegLPStandard lp = new PosNegLPStandard(rc);
-		lp.setPositiveExamples(this.posExamples);
-		lp.setNegativeExamples(this.negExamples);
+		lp.setPositiveExamples(posExamples);
+		lp.setNegativeExamples(negExamples);
 		lp.init();
 		logger.info("finished initializing learning problem");
 		System.out.println("finished initializing learning problem");

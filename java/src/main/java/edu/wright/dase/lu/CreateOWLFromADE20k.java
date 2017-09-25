@@ -177,9 +177,9 @@ public class CreateOWLFromADE20k {
 		owlManager.applyChange(addAxiom);
 
 		// assign individual to class
-		// do not assign it the corresponding class
+		// do not assign it the corresponding class, instead assign it to OWL:Thing
 		System.out.println("Individual Name: "+ namedIndiImage.getIRI().toString());
-		OWLClassAssertionAxiom owlClassAssertionAxiom = owlDataFactory.getOWLClassAssertionAxiom(owlClass, namedIndiImage);
+		OWLClassAssertionAxiom owlClassAssertionAxiom = owlDataFactory.getOWLClassAssertionAxiom(owlDataFactory.getOWLThing(), namedIndiImage);
 		addAxiom = new AddAxiom(ontology, owlClassAssertionAxiom);
 		owlManager.applyChange(addAxiom);
 

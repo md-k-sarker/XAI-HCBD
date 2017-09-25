@@ -277,9 +277,9 @@ public class CombineOntology {
 		// TODO Auto-generated method stub
 		try {
 
-			init();
+			//init();
 
-			runOneByOne();
+			//runOneByOne();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
