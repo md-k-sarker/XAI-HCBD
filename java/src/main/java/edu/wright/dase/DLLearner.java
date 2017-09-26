@@ -68,7 +68,7 @@ public class DLLearner {
 	 * Configurations
 	 */
 	private int maxExecutionTimeInSeconds = (5*3600);
-	private int maxNoOfThreads = 10;
+	private int maxNoOfThreads = 8;
 	
 	/**
 	 * Constructor
