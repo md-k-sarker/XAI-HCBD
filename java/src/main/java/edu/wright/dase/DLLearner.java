@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.dllearner.algorithms.celoe.CELOE;
+import org.dllearner.algorithms.celoe.PCELOE;
 import org.dllearner.core.AbstractCELA;
 import org.dllearner.core.ComponentInitException;
 import org.dllearner.core.KnowledgeSource;
@@ -66,7 +67,8 @@ public class DLLearner {
 	/**
 	 * Configurations
 	 */
-	private int maxExecutionTimeInSeconds = 6000;
+	private int maxExecutionTimeInSeconds = (5*3600);
+	private int maxNoOfThreads = 10;
 	
 	/**
 	 * Constructor
@@ -110,7 +112,7 @@ public class DLLearner {
 	}
 	
 	
-	public CELOE run() throws ComponentInitException {
+	public PCELOE run() throws ComponentInitException {
 		KnowledgeSource ks = new OWLAPIOntology(this.owlOntology);
 
 		ks.init();
@@ -123,7 +125,7 @@ public class DLLearner {
 		Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
 		OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
 
-		baseReasoner.setReasonerImplementation(ReasonerImplementation.PELLET);
+		baseReasoner.setReasonerImplementation(ReasonerImplementation.HERMIT);
 		// baseReasoner.setUseFallbackReasoner(true);
 		baseReasoner.init();
 		// Logger.getLogger(PelletReasoner.class).setLevel(Level.INFO);
@@ -164,7 +166,7 @@ public class DLLearner {
 		AbstractCELA la;
 		// OEHeuristicRuntime heuristic = new OEHeuristicRuntime();
 		// heuristic.setExpansionPenaltyFactor(0.1);
-		la = new CELOE(lp, rc);
+		la = new PCELOE(lp, rc);
 
 		// OWLClassExpression startClass = new
 		// OWLClassImpl(IRI.create(startClass));
@@ -173,15 +175,16 @@ public class DLLearner {
 		// new ObjectSomeRestriction(new
 		// ObjectProperty("http://dl-learner.org/smallis/has_phenotype"),
 		// Thing.instance));
-		((CELOE) la).setStartClass(this.owlDataFactory.getOWLThing());
-		((CELOE) la).setMaxExecutionTimeInSeconds(maxExecutionTimeInSeconds);
+		((PCELOE) la).setStartClass(this.owlDataFactory.getOWLThing());
+		((PCELOE) la).setMaxExecutionTimeInSeconds(maxExecutionTimeInSeconds);
+		((PCELOE) la).setNrOfThreads(maxNoOfThreads);
 		// ((CELOE) la).setNoisePercentage(80);
 		// ((CELOE) la).setMaxNrOfResults(50);
 		// ((CELOE) la).setWriteSearchTree(false);
 		// ((CELOE) la).setReplaceSearchTree(true);
 		// ((CELOE) la).setSearchTreeFile("log/mouse-diabetis.log");
 		// ((CELOE) la).setHeuristic(heuristic);
-		((CELOE) la).init();
+		((PCELOE) la).init();
 		logger.info("finished initializing learning algorithm");
 		System.out.println("finished initializing learning algorithm");
 		Writer.writeInDisk(writeTo, "\nfinished initializing learning algorithm", true);
@@ -193,7 +196,7 @@ public class DLLearner {
 		System.out.println("Algorithm run for: " + (endTime - startTime)/1000 + " seconds");
 		Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime)/1000 + " seconds", true);
 		
-		return (CELOE) la;
+		return (PCELOE) la;
 	}
 	
 	
