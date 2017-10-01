@@ -147,7 +147,7 @@ public class Alignment {
 		return strings;
 	}
 
-	private static double computeConfidence(String labelA, String labelB) {
+	public static double computeConfidence(String labelA, String labelB) {
 		double confidenceValue = 1 - (Math.abs(new Levenstein().score(labelA, labelB))
 				/ (double) Math.max(labelA.length(), labelB.length()));
 
@@ -155,27 +155,27 @@ public class Alignment {
 	}
 
 	public static void doAlign() {
-		// FileOutputStream os1 = new
-		// FileOutputStream("./logging/anatomy_logging.txt");
-		// PrintWriter output = new PrintWriter(new
-		// OutputStreamWriter(os1,"UTF-8"), true);
-		//
-		// ArticleAlignment aligner = new ArticleAlignment("anatomy");
-		//
-		// File f1 = new File("./data/anatomy/mouse.owl");
-		// File f2 = new File("./data/anatomy/human.owl");
-		//
-		// String s1 = f1.toString();
-		// String s2 = f2.toString();
-		// String name1 = s1.substring(s1.lastIndexOf("/") +
-		// 1,s1.lastIndexOf("."));
-		// String name2 = s2.substring(s2.lastIndexOf("/") +
-		// 1,s2.lastIndexOf("."));
-		//
-		// System.out.println("\tAligning " + name1 + " and " + name2);
-		//
-		// aligner.articleAlign(f1.toURI(), f2.toURI(), name1, name2, output);
-		//
-		// output.close();
+//		 FileOutputStream os1 = new
+//		 FileOutputStream("./logging/anatomy_logging.txt");
+//		 PrintWriter output = new PrintWriter(new
+//		 OutputStreamWriter(os1,"UTF-8"), true);
+//		
+//		 ArticleAlignment aligner = new ArticleAlignment("anatomy");
+//		
+//		 File f1 = new File("./data/anatomy/mouse.owl");
+//		 File f2 = new File("./data/anatomy/human.owl");
+//		
+//		 String s1 = f1.toString();
+//		 String s2 = f2.toString();
+//		 String name1 = s1.substring(s1.lastIndexOf("/") +
+//		 1,s1.lastIndexOf("."));
+//		 String name2 = s2.substring(s2.lastIndexOf("/") +
+//		 1,s2.lastIndexOf("."));
+//		
+//		 System.out.println("\tAligning " + name1 + " and " + name2);
+//		
+//		 aligner.articleAlign(f1.toURI(), f2.toURI(), name1, name2, output);
+//		
+//		 output.close();
 	}
 }

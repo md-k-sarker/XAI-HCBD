@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
 
 import org.dllearner.algorithms.celoe.CELOE;
 import org.dllearner.algorithms.celoe.PCELOE;
@@ -51,68 +52,81 @@ public class DLLearner {
 	public static final String posExamplesFilePath = "/Users/sarker/Dropbox/HCBD-Project/DL-Learner Approach/experiments/sumowithADE20K/warehouse (positive) vs workroom (negative)/positive_indivs.txt";
 	public static final String negExamplesFilePath = "/Users/sarker/Dropbox/HCBD-Project/DL-Learner Approach/experiments/sumowithADE20K/warehouse (positive) vs workroom (negative)/negative_indivs.txt";
 
-
 	private static File ontoFile;
 	private static OWLDataFactory df;
 	private static OWLOntologyManager ontologyManager;
 
 	private static OWLOntology ontology;
-	
+
 	private OWLOntology owlOntology;
 	private static Set<OWLIndividual> posExamples;
 	private static Set<OWLIndividual> negExamples;
 	private OWLDataFactory owlDataFactory;
 	private String writeTo;
-	
+
 	/**
 	 * Configurations
 	 */
-	private int maxExecutionTimeInSeconds = (5*3600);
+	private int maxExecutionTimeInSeconds = (5 * 3600);
 	private int maxNoOfThreads = 8;
-	
+
 	/**
 	 * Constructor
+	 * 
 	 * @param ontology
 	 * @param posExamples
 	 * @param negExamples
 	 * @param writeTo
 	 */
-	public DLLearner(OWLOntology ontology,Set<OWLNamedIndividual> posExamples_, Set<OWLNamedIndividual> negExamples_,String writeTo) {
+	public DLLearner(OWLOntology ontology, Set<OWLNamedIndividual> posExamples_, Set<OWLNamedIndividual> negExamples_,
+			String writeTo) {
 		this.owlOntology = ontology;
 		this.owlDataFactory = ontology.getOWLOntologyManager().getOWLDataFactory();
 		posExamples = new HashSet<OWLIndividual>();
 		negExamples = new HashSet<OWLIndividual>();
-		
-		//Set<OWLIndividual> owlIndividuals = new HashSet<OWLIndividual>();
-		for(OWLNamedIndividual indi: posExamples_) {
-			//owlIndividuals.add((OWLIndividual) indi);
+
+		// Set<OWLIndividual> owlIndividuals = new HashSet<OWLIndividual>();
+		for (OWLNamedIndividual indi : posExamples_) {
+			// owlIndividuals.add((OWLIndividual) indi);
 			posExamples.add((OWLIndividual) indi);
 		}
-		//this.posExamples = owlIndividuals;
-		
-		//owlIndividuals.clear();
-		
-		for(OWLNamedIndividual indi: negExamples_) {
-			//owlIndividuals.add((OWLIndividual) indi);
-			negExamples.add((OWLIndividual) indi); 
+		// this.posExamples = owlIndividuals;
+
+		// owlIndividuals.clear();
+
+		for (OWLNamedIndividual indi : negExamples_) {
+			// owlIndividuals.add((OWLIndividual) indi);
+			negExamples.add((OWLIndividual) indi);
 		}
-		//this.negExamples = owlIndividuals;
-		
-		//owlIndividuals.clear();
-		
-//		for(OWLIndividual posIndi: posExamples) {
-//			System.out.println("Pos: "+ posIndi);
-//		}
-//		
-//		for(OWLIndividual negIndi: negExamples) {
-//			System.out.println("Neg: "+ negIndi);
-//		}
-		
+		// this.negExamples = owlIndividuals;
+
+		// owlIndividuals.clear();
+
+		// for(OWLIndividual posIndi: posExamples) {
+		// System.out.println("Pos: "+ posIndi);
+		// }
+		//
+		// for(OWLIndividual negIndi: negExamples) {
+		// System.out.println("Neg: "+ negIndi);
+		// }
+
 		this.writeTo = writeTo;
 	}
-	
-	
-	public PCELOE run() throws ComponentInitException {
+
+	//@formatter:off
+	/**
+	 * In dl-learner they have fact++ support. 
+	 * link: https://github.com/SmartDataAnalytics/DL-Learner/blob/develop/components-core/src/main/java/org/dllearner/reasoning/OWLAPIReasoner.java
+	 * conclude is not supported
+	 */
+	//@formatter:on
+
+	/**
+	 * 
+	 * @return
+	 * @throws ComponentInitException
+	 */
+	public CELOE run() throws ComponentInitException {
 		KnowledgeSource ks = new OWLAPIOntology(this.owlOntology);
 
 		ks.init();
@@ -125,14 +139,14 @@ public class DLLearner {
 		Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
 		OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
 
-		baseReasoner.setReasonerImplementation(ReasonerImplementation.HERMIT);
+		baseReasoner.setReasonerImplementation(ReasonerImplementation.FACT);
 		// baseReasoner.setUseFallbackReasoner(true);
 		baseReasoner.init();
-		// Logger.getLogger(PelletReasoner.class).setLevel(Level.INFO);
+		// Logger.getLogger(HermitReasoner.class).setLevel(Level.INFO);
 		logger.info("finished initializing reasoner");
 		System.out.println("finished initializing reasoner");
 		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
-		
+
 		logger.info("initializing reasoner component...");
 		System.out.println("initializing reasoner component...");
 		Writer.writeInDisk(writeTo, "\ninitializing reasoner component...", true);
@@ -146,7 +160,6 @@ public class DLLearner {
 		System.out.println("finished initializing reasoner");
 		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
 
-		
 		logger.info("initializing learning problem...");
 		System.out.println("initializing learning problem...");
 		Writer.writeInDisk(writeTo, "\ninitializing learning problem...", true);
@@ -162,11 +175,11 @@ public class DLLearner {
 		logger.info("initializing learning algorithm...");
 		System.out.println("initializing learning algorithm...");
 		Writer.writeInDisk(writeTo, "\ninitializing learning algorithm...", true);
-		
+
 		AbstractCELA la;
 		// OEHeuristicRuntime heuristic = new OEHeuristicRuntime();
 		// heuristic.setExpansionPenaltyFactor(0.1);
-		la = new PCELOE(lp, rc);
+		la = new CELOE(lp, rc);
 
 		// OWLClassExpression startClass = new
 		// OWLClassImpl(IRI.create(startClass));
@@ -175,46 +188,45 @@ public class DLLearner {
 		// new ObjectSomeRestriction(new
 		// ObjectProperty("http://dl-learner.org/smallis/has_phenotype"),
 		// Thing.instance));
-		((PCELOE) la).setStartClass(this.owlDataFactory.getOWLThing());
-		((PCELOE) la).setMaxExecutionTimeInSeconds(maxExecutionTimeInSeconds);
-		((PCELOE) la).setNrOfThreads(maxNoOfThreads);
+		((CELOE) la).setStartClass(this.owlDataFactory.getOWLThing());
+		((CELOE) la).setMaxExecutionTimeInSeconds(maxExecutionTimeInSeconds);
+		// ((CELOE) la).setNrOfThreads(maxNoOfThreads);
 		// ((CELOE) la).setNoisePercentage(80);
 		// ((CELOE) la).setMaxNrOfResults(50);
 		// ((CELOE) la).setWriteSearchTree(false);
 		// ((CELOE) la).setReplaceSearchTree(true);
 		// ((CELOE) la).setSearchTreeFile("log/mouse-diabetis.log");
 		// ((CELOE) la).setHeuristic(heuristic);
-		((PCELOE) la).init();
+		((CELOE) la).init();
 		logger.info("finished initializing learning algorithm");
 		System.out.println("finished initializing learning algorithm");
 		Writer.writeInDisk(writeTo, "\nfinished initializing learning algorithm", true);
-		
+
 		long startTime = System.currentTimeMillis();
 		la.start();
 		long endTime = System.currentTimeMillis();
-		logger.info("Algorithm run for: " + (endTime - startTime)/1000 + " seconds");
-		System.out.println("Algorithm run for: " + (endTime - startTime)/1000 + " seconds");
-		Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime)/1000 + " seconds", true);
-		
-		return (PCELOE) la;
-	}
-	
-	
-	/**
-	 * long startTime = System.nanoTime();
-methodToTime();
-long endTime = System.nanoTime();
+		logger.info("Algorithm run for: " + (endTime - startTime) / 1000 + " seconds");
+		System.out.println("Algorithm run for: " + (endTime - startTime) / 1000 + " seconds");
+		Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime) / 1000 + " seconds", true);
 
-long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+		return (CELOE) la;
+	}
+
+	/**
+	 * long startTime = System.nanoTime(); methodToTime(); long endTime =
+	 * System.nanoTime();
+	 * 
+	 * long duration = (endTime - startTime); //divide by 1000000 to get
+	 * milliseconds.
 	 */
-	
+
 	/**
 	 * 
 	 * @param filePath
 	 * @return
 	 * @throws IOException
 	 */
-	
+
 	private static Set<OWLIndividual> readNegativeExamples(String filePath) throws IOException {
 		Set<OWLIndividual> indivs = new TreeSet<>();
 		try (BufferedReader buffRead = new BufferedReader(new FileReader(new File(filePath)))) {
@@ -269,6 +281,7 @@ long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
 		}
 	}
 
+	// only for testing
 	public static void main_test(String[] args)
 			throws IOException, ComponentInitException, OWLOntologyCreationException, OWLOntologyStorageException {
 

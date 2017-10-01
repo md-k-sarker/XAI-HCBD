@@ -539,7 +539,7 @@ public class MapADEToSumo extends ModifyOntology {
 			// mapADEToSumo.createObjectProperty();
 			// mapADEToSumo.iteratedOverFiles();
 			// mapADEToSumo.saveOntology();
-			mapADEToSumo.writeforConfigFiles();
+			// mapADEToSumo.writeforConfigFiles();
 
 		}
 		// catch (OWLOntologyCreationException ex) {
