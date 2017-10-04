@@ -115,9 +115,14 @@ public class DLLearner {
 
 	//@formatter:off
 	/**
-	 * In dl-learner they have fact++ support. 
+	 *  http://dl.kr.org/ore2015/vip.cs.man.ac.uk_8008/results.html
+	 * 1. Konclude:  is not supported.
+	 * 2. Fact++: * In dl-learner they have fact++ support. 
 	 * link: https://github.com/SmartDataAnalytics/DL-Learner/blob/develop/components-core/src/main/java/org/dllearner/reasoning/OWLAPIReasoner.java
-	 * conclude is not supported
+	 * 
+	 *  but Exception in thread "main" java.lang.UnsatisfiedLinkError: no FaCTPlusPlusJNI in java.library.path
+	 *  dl-learner not running without fact++jni.
+	 * 
 	 */
 	//@formatter:on
 
@@ -139,7 +144,7 @@ public class DLLearner {
 		Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
 		OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
 
-		baseReasoner.setReasonerImplementation(ReasonerImplementation.FACT);
+		baseReasoner.setReasonerImplementation(ReasonerImplementation.HERMIT);
 		// baseReasoner.setUseFallbackReasoner(true);
 		baseReasoner.init();
 		// Logger.getLogger(HermitReasoner.class).setLevel(Level.INFO);
