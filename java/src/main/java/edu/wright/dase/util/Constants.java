@@ -12,7 +12,7 @@ public final class Constants {
 
 	public static final String DefaultIRIPrefixInSumo = "http://www.adampease.org/OP/SUMO.owl#";
 
-	public static final String ontologyIRI = "http://www.dase.wright.edu/TestOntoZ";
+	
 
 	public static final String ontoOrgnlFileName = "/Users/sarker/Dropbox/HCBD-Project/DL-Learner Approach/experiments/sumowithADE20K/updated/sumo_mod_by_hand.owl";
 
@@ -32,5 +32,9 @@ public final class Constants {
 	public final static String FIXED_ANNOTATION_NAME = "created from ade20k dataset";
 
 	public static final String objPropImgConName = "imageContains";
+	
+	public static final String prefix = "http://www.daselab.org/ontologies/ADE20K/hcbdwsu#";
+	
+	public static final String ontologyIRI = "http://www.daselab.org/ontologies/ADE20K/hcbdwsu/";
 
 }
