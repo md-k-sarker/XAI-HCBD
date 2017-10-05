@@ -71,13 +71,13 @@
 		</dependency>
 
 		<!-- add local jar as maven dependency -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.semanticweb.owl</groupId>
 			<artifactId>align</artifactId>
 			<version>4.9</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/resources/lib/align.jar</systemPath>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 

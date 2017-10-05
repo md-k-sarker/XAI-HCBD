@@ -67,7 +67,7 @@ public class DLLearner {
 	/**
 	 * Configurations
 	 */
-	private int maxExecutionTimeInSeconds = (5 * 3600);
+	private int maxExecutionTimeInSeconds = (4 * 3600);
 	private int maxNoOfThreads = 8;
 
 	/**
@@ -196,8 +196,9 @@ public class DLLearner {
 		((CELOE) la).setStartClass(this.owlDataFactory.getOWLThing());
 		((CELOE) la).setMaxExecutionTimeInSeconds(maxExecutionTimeInSeconds);
 		// ((CELOE) la).setNrOfThreads(maxNoOfThreads);
-		// ((CELOE) la).setNoisePercentage(80);
-		// ((CELOE) la).setMaxNrOfResults(50);
+		//((CELOE) la).setNoisePercentage(80);
+		((CELOE) la).setMaxNrOfResults(50);
+		//((CELOE) la).setMaxClassExpressionTests(10);
 		// ((CELOE) la).setWriteSearchTree(false);
 		// ((CELOE) la).setReplaceSearchTree(true);
 		// ((CELOE) la).setSearchTreeFile("log/mouse-diabetis.log");
