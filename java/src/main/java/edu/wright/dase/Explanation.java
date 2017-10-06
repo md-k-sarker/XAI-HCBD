@@ -71,13 +71,13 @@ public class Explanation {
 	static int totalClasses = 0;
 
 	// file storages
-	static String sumoFilePath = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo/sumo_without_indi.owl";
+	// static String sumoFilePath = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo_aligned_without_score.owl";
 	// for ning manual
 	// static String rootPath =
 	// "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/b/";
 	// static String rootOntoPath =
 	// "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/b/";
-	static String runDlConfWritings = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/b/";
+	//static String runDlConfWritings = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/b/";
 
 	static final double distanceThreshold = 0.8;
 
@@ -107,8 +107,8 @@ public class Explanation {
 	static String[] OntologyFolders = { "bedroom", "bathroom" };
 	static String posInstanceFolderPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/k/kitchen/";
 	static String negInstanceFolderPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/l/living_room/";
-	static String explanationForPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs/Bathroom/";
-	static String backgroundOntology = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/sumo_aligned.owl";
+	static String explanationForPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs_owl_without_score/";
+	static String backgroundOntology = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo_aligned_without_score.owl";
 	// "butchers_shop", "bullpen", "bridge"
 
 	static ArrayList<Integer> randomClassIndex = new ArrayList<Integer>();
@@ -278,58 +278,58 @@ public class Explanation {
 	 * 
 	 * @throws OWLOntologyCreationException
 	 */
-	public static void alignWithSumo() throws OWLOntologyCreationException {
-		sumoOntology = loadOntology(new File(sumoFilePath));
-
-		// align Classes
-
-		/**
-		 * // there are a lot of considerations for alignment. So just combine them now.
-		 */
-
-		sourceOntologies.add(sumoOntology);
-		OntologyMerger merger = new OntologyMerger(owlOntologyManager, sourceOntologies, combinedOntology);
-		merger.mergeOntologies();
-
-		// for (OWLClass classFromSumo : sumoOntology.getClassesInSignature()) {
-		// for (OWLClass classFromADE : combinedOntology.getClassesInSignature()) {
-		//
-		// double distance =
-		// Alignment.computeConfidence(classFromSumo.getIRI().getShortForm(),
-		// classFromADE.getIRI().getShortForm());
-		// if (distance > distanceThreshold) {
-		//
-		//
-		// // align individuals
-		// for (OWLIndividual indi : classFromADE.getIndividualsInSignature()) {
-		// OWLClassAssertionAxiom ax =
-		// owlDataFactory.getOWLClassAssertionAxiom(classFromSumo, indi);
-		// ChangeApplied ca = owlOntologyManager.addAxiom(sumoOntology, ax);
-		// }
-		//
-		// // // align object properties
-		// // for(OWLObjectProperty objProp:
-		// classFromADE.getObjectPropertiesInSignature())
-		// // {
-		// //
-		// // }
-		// }
-		// }
-		// }
-		//
-		// // // align object properties
-		// // for(OWLObjectProperty objProp:
-		// // combinedOntology.getObjectPropertiesInSignature()) {
-		// // objProp.
-		// // }
-		//
-		// // align data properties
-		//
-		// //
-		//
-		//
-		// combinedOntology = sumoOntology;
-	}
+//	public static void alignWithSumo() throws OWLOntologyCreationException {
+//		sumoOntology = loadOntology(new File(sumoFilePath));
+//
+//		// align Classes
+//
+//		/**
+//		 * // there are a lot of considerations for alignment. So just combine them now.
+//		 */
+//
+//		sourceOntologies.add(sumoOntology);
+//		OntologyMerger merger = new OntologyMerger(owlOntologyManager, sourceOntologies, combinedOntology);
+//		merger.mergeOntologies();
+//
+//		// for (OWLClass classFromSumo : sumoOntology.getClassesInSignature()) {
+//		// for (OWLClass classFromADE : combinedOntology.getClassesInSignature()) {
+//		//
+//		// double distance =
+//		// Alignment.computeConfidence(classFromSumo.getIRI().getShortForm(),
+//		// classFromADE.getIRI().getShortForm());
+//		// if (distance > distanceThreshold) {
+//		//
+//		//
+//		// // align individuals
+//		// for (OWLIndividual indi : classFromADE.getIndividualsInSignature()) {
+//		// OWLClassAssertionAxiom ax =
+//		// owlDataFactory.getOWLClassAssertionAxiom(classFromSumo, indi);
+//		// ChangeApplied ca = owlOntologyManager.addAxiom(sumoOntology, ax);
+//		// }
+//		//
+//		// // // align object properties
+//		// // for(OWLObjectProperty objProp:
+//		// classFromADE.getObjectPropertiesInSignature())
+//		// // {
+//		// //
+//		// // }
+//		// }
+//		// }
+//		// }
+//		//
+//		// // // align object properties
+//		// // for(OWLObjectProperty objProp:
+//		// // combinedOntology.getObjectPropertiesInSignature()) {
+//		// // objProp.
+//		// // }
+//		//
+//		// // align data properties
+//		//
+//		// //
+//		//
+//		//
+//		// combinedOntology = sumoOntology;
+//	}
 
 	/**
 	 * This function calls dl-learner to run
@@ -739,6 +739,53 @@ public class Explanation {
 	// combineOntology", true);
 	// }
 
+	
+	
+	/**
+	 * 
+	 */
+	private void iterateOverFiles(String folder) {
+		try {
+			Files.walk(Paths.get(folder)).filter(f -> f.toFile().isFile()).
+				filter(f->f.toFile().getAbsolutePath().
+					endsWith(".owl")).forEach(f->{
+				// will get each file
+				// now run explanation for each owl, i.e. for each image
+				
+				/**
+				 * Get/load pos and neg examples from txt file
+				 */
+						
+				/**
+				 * load background ontology
+				 */
+				
+				/**
+				 * Try to run Dl-Learner
+				 */
+						
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * 
+	 */
+	private void iterateOverFolders(String path) {
+		try {
+			Files.walk(Paths.get(path)).filter(d -> d.toFile().isDirectory()).forEach(d->{
+				// will get each folder
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Main method
 	 * 

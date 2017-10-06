@@ -34,7 +34,7 @@ public class CreateOWLFromADE20k {
 	// public static String Constants.prefix =
 	// "http://www.daselab.org/ontologies/ADE20K/hcbdwsu#";
 	public static String rootPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/";
-	public static String rootPathNingManual = "/Users/sarker/Mega_Cloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs/";
+	public static String rootPathNingManual = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs_owl_without_score/";
 	// "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/"
 
 	public static String partLevelDataPropertyName = "partLevel";
@@ -288,7 +288,12 @@ public class CreateOWLFromADE20k {
 			// column[6]
 			// use score column , column[6] to get the score
 			double objectScore = Double.valueOf(column[6]);
-			OWLObjectProperty owlObjPropImageContains = getObjectProperty(objectScore, owlDataFactory);
+			// disregards objectScore.
+			// as this is not giving good result.
+			// OWLObjectProperty owlObjPropImageContains = getObjectProperty(objectScore, owlDataFactory);
+			IRI iriObjectProp = IRI.create(Constants.prefix + imageContainsObjPropertyName);
+			OWLObjectProperty owlObjPropImageContains = owlDataFactory.getOWLObjectProperty(iriObjectProp);
+			
 			// Assign this objects to the image by using imagecontains object property
 			OWLObjectPropertyAssertionAxiom owlObjectPropertyAssertionAxiom = owlDataFactory
 					.getOWLObjectPropertyAssertionAxiom(owlObjPropImageContains, namedIndiImage, namedIndiObject);

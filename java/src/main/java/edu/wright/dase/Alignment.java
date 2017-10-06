@@ -38,8 +38,8 @@ public class Alignment {
 	static OWLOntologyManager ontoManager;
 	static OWLDataFactory ontoDataFactory;
 	static double threshold = 0.8;
-	static String sumoPath = "/Users/sarker/Mega_Cloud/ProjectHCBD/datas/sumo_aligned/sumo_with_imgContain_others_aligned.owl";
-	static final String adePath = "/Users/sarker/Mega_Cloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs/";
+	static String sumoPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo.owl";
+	static final String adePath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs_owl_without_score/";
 	static int counter = 0;
 	// static String targetPath =
 	// "/Users/sarker/Mega_Cloud/ProjectHCBD/datas/sumo_aligned/sumo_with_imgContain_others_aligned.owl";

@@ -362,6 +362,7 @@ public class DLLearner {
 		// ((CELOE) la).setHeuristic(heuristic);
 		((CELOE) la).init();
 		la.start();
+		
 		LinkedList bestClassesDescription = (LinkedList) la.getCurrentlyBestDescriptions();
 
 		LinkedList best100Classes = (LinkedList) la.getCurrentlyBestDescriptions(100);
