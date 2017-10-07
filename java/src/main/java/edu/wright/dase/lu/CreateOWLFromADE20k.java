@@ -34,7 +34,7 @@ public class CreateOWLFromADE20k {
 	// public static String Constants.prefix =
 	// "http://www.daselab.org/ontologies/ADE20K/hcbdwsu#";
 	public static String rootPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/";
-	public static String rootPathNingManual = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs_owl_without_score/";
+	public static String rootPathNingManual = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_v3_txts_as_dirs_owl_without_score_without_wordnet/";
 	// "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/"
 
 	public static String partLevelDataPropertyName = "partLevel";
@@ -290,9 +290,9 @@ public class CreateOWLFromADE20k {
 			double objectScore = Double.valueOf(column[6]);
 			// disregards objectScore.
 			// as this is not giving good result.
-			// OWLObjectProperty owlObjPropImageContains = getObjectProperty(objectScore, owlDataFactory);
-			IRI iriObjectProp = IRI.create(Constants.prefix + imageContainsObjPropertyName);
-			OWLObjectProperty owlObjPropImageContains = owlDataFactory.getOWLObjectProperty(iriObjectProp);
+			//OWLObjectProperty owlObjPropImageContains = getObjectProperty(objectScore, owlDataFactory);
+			 IRI iriObjectProp = IRI.create(Constants.prefix + imageContainsObjPropertyName);
+			 OWLObjectProperty owlObjPropImageContains = owlDataFactory.getOWLObjectProperty(iriObjectProp);
 			
 			// Assign this objects to the image by using imagecontains object property
 			OWLObjectPropertyAssertionAxiom owlObjectPropertyAssertionAxiom = owlDataFactory
@@ -301,19 +301,19 @@ public class CreateOWLFromADE20k {
 
 			// create class and assign individual to class
 			// Column[3] Wordnet
-			String[] classes = column[3].split(",");
-			for (String eachClass : classes) {
-
-				eachClass = eachClass.trim().replace(" ", "").replace("_", "");
-				eachClass = eachClass.substring(0, 1).toUpperCase() + eachClass.substring(1);
-				// create class
-				iriClass = IRI.create(Constants.prefix + "WN_" + eachClass);
-				owlClass = owlDataFactory.getOWLClass(iriClass);
-				// assign individual to class
-				owlClassAssertionAxiom = owlDataFactory.getOWLClassAssertionAxiom(owlClass, namedIndiObject);
-				// addAxiom = new AddAxiom(ontology, owlClassAssertionAxiom);
-				owlManager.addAxiom(ontology, owlClassAssertionAxiom);
-			}
+//			String[] classes = column[3].split(",");
+//			for (String eachClass : classes) {
+//
+//				eachClass = eachClass.trim().replace(" ", "").replace("_", "");
+//				eachClass = eachClass.substring(0, 1).toUpperCase() + eachClass.substring(1);
+//				// create class
+//				iriClass = IRI.create(Constants.prefix + "WN_" + eachClass);
+//				owlClass = owlDataFactory.getOWLClass(iriClass);
+//				// assign individual to class
+//				owlClassAssertionAxiom = owlDataFactory.getOWLClassAssertionAxiom(owlClass, namedIndiObject);
+//				// addAxiom = new AddAxiom(ontology, owlClassAssertionAxiom);
+//				owlManager.addAxiom(ontology, owlClassAssertionAxiom);
+//			}
 
 			// Column[4] Raw name
 			String[] rawClasses = column[4].split(",");
