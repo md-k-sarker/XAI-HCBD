@@ -4,6 +4,8 @@
 package edu.wright.dase.util;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -167,6 +169,15 @@ public class OWLUtility {
 	public static String getCurrentTimeAsString() {
 		String time = new SimpleDateFormat("MM.dd.yyyy  HH.mm.ss a").format(new Date());
 		return time;
+	}
+	
+	public static String getStackTraceAsString(Exception e) {
+
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		e.printStackTrace(pw);
+		String sStackTrace = sw.toString(); // stack trace as a string
+		return sStackTrace;
 	}
 	
 	/**

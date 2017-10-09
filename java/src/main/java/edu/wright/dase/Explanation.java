@@ -113,7 +113,11 @@ public class Explanation {
 	static String backgroundOntology = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo_aligned_without_score_minimal.owl";
 	// "butchers_shop", "bullpen", "bridge"
 	
-	private static int maxExecutionTimeInSeconds = (1 * 27);
+	static String alreadyGotResultPath = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/automated/without_score_got_result/";
+
+	static ArrayList<String> alreadyGotResult = new ArrayList<String>();
+	
+	private static int maxExecutionTimeInSeconds = (1 * 1800);
 
 	static ArrayList<Integer> randomClassIndex = new ArrayList<Integer>();
 
@@ -124,6 +128,8 @@ public class Explanation {
 			"dining_room_ADE_train_00006845", "dining_room_ADE_train_00006846", "hotel_room_ADE_train_00009520",
 			"hotel_room_ADE_train_00009521", "kitchen_ADE_train_00000594", "kitchen_ADE_train_00000595",
 			"living_room_ADE_train_00000651", "living_room_ADE_train_00000652" };
+
+	static String logFile = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/logs/oct_08/with_score/with_score_pos_only.log";
 
 	/**
 	 * Initializes various components
@@ -607,7 +613,7 @@ public class Explanation {
 			Writer.writeInDisk(fileName, "\nBest " +best100Classes.size() +" Classes- using getCurrentlyBestDescriptions()", true);
 			Writer.writeInDisk(fileName, "\n# This is the best class descriptions found by the learning algorithm so far.\n", true);
 			for (int i = 0; i < best100Classes.size(); i++) {
-				System.out.println("Best 100 Class- " + i + " :" + best100Classes.get(i));
+				//System.out.println("Best 100 Class- " + i + " :" + best100Classes.get(i));
 				// writer.write(best100Classes.get(i) + "\n");
 				Writer.writeInDisk(fileName, best100Classes.get(i) + "\n", true);
 			}
@@ -622,9 +628,10 @@ public class Explanation {
 					+ "\n# We assume that they are ordered such that the best ones come in last."
 					+ "\n# (In Java, iterators traverse a SortedSet in ascending order.\n)",true);
 			while (it.hasNext()) {
-				System.out.println("Best Eval Class- :" + it.next());
+				Object obj = it.next();
+				//System.out.println("Best Eval Class- :" + obj);
 				// writer.write(it.next()+"\n");
-				Writer.writeInDisk(fileName, it.next() + "\n", true);
+				Writer.writeInDisk(fileName, obj + "\n", true);
 			}
 
 			// writer.close();
@@ -824,6 +831,8 @@ public class Explanation {
 	 * Will get each owl file path
 	 */
 	private static void tryToCreateExplanationDemo(Path path) {
+
+		String writeToPosOnly = path.toFile().getAbsolutePath().replace(".conf", "_expl_pos_only.txt");
 		try {
 
 			// will get each file
@@ -836,12 +845,11 @@ public class Explanation {
 			// 1 for pos and neg
 			//String confFilePath = path.toFile().getAbsolutePath().replace(".owl", ".conf");
 			//String writeToPosNeg = path.toFile().getAbsolutePath().replace(".owl", "_expl_pos_neg.txt");
-			String writeToPosOnly = path.toFile().getAbsolutePath().replace(".conf", "_expl_pos_only.txt");
 			
 			// for only pos
-			Writer.writeInDisk(writeToPosOnly, "Explanation for: "+ path.toFile().getName().replace(".conf", "") +
+			Writer.writeInDisk(writeToPosOnly, "Explanation for: "+  path.toFile().getAbsolutePath() +
 					"\n started at: " +OWLUtility.getCurrentTimeAsString(), false);
-			System.out.println("\n\n\nExplanation for: "+ path.toFile().getName().replace(".conf", "") +
+			System.out.println("\n\n\nExplanation for: "+ path.toFile().getAbsolutePath() +
 					"\n started at: " +OWLUtility.getCurrentTimeAsString());
 						
 
@@ -891,9 +899,9 @@ public class Explanation {
 			writeStatistics(expl, writeToPosOnly);
 			printStatus(path.toString());
 
-			Writer.writeInDisk(writeToPosOnly, "\nExplanation for: "+ path.toFile().getName().replace(".owl", "") +
+			Writer.writeInDisk(writeToPosOnly, "\nExplanation for: "+  path.toFile().getAbsolutePath() +
 					"\n finished at: " +OWLUtility.getCurrentTimeAsString(), true);
-			System.out.println("Explanation for: "+ path.toFile().getName().replace(".owl", "") +
+			System.out.println("Explanation for: "+  path.toFile().getAbsolutePath() +
 					"\n finished at: " +OWLUtility.getCurrentTimeAsString());
 			
 			// 1 for  pos and neg
@@ -902,6 +910,7 @@ public class Explanation {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Writer.writeInDisk(writeToPosOnly,  "\n!!!!!!!!Fatal ERROR!!!!!!!!!!!\n"+OWLUtility.getStackTraceAsString(e), true);
 		}
 	}
 
@@ -921,13 +930,20 @@ public class Explanation {
 		try {
 			// iterate over the files of a folder
 			Files.walk(path).filter(f -> f.toFile().isFile()).filter(f->f.toFile().getAbsolutePath().endsWith(".conf")).forEach(f -> {
-				// will get each folder
-				tryToCreateExplanationDemo(f);
+				// will get each file
+				if(alreadyGotResult.contains(f.toFile().getName())) {
+					System.out.println( f.toString()+ " already has result not running it");
+				}
+				else {
+					//System.out.println("Not matched "+ f.toString());
+					tryToCreateExplanationDemo(f);
+				}
 				
 			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Writer.writeInDisk(logFile, "!!!!!!!Fatal error!!!!!!!\n" + OWLUtility.getStackTraceAsString(e), true);
 		}
 	}
 
@@ -939,7 +955,17 @@ public class Explanation {
 	public static void main(String[] args) {
 
 		int i = 0;
-
+		Writer.writeInDisk(logFile, "Main Program started at: " + OWLUtility.getCurrentTimeAsString(), false);
+		try {
+			Files.walk(Paths.get(alreadyGotResultPath)).filter(f -> f.toFile().isFile()).
+			filter(f -> f.toFile().getAbsolutePath().endsWith(".txt")).forEach(f->{
+				alreadyGotResult.add(f.toFile().getName().replaceAll("_expl_pos_only.txt", ".conf"));
+				Writer.writeInDisk(logFile, "\nAlready got result for: " + f.toString(), true);
+			});
+		}catch(Exception ex){
+			Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + OWLUtility.getStackTraceAsString(ex), true);
+		}
+		
 		OWLOntology _onto;
 		try {
 			
@@ -947,9 +973,11 @@ public class Explanation {
 			Files.walk(Paths.get(explanationForPath)).filter(d -> d.toFile().isDirectory()).forEach(d -> {
 				try {
 					iterateOverFolders(d);
+					 Writer.writeInDisk(logFile, "Running on folder: "+ d.toString() , true);
 				}catch(Exception ex) {
 					System.out.println("Error occurred");
 					ex.printStackTrace();
+					Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + OWLUtility.getStackTraceAsString(ex), true);
 					System.exit(0);
 				}
 			});
