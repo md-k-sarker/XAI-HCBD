@@ -47,7 +47,7 @@ import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 
 import edu.wright.dase.lu.Alignment;
 import edu.wright.dase.util.Constants;
-import edu.wright.dase.util.OWLUtility;
+import edu.wright.dase.util.Utility;
 import edu.wright.dase.util.Writer;
 import uk.ac.manchester.cs.jfact.JFactFactory;
 import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
@@ -99,21 +99,22 @@ public class Explanation {
 	static OWLOntology sumoOntology;
 	// static OWLOntology ade20KOntology;
 	static OWLOntology combinedOntology;
-	static Set<OWLOntology> sourceOntologies; // = new HashSet<OWLOntology>();
+	//static Set<OWLOntology> sourceOntologies; // = new HashSet<OWLOntology>();
 	static IRI owlDiskFileIRIForSave;
 	static int counter = 0;
-	static String[] excludedFolders = { "images", "training", "validation", "a", "b", "c", "d", "e", "f", "g", "h", "i",
-			"j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-	static String[] ningManualFolders = { "bathroom" };
+	//static String[] excludedFolders = { "images", "training", "validation", "a", "b", "c", "d", "e", "f", "g", "h", "i",
+		//	"j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+	//static String[] ningManualFolders = { "bathroom" };
 	// , "bathroom", "butchers_shop", "bullpen", "bridge"
-	static String[] OntologyFolders = { "bedroom", "bathroom" };
-	static String posInstanceFolderPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/k/kitchen/";
-	static String negInstanceFolderPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/l/living_room/";
-	static String explanationForPath = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/automated/without_score/ning_v3/";
+	//static String[] OntologyFolders = { "bedroom", "bathroom" };
+	//static String posInstanceFolderPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/k/kitchen/";
+	//static String negInstanceFolderPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ADE20K/images/training/l/living_room/";
+	
+	static String explanationForPath = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/neuron_activation_tracing/without_score/ning_v3/";
 	static String backgroundOntology = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo_aligned_without_score_minimal.owl";
 	// "butchers_shop", "bullpen", "bridge"
 	
-	static String alreadyGotResultPath = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/automated/without_score_got_result/";
+	static String alreadyGotResultPath = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/neuron_activation_tracing/without_score_got_result/";
 
 	static ArrayList<String> alreadyGotResult = new ArrayList<String>();
 	
@@ -121,15 +122,8 @@ public class Explanation {
 
 	static ArrayList<Integer> randomClassIndex = new ArrayList<Integer>();
 
-	static String[] posStrings = { "bathroom_ADE_train_00000006", "bathroom_ADE_train_00000007",
-			"bathroom_ADE_train_00000008", "bathroom_ADE_train_00000009", "bathroom_ADE_train_00000010" };
-	static String[] negStrings = { "bedroom_ADE_train_00000192", "bedroom_ADE_train_00000193",
-			"conference_room_ADE_train_00000570", "conference_room_ADE_train_00005979",
-			"dining_room_ADE_train_00006845", "dining_room_ADE_train_00006846", "hotel_room_ADE_train_00009520",
-			"hotel_room_ADE_train_00009521", "kitchen_ADE_train_00000594", "kitchen_ADE_train_00000595",
-			"living_room_ADE_train_00000651", "living_room_ADE_train_00000652" };
 
-	static String logFile = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/logs/oct_08/with_score/with_score_pos_only.log";
+	static String logFile = "/home/sarker/MegaCloud/ProjectHCBD/experiments/ade_with_wn_sumo/logs/oct_08/without_score/without_score_pos_only.log";
 
 	/**
 	 * Initializes various components
@@ -162,186 +156,11 @@ public class Explanation {
 		merger.mergeOntologies();
 	}
 
-	// is it working without file:, i.e. fullPath = "file:" + fullPath ?;
-	// Checked this saveOntology() function.
-	// do not save in disk for each combined ontology. it takes too much space in
-	// disk.
-	// each combined ontology is being approximately 80MB.
-	// 80 MB * 22000 = 2000,000 MB = 2000 GB
-	// saveOntology(fullPath);
 
-	/**
-	 * Save combined ontology to file system
-	 * 
-	 * @throws OWLOntologyStorageException
-	 */
-	public static void saveOntology(String path) throws OWLOntologyStorageException {
 
-		owlDiskFileIRIForSave = IRI.create("file:" + path);
-		owlOntologyManager.saveOntology(combinedOntology, owlDiskFileIRIForSave);
 
-	}
 
-	/**
-	 * Load ontology from file system
-	 * 
-	 * @throws OWLOntologyCreationException
-	 */
-	public static OWLOntology loadOntology(File ontoFile) throws OWLOntologyCreationException {
 
-		OWLOntology ontology = owlOntologyManager.loadOntologyFromOntologyDocument(ontoFile);
-		return ontology;
-
-	}
-
-	/**
-	 * Load positive instances and also add them to combined ontology
-	 */
-	public static void loadPosInstancesAndAddForMerging(String writeTo) {
-
-		try {
-			Files.walk(Paths.get(posInstanceFolderPath)).filter(f -> posIndiCounter <= 10)
-					.filter(f -> f.toFile().getAbsolutePath().endsWith(".owl")).forEach(f -> {
-
-						// add to posIndi
-						String name = f.getFileName().toString().replaceAll(".owl", "");
-						IRI iriIndi = IRI.create(prefix + name);
-						OWLNamedIndividual namedIndi = owlDataFactory.getOWLNamedIndividual(iriIndi);
-						posExamples.add(namedIndi);
-						posIndiCounter++;
-					});
-			// tookPositiveExamples = true;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * Load positive instances and also add them to combined ontology
-	 */
-	public static void loadNegInstances(String writeTo) {
-		try {
-			Files.walk(Paths.get(negInstanceFolderPath)).filter(f -> negIndiCounter <= 10)
-					.filter(f -> f.toFile().getAbsolutePath().endsWith(".owl")).forEach(f -> {
-						// add to sourceOnto for combining with backgroundInfo
-						try {
-							OWLOntology ontology = loadOntology(f.toFile());
-							sourceOntologies.add(ontology);
-							logger.info(" adding " + f + " sumo to combineOntology...");
-							System.out.println(" adding " + f + "  sumo to combineOntology...");
-							Writer.writeInDisk(writeTo, "\n adding \"+ f +\" sumo to combineOntology...", true);
-						} catch (OWLOntologyCreationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-						// add to negIndivs
-						String name = f.getFileName().toString().replaceAll(".owl", "");
-						IRI iriIndi = IRI.create(prefix + name);
-						OWLNamedIndividual namedIndi = owlDataFactory.getOWLNamedIndividual(iriIndi);
-						negExamples.add(namedIndi);
-						negIndiCounter++;
-					});
-			// tookPositiveExamples = true;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * OWLEntityRemover entityRemover = new
-	 * OWLEntityRemover(Collections.singleton(ontology)); for (OWLNamedIndividual
-	 * individual : ontology.getIndividualsInSignature(Imports.INCLUDED)) { if
-	 * (!individual.getIRI().getShortForm().contains("_Indi_")) {
-	 * entityRemover.visit(individual); } }
-	 * ontologyManager.applyChanges(entityRemover.getChanges());
-	 */
-
-	/**
-	 * Removes concepts which do not have a single instance. alternatively keep
-	 * those concepts which have at-least a single instance. TO-DO: FIX
-	 */
-	public static OWLOntology removeNonRelatedConcepts(OWLOntology combinedOntology, OWLReasoner owlReasoner,
-			String writeTo) {
-
-		OWLEntityRemover entityRemover = new OWLEntityRemover(Collections.singleton(combinedOntology));
-
-		for (OWLClass owlClass : combinedOntology.getClassesInSignature()) {
-			if (owlReasoner.getInstances(owlClass, false).getFlattened().size() < 1) {
-				entityRemover.visit(owlClass);
-			}
-		}
-		ChangeApplied ca = owlOntologyManager.applyChanges(entityRemover.getChanges());
-		if (writeTo != null)
-			Writer.writeInDisk(writeTo, "Removing " + ca.toString(), true);
-		logger.info("Removing " + ca.toString(), true);
-		System.out.println("Removing " + ca.toString());
-
-		return combinedOntology;
-	}
-
-	/**
-	 * Alignment with sumo ontology
-	 * 
-	 * @throws OWLOntologyCreationException
-	 */
-	// public static void alignWithSumo() throws OWLOntologyCreationException {
-	// sumoOntology = loadOntology(new File(sumoFilePath));
-	//
-	// // align Classes
-	//
-	// /**
-	// * // there are a lot of considerations for alignment. So just combine them
-	// now.
-	// */
-	//
-	// sourceOntologies.add(sumoOntology);
-	// OntologyMerger merger = new OntologyMerger(owlOntologyManager,
-	// sourceOntologies, combinedOntology);
-	// merger.mergeOntologies();
-	//
-	// // for (OWLClass classFromSumo : sumoOntology.getClassesInSignature()) {
-	// // for (OWLClass classFromADE : combinedOntology.getClassesInSignature()) {
-	// //
-	// // double distance =
-	// // Alignment.computeConfidence(classFromSumo.getIRI().getShortForm(),
-	// // classFromADE.getIRI().getShortForm());
-	// // if (distance > distanceThreshold) {
-	// //
-	// //
-	// // // align individuals
-	// // for (OWLIndividual indi : classFromADE.getIndividualsInSignature()) {
-	// // OWLClassAssertionAxiom ax =
-	// // owlDataFactory.getOWLClassAssertionAxiom(classFromSumo, indi);
-	// // ChangeApplied ca = owlOntologyManager.addAxiom(sumoOntology, ax);
-	// // }
-	// //
-	// // // // align object properties
-	// // // for(OWLObjectProperty objProp:
-	// // classFromADE.getObjectPropertiesInSignature())
-	// // // {
-	// // //
-	// // // }
-	// // }
-	// // }
-	// // }
-	// //
-	// // // // align object properties
-	// // // for(OWLObjectProperty objProp:
-	// // // combinedOntology.getObjectPropertiesInSignature()) {
-	// // // objProp.
-	// // // }
-	// //
-	// // // align data properties
-	// //
-	// // //
-	// //
-	// //
-	// // combinedOntology = sumoOntology;
-	// }
 
 	/**
 	 * This function calls dl-learner to run
@@ -355,7 +174,7 @@ public class Explanation {
 	public static void tryToCreateExplanations(Path path, String writeTo)
 			throws ComponentInitException, OWLOntologyCreationException, OWLOntologyStorageException {
 
-		sourceOntologies = new HashSet<OWLOntology>();
+		 Set<OWLOntology> sourceOntologies = new HashSet<OWLOntology>();
 
 		// variables
 		negIndiCounter = 0;
@@ -381,6 +200,14 @@ public class Explanation {
 		// loadNegInstances(writeTo);
 		posExamples.clear();
 		negExamples.clear();
+		
+		 String[] posStrings = { "bathroom_ADE_train_00000006", "bathroom_ADE_train_00000007",
+				"bathroom_ADE_train_00000008", "bathroom_ADE_train_00000009", "bathroom_ADE_train_00000010" };
+		 String[] negStrings = { "bedroom_ADE_train_00000192", "bedroom_ADE_train_00000193",
+				"conference_room_ADE_train_00000570", "conference_room_ADE_train_00005979",
+				"dining_room_ADE_train_00006845", "dining_room_ADE_train_00006846", "hotel_room_ADE_train_00009520",
+				"hotel_room_ADE_train_00009521", "kitchen_ADE_train_00000594", "kitchen_ADE_train_00000595",
+				"living_room_ADE_train_00000651", "living_room_ADE_train_00000652" };
 
 		for (String indi : posStrings) {
 			indi = Constants.prefix + indi;
@@ -402,7 +229,7 @@ public class Explanation {
 		Writer.writeInDisk(writeTo, "\n loading background Ontology...", true);
 
 		// just load background ontology
-		combinedOntology = OWLUtility.loadOntology(new File(backgroundOntology));
+		combinedOntology = Utility.loadOntology(new File(backgroundOntology));
 
 		logger.info(" loading background Ontology finished");
 		System.out.println(" loading background Ontology finished");
@@ -429,7 +256,7 @@ public class Explanation {
 				true);
 
 		// remove non related concepts
-		combinedOntology = removeNonRelatedConcepts(combinedOntology, owlReasoner, writeTo);
+		combinedOntology = Utility.removeNonRelatedConcepts(combinedOntology, owlReasoner, writeTo);
 		totalClasses = combinedOntology.getClassesInSignature().size();
 		totalInstances = combinedOntology.getIndividualsInSignature().size();
 
@@ -471,7 +298,7 @@ public class Explanation {
 
 		counter++;
 
-		writeStatistics(expl, writeTo);
+		Utility.writeStatistics(expl, writeTo);
 		printStatus(path.toString());
 
 	}
@@ -516,7 +343,7 @@ public class Explanation {
 				true);
 
 		// remove non related concepts
-		combinedOntology = removeNonRelatedConcepts(ontology, owlReasoner, writeTo);
+		combinedOntology = Utility.removeNonRelatedConcepts(ontology, owlReasoner, writeTo);
 		totalClasses = combinedOntology.getClassesInSignature().size();
 		totalInstances = combinedOntology.getIndividualsInSignature().size();
 
@@ -556,92 +383,109 @@ public class Explanation {
 		DLLearner dlLearner = new DLLearner(combinedOntology, posExamples, posExamples, writeTo,maxExecutionTimeInSeconds);
 		CELOE expl = dlLearner.run();
 
-		writeStatistics(expl, writeTo);
+		Utility.writeStatistics(expl, writeTo);
 		printStatus(explanationFor);
 
 	}
 
 	/**
-	 * Iterate over folders to make positive and negative instances and then run
-	 * DL-Learner
-	 * 
-	 * @param path
-	 * @throws OWLOntologyCreationException
-	 * @throws OWLOntologyStorageException
-	 * @throws ComponentInitException
+	 * Will get each owl file path
 	 */
-//	public static void iterateOverFolders(Path path)
-//			throws OWLOntologyCreationException, OWLOntologyStorageException, ComponentInitException {
-//
-//		// no need to do explanation because these folders do not have any instances
-//		for (String name : excludedFolders) {
-//			if (path.getFileName().toString().equals(name)) {
-//				System.out.println("Directory " + path + " is excluded");
-//				return;
-//			}
-//		}
-//
-//		// make explanation for only ning suggested folders
-//		for (String folder : ningManualFolders) {
-//			if (path.getFileName().toString().equals(folder)) {
-//
-//				// tryToCreateExplanations(path);
-//
-//			}
-//		}
-//
-//	}
+	private static void tryToCreateExplanationDemo(Path path) {
 
-	/**
-	 * Write statistics to file/disk
-	 * 
-	 * @param expl
-	 * @param fileName
-	 */
-	public static void writeStatistics(CELOE expl, String fileName) {
-		BufferedWriter writer;
-		try {
-			// writer = new BufferedWriter( new FileWriter( fileName));
-
-			Writer.writeInDisk(fileName, "\n\n########################\n", true);
-
-			LinkedList bestClassesDescription = (LinkedList) expl.getCurrentlyBestDescriptions();
-
-			LinkedList best100Classes = (LinkedList) expl.getCurrentlyBestDescriptions(1000);
+		String writeToPosOnly = path.toFile().getAbsolutePath().replace(".conf", "_expl_pos_only.txt");
+		
+		if(!path.toFile().getAbsolutePath().endsWith(".conf")) {
 			
-			System.out.println("Best " +best100Classes.size() +" Classes- using getCurrentlyBestDescriptions()");
-			Writer.writeInDisk(fileName, "\nBest " +best100Classes.size() +" Classes- using getCurrentlyBestDescriptions()", true);
-			Writer.writeInDisk(fileName, "\n# This is the best class descriptions found by the learning algorithm so far.\n", true);
-			for (int i = 0; i < best100Classes.size(); i++) {
-				//System.out.println("Best 100 Class- " + i + " :" + best100Classes.get(i));
-				// writer.write(best100Classes.get(i) + "\n");
-				Writer.writeInDisk(fileName, best100Classes.get(i) + "\n", true);
+			Writer.writeInDisk(writeToPosOnly, "Explanation for: "+  path.toFile().getAbsolutePath() +
+					"Can not run because it is not a .conf file.\n !!!!!!!!!!Explanation aborted!!!!!!!!!!", false);
+			System.out.println("\n\n\nExplanation for: "+ path.toFile().getAbsolutePath() +
+					"Can not run because it is not a .conf file. \n !!!!!!!!!!Explanation aborted!!!!!!!!!!");
+			return;
+		}
+		
+		try {
+
+			// will get each file
+			// now run explanation for each owl, i.e. for each image
+			
+			/**
+			 * Try to run Dl-Learner 2 times
+			 */
+	
+			// 1 for pos and neg
+			//String confFilePath = path.toFile().getAbsolutePath().replace(".owl", ".conf");
+			//String writeToPosNeg = path.toFile().getAbsolutePath().replace(".owl", "_expl_pos_neg.txt");
+			
+			// for only pos
+			Writer.writeInDisk(writeToPosOnly, "Explanation for: "+  path.toFile().getAbsolutePath() +
+					"\n started at: " +Utility.getCurrentTimeAsString(), false);
+			System.out.println("\n\n\nExplanation for: "+ path.toFile().getAbsolutePath() +
+					"\n started at: " +Utility.getCurrentTimeAsString());
+						
+
+			/**
+			 * load background ontology
+			 */
+			OWLOntology _onto = Utility.loadOntology(new File(backgroundOntology));
+			reasonerFactory = new PelletReasonerFactory();
+			owlReasoner = reasonerFactory.createNonBufferingReasoner(_onto);
+			
+			/**
+			 * Get/load pos and neg examples from txt file
+			 */
+			readExamplesFromConf(path.toFile().getAbsolutePath());
+			Set<OWLNamedIndividual> allExamples = new HashSet<OWLNamedIndividual>();
+			
+			allExamples.addAll(posExamples);
+			allExamples.addAll(negExamples);
+			
+			OWLOntology mod_onto = Utility.removeNonRelatedIndividuals(_onto, owlReasoner, allExamples, null);
+			owlReasoner = reasonerFactory.createNonBufferingReasoner(mod_onto);
+			
+			OWLOntology _mod_onto = Utility.removeNonRelatedConcepts(mod_onto,owlReasoner);
+			
+			System.out.println("PosExamples: ");
+			Writer.writeInDisk(writeToPosOnly, "\n\nPosExamples: ", true);
+			for(OWLNamedIndividual indi: posExamples) {
+				System.out.println(indi);
+				Writer.writeInDisk(writeToPosOnly, "\n"+indi.getIRI().getShortForm(), true);
 			}
-
-			// Returns a sorted set of the best descriptions found so far. We assume that they are ordered such that the best ones come in last. 
-			// (In Java, iterators traverse a SortedSet in ascending order.)
-			TreeSet bestEvalClasses = (TreeSet) expl.getCurrentlyBestEvaluatedDescriptions();
-			Iterator it = bestEvalClasses.iterator();
-			// writer.write("\nBest Eval Class- \n");
-			Writer.writeInDisk(fileName, "\n\nBest Evaluated Class- using getCurrentlyBestEvaluatedDescriptions()\n", true);
-			Writer.writeInDisk(fileName, "# Returns a sorted set of the best descriptions found so far. "
-					+ "\n# We assume that they are ordered such that the best ones come in last."
-					+ "\n# (In Java, iterators traverse a SortedSet in ascending order.\n)",true);
-			while (it.hasNext()) {
-				Object obj = it.next();
-				//System.out.println("Best Eval Class- :" + obj);
-				// writer.write(it.next()+"\n");
-				Writer.writeInDisk(fileName, obj + "\n", true);
+			
+			System.out.println("\nNegExamples: ");
+			Writer.writeInDisk(writeToPosOnly, "\n\nNegExamples:", true);
+			for(OWLNamedIndividual indi: negExamples) {
+				System.out.println(indi);
+				Writer.writeInDisk(writeToPosOnly, "\n"+indi.getIRI().getShortForm(), true);
 			}
+			
+			Writer.writeInDisk(writeToPosOnly, "\n\n", true);
+			
+			// call to run dl-learner
+			DLLearner dlLearner = new DLLearner(_mod_onto, posExamples, posExamples, writeToPosOnly,maxExecutionTimeInSeconds);
+			CELOE expl = dlLearner.run(true);
+			
+			counter++;
+			
+			Utility.writeStatistics(expl, writeToPosOnly);
+			printStatus(path.toString());
 
-			// writer.close();
+			Writer.writeInDisk(writeToPosOnly, "\nExplanation for: "+  path.toFile().getAbsolutePath() +
+					"\n finished at: " +Utility.getCurrentTimeAsString(), true);
+			System.out.println("Explanation for: "+  path.toFile().getAbsolutePath() +
+					"\n finished at: " +Utility.getCurrentTimeAsString());
+			
+			// 1 for  pos and neg
 
+					
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Writer.writeInDisk(writeToPosOnly,  "\n!!!!!!!!Fatal ERROR!!!!!!!!!!!\n"+Utility.getStackTraceAsString(e), true);
 		}
-
 	}
+
+
 
 	public static Set<OWLIndividual> loadPosExamples(String posExamplesFilePath) throws IOException {
 		return readExamples(posExamplesFilePath);
@@ -827,92 +671,6 @@ public class Explanation {
 //		}
 	}
 
-	/**
-	 * Will get each owl file path
-	 */
-	private static void tryToCreateExplanationDemo(Path path) {
-
-		String writeToPosOnly = path.toFile().getAbsolutePath().replace(".conf", "_expl_pos_only.txt");
-		try {
-
-			// will get each file
-			// now run explanation for each owl, i.e. for each image
-			
-			/**
-			 * Try to run Dl-Learner 2 times
-			 */
-	
-			// 1 for pos and neg
-			//String confFilePath = path.toFile().getAbsolutePath().replace(".owl", ".conf");
-			//String writeToPosNeg = path.toFile().getAbsolutePath().replace(".owl", "_expl_pos_neg.txt");
-			
-			// for only pos
-			Writer.writeInDisk(writeToPosOnly, "Explanation for: "+  path.toFile().getAbsolutePath() +
-					"\n started at: " +OWLUtility.getCurrentTimeAsString(), false);
-			System.out.println("\n\n\nExplanation for: "+ path.toFile().getAbsolutePath() +
-					"\n started at: " +OWLUtility.getCurrentTimeAsString());
-						
-
-			/**
-			 * load background ontology
-			 */
-			OWLOntology _onto = OWLUtility.loadOntology(new File(backgroundOntology));
-			reasonerFactory = new PelletReasonerFactory();
-			owlReasoner = reasonerFactory.createNonBufferingReasoner(_onto);
-			
-			/**
-			 * Get/load pos and neg examples from txt file
-			 */
-			readExamplesFromConf(path.toFile().getAbsolutePath());
-			Set<OWLNamedIndividual> allExamples = new HashSet<OWLNamedIndividual>();
-			
-			allExamples.addAll(posExamples);
-			allExamples.addAll(negExamples);
-			
-			OWLOntology mod_onto = OWLUtility.removeNonRelatedIndividuals(_onto, owlReasoner, allExamples, null);
-			owlReasoner = reasonerFactory.createNonBufferingReasoner(mod_onto);
-			
-			OWLOntology _mod_onto = OWLUtility.removeNonRelatedConcepts(mod_onto,owlReasoner);
-			
-			System.out.println("PosExamples: ");
-			Writer.writeInDisk(writeToPosOnly, "\n\nPosExamples: ", true);
-			for(OWLNamedIndividual indi: posExamples) {
-				System.out.println(indi);
-				Writer.writeInDisk(writeToPosOnly, "\n"+indi.getIRI().getShortForm(), true);
-			}
-			
-			System.out.println("\nNegExamples: ");
-			Writer.writeInDisk(writeToPosOnly, "\n\nNegExamples:", true);
-			for(OWLNamedIndividual indi: negExamples) {
-				System.out.println(indi);
-				Writer.writeInDisk(writeToPosOnly, "\n"+indi.getIRI().getShortForm(), true);
-			}
-			
-			Writer.writeInDisk(writeToPosOnly, "\n\n", true);
-			
-			// call to run dl-learner
-			DLLearner dlLearner = new DLLearner(_mod_onto, posExamples, posExamples, writeToPosOnly,maxExecutionTimeInSeconds);
-			CELOE expl = dlLearner.run(true);
-			
-			counter++;
-			
-			writeStatistics(expl, writeToPosOnly);
-			printStatus(path.toString());
-
-			Writer.writeInDisk(writeToPosOnly, "\nExplanation for: "+  path.toFile().getAbsolutePath() +
-					"\n finished at: " +OWLUtility.getCurrentTimeAsString(), true);
-			System.out.println("Explanation for: "+  path.toFile().getAbsolutePath() +
-					"\n finished at: " +OWLUtility.getCurrentTimeAsString());
-			
-			// 1 for  pos and neg
-
-					
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Writer.writeInDisk(writeToPosOnly,  "\n!!!!!!!!Fatal ERROR!!!!!!!!!!!\n"+OWLUtility.getStackTraceAsString(e), true);
-		}
-	}
 
 	/**
 	 * Will get a folder
@@ -943,7 +701,7 @@ public class Explanation {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Writer.writeInDisk(logFile, "!!!!!!!Fatal error!!!!!!!\n" + OWLUtility.getStackTraceAsString(e), true);
+			Writer.writeInDisk(logFile, "!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(e), true);
 		}
 	}
 
@@ -955,7 +713,7 @@ public class Explanation {
 	public static void main(String[] args) {
 
 		int i = 0;
-		Writer.writeInDisk(logFile, "Main Program started at: " + OWLUtility.getCurrentTimeAsString(), false);
+		Writer.writeInDisk(logFile, "Main Program started at: " + Utility.getCurrentTimeAsString(), false);
 		try {
 			Files.walk(Paths.get(alreadyGotResultPath)).filter(f -> f.toFile().isFile()).
 			filter(f -> f.toFile().getAbsolutePath().endsWith(".txt")).forEach(f->{
@@ -963,7 +721,7 @@ public class Explanation {
 				Writer.writeInDisk(logFile, "\nAlready got result for: " + f.toString(), true);
 			});
 		}catch(Exception ex){
-			Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + OWLUtility.getStackTraceAsString(ex), true);
+			Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(ex), true);
 		}
 		
 		OWLOntology _onto;
@@ -973,16 +731,16 @@ public class Explanation {
 			Files.walk(Paths.get(explanationForPath)).filter(d -> d.toFile().isDirectory()).forEach(d -> {
 				try {
 					iterateOverFolders(d);
-					 Writer.writeInDisk(logFile, "Running on folder: "+ d.toString() , true);
+					 Writer.writeInDisk(logFile, "\n\nRunning on folder: "+ d.toString() , true);
 				}catch(Exception ex) {
 					System.out.println("Error occurred");
 					ex.printStackTrace();
-					Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + OWLUtility.getStackTraceAsString(ex), true);
+					Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(ex), true);
 					System.exit(0);
 				}
 			});
 			
-//			_onto = OWLUtility.loadOntology(new File(backgroundOntology));
+//			_onto = Utility.loadOntology(new File(backgroundOntology));
 //			reasonerFactory = new PelletReasonerFactory();
 //			owlReasoner = reasonerFactory.createNonBufferingReasoner(_onto);
 //			
@@ -992,14 +750,14 @@ public class Explanation {
 //			allExamples.addAll(posExamples);
 //			allExamples.addAll(negExamples);
 //			
-//			OWLOntology mod_onto = OWLUtility.removeNonRelatedIndividuals(_onto, owlReasoner, allExamples, null);
+//			OWLOntology mod_onto = Utility.removeNonRelatedIndividuals(_onto, owlReasoner, allExamples, null);
 //			owlReasoner = reasonerFactory.createNonBufferingReasoner(mod_onto);
 //			
-//			OWLOntology _mod_onto = OWLUtility.removeNonRelatedConcepts(mod_onto,owlReasoner);
+//			OWLOntology _mod_onto = Utility.removeNonRelatedConcepts(mod_onto,owlReasoner);
 //			
 //			String saveTo = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo_with_imgContains_without_score_without_wordnet_minimal_rnr__.owl";
 //			
-//			OWLUtility.saveOntology(_mod_onto, saveTo);
+//			Utility.saveOntology(_mod_onto, saveTo);
 		} 
 //		catch (OWLOntologyCreationException e1) {
 //			// TODO Auto-generated catch block
