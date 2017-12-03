@@ -30,7 +30,7 @@ import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 import com.wcohen.ss.Levenstein;
 
 import edu.wright.dase.util.Constants;
-import edu.wright.dase.util.OWLUtility;
+import edu.wright.dase.util.Utility;
 
 public class Alignment {
 
@@ -38,8 +38,8 @@ public class Alignment {
 	static OWLOntologyManager ontoManager;
 	static OWLDataFactory ontoDataFactory;
 	static double threshold = 0.8;
-	static String sumoPath = "/Users/sarker/Mega_Cloud/ProjectHCBD/datas/sumo_aligned/sumo_with_imgContain_others_aligned.owl";
-	static final String adePath = "/Users/sarker/Mega_Cloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs/";
+	static String sumoPath = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo_with_imgContains_without_score_without_wordnet.owl";
+	static final String adePath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_v3_txts_as_dirs_owl_without_score_without_wordnet/";
 	static int counter = 0;
 	// static String targetPath =
 	// "/Users/sarker/Mega_Cloud/ProjectHCBD/datas/sumo_aligned/sumo_with_imgContain_others_aligned.owl";
@@ -48,9 +48,9 @@ public class Alignment {
 
 		// Explanation.init();
 
-		OWLOntology ontA = OWLUtility.loadOntology(new File(pathA));
+		OWLOntology ontA = Utility.loadOntology(new File(pathA));
 		System.out.println("Loaded ontology: " + ontA.getOntologyID());
-		OWLOntology ontB = OWLUtility.loadOntology(new File(pathB));
+		OWLOntology ontB = Utility.loadOntology(new File(pathB));
 		System.out.println("Loaded ontology: " + ontB.getOntologyID());
 		OWLReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner owlReasoner = reasonerFactory.createNonBufferingReasoner(ontA);
@@ -86,7 +86,7 @@ public class Alignment {
 				// need to preprocess
 				// System.out.println(lblA);
 
-				 similarity = OWLUtility.computeConfidence(lblA,
+				 similarity = Utility.computeConfidence(lblA,
 						lblB.startsWith("WN_") ? lblB.substring(3) : lblB);
 				if (similarity >= threshold) {
 					matchedClass = a;
@@ -152,7 +152,7 @@ public class Alignment {
 				// need to preprocess
 				// System.out.println(lblA);
 
-				 similarity = OWLUtility.computeConfidence(lblA, lblB);
+				 similarity = Utility.computeConfidence(lblA, lblB);
 				if (similarity >= threshold) {
 					matchedProperty = a;
 					break;
@@ -199,7 +199,7 @@ public class Alignment {
 				// need to preprocess
 				// System.out.println(lblA);
 
-				 similarity = OWLUtility.computeConfidence(lblA, lblB);
+				 similarity = Utility.computeConfidence(lblA, lblB);
 				if (similarity >= threshold) {
 					matchedProperty = a;
 					break;
@@ -232,7 +232,7 @@ public class Alignment {
 
 		System.out.println("debug: saveTo: " + saveTo);
 		// save to disk
-		OWLUtility.saveOntology(targetOnto, saveTo);
+		Utility.saveOntology(targetOnto, saveTo);
 
 		counter++;
 		printStatus(pathB);
@@ -273,5 +273,66 @@ public class Alignment {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/**
+	 * Alignment with sumo ontology
+	 * 
+	 * @throws OWLOntologyCreationException
+	 */
+	// public static void alignWithSumo() throws OWLOntologyCreationException {
+	// sumoOntology = loadOntology(new File(sumoFilePath));
+	//
+	// // align Classes
+	//
+	// /**
+	// * // there are a lot of considerations for alignment. So just combine them
+	// now.
+	// */
+	//
+	// sourceOntologies.add(sumoOntology);
+	// OntologyMerger merger = new OntologyMerger(owlOntologyManager,
+	// sourceOntologies, combinedOntology);
+	// merger.mergeOntologies();
+	//
+	// // for (OWLClass classFromSumo : sumoOntology.getClassesInSignature()) {
+	// // for (OWLClass classFromADE : combinedOntology.getClassesInSignature()) {
+	// //
+	// // double distance =
+	// // Alignment.computeConfidence(classFromSumo.getIRI().getShortForm(),
+	// // classFromADE.getIRI().getShortForm());
+	// // if (distance > distanceThreshold) {
+	// //
+	// //
+	// // // align individuals
+	// // for (OWLIndividual indi : classFromADE.getIndividualsInSignature()) {
+	// // OWLClassAssertionAxiom ax =
+	// // owlDataFactory.getOWLClassAssertionAxiom(classFromSumo, indi);
+	// // ChangeApplied ca = owlOntologyManager.addAxiom(sumoOntology, ax);
+	// // }
+	// //
+	// // // // align object properties
+	// // // for(OWLObjectProperty objProp:
+	// // classFromADE.getObjectPropertiesInSignature())
+	// // // {
+	// // //
+	// // // }
+	// // }
+	// // }
+	// // }
+	// //
+	// // // // align object properties
+	// // // for(OWLObjectProperty objProp:
+	// // // combinedOntology.getObjectPropertiesInSignature()) {
+	// // // objProp.
+	// // // }
+	// //
+	// // // align data properties
+	// //
+	// // //
+	// //
+	// //
+	// // combinedOntology = sumoOntology;
+	// }
 
 }

@@ -1,6 +1,8 @@
 package edu.wright.dase.lu;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -224,6 +226,7 @@ public class Testing {
 		
 		String a = "abcdefg";
 		double i = 0;
-		System.out.println(i==0? a:a.substring(3));
+		String time = new SimpleDateFormat("MM.dd.yyyy  HH.mm.ss a").format(new Date());
+		System.out.println(time);
 	}
 }
