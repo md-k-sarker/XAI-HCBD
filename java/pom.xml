@@ -79,6 +79,11 @@
 			<systemPath>${project.basedir}/src/main/resources/lib/align.jar</systemPath>
 		</dependency> -->
 
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.11</version>
+		</dependency>
 	</dependencies>
 
 	<build>

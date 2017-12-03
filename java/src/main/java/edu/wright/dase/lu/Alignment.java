@@ -14,7 +14,8 @@ import com.wcohen.ss.Levenstein;
 
 public class Alignment {
 	public static void main(String[] args) throws Exception {
-		alignment();
+		//alignment();
+		System.out.println(computeConfidence("Color","Colur"));
 	}
 
 	public static void alignment() throws Exception {
