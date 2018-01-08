@@ -10,6 +10,7 @@
 	</properties>
 
 	<name>Explainability</name>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.dllearner</groupId>
@@ -30,6 +31,8 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- OWL api latest version http://search.maven.org/#artifactdetails%7Cnet.sourceforge.owlapi%7Cowlapi-parent%7C5.1.4%7Cpom-->
 
 		<!-- https://mvnrepository.com/artifact/com.wcohen/com.wcohen.secondstring -->
 		<dependency>
@@ -84,6 +87,13 @@
 			<artifactId>testng</artifactId>
 			<version>6.11</version>
 		</dependency>
+		
+		<!-- 	<dependency>
+				<groupId>net.sourceforge.owlapi</groupId>
+				<artifactId>owlapi-distribution</artifactId>
+				<version>5.1.3</version>
+			</dependency> -->
+		
 	</dependencies>
 
 	<build>
@@ -170,5 +180,21 @@
 			Leipzig, AKSW Maven2 Repository</name> <url>http://maven.aksw.org/repository/snapshots/</url> 
 			</repository> -->
 
+		<!-- Maven central -->
+	<repository>
+			<id>maven.central</id>
+			<name>Maven central</name>
+			<url>https://repo.maven.apache.org/maven2/</url>
+		</repository> 
+
 	</repositories>
+<!-- 	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.sourceforge.owlapi</groupId>
+				<artifactId>owlapi-distribution</artifactId>
+				<version>5.1.3</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement> -->
 </project>
