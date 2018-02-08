@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.formats.OWLXMLDocumentFormat;
 import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -592,7 +593,7 @@ public class CreateOWLFromADE20k {
 		}
 
 		// Save Ontology
-		owlManager.saveOntology(ontology, owlDiskFileIRI);
+		owlManager.saveOntology(ontology, new OWLXMLDocumentFormat(),  owlDiskFileIRI);
 
 		// System.out.println("saved on file: " + owlDiskFileIRI +
 		// "\nSuccessfull");
