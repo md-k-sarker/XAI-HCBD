@@ -1,4 +1,4 @@
-package edu.wright.dase;
+package edu.wright.dase.explanation;
 
 
 import com.google.common.base.Optional;

@@ -1,14 +1,11 @@
-package edu.wright.dase;
+package edu.wright.dase.explanation;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.dllearner.core.ComponentInitException;

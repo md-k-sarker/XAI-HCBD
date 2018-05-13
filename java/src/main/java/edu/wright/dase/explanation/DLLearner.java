@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.wright.dase;
+package edu.wright.dase.explanation;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,10 +12,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
 
 import org.dllearner.algorithms.celoe.CELOE;
-import org.dllearner.algorithms.celoe.PCELOE;
 import org.dllearner.core.AbstractCELA;
 import org.dllearner.core.ComponentInitException;
 import org.dllearner.core.KnowledgeSource;

@@ -1,5 +1,7 @@
 package edu.wright.dase;
 
+import edu.wright.dase.explanation.Explanation;
+
 import java.util.HashSet;
 import java.util.Set;
 

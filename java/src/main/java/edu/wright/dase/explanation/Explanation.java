@@ -1,55 +1,39 @@
-package edu.wright.dase;
+package edu.wright.dase.explanation;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.dllearner.algorithms.celoe.CELOE;
-import org.dllearner.algorithms.celoe.PCELOE;
 import org.dllearner.core.ComponentInitException;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-import org.semanticweb.owlapi.model.parameters.ChangeApplied;
-import org.semanticweb.owlapi.model.parameters.Imports;
-import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
-import org.semanticweb.owlapi.util.OWLEntityRemover;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 
-import edu.wright.dase.lu.Alignment;
 import edu.wright.dase.util.Constants;
 import edu.wright.dase.util.Utility;
 import edu.wright.dase.util.Writer;
-import uk.ac.manchester.cs.jfact.JFactFactory;
 import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
 
 /**
@@ -65,8 +49,10 @@ import uk.ac.manchester.cs.owl.owlapi.OWLNamedIndividualImpl;
 
 public class Explanation {
 
-	private static final Logger logger = LoggerFactory.getLogger(Explanation.class);
-	final static int maxNegativeInstances = 20;
+	final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+	// log level: ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+
+	final static int maxNegativeInstances = 200;
 	static int totalInstances = 0;
 	static int totalClasses = 0;
 
@@ -155,10 +141,6 @@ public class Explanation {
 		OntologyMerger merger = new OntologyMerger(owlOntologyManager, ontologies, combinedOntology);
 		merger.mergeOntologies();
 	}
-
-
-
-
 
 
 
@@ -707,13 +689,14 @@ public class Explanation {
 
 	/**
 	 * Main method
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
 		int i = 0;
 		Writer.writeInDisk(logFile, "Main Program started at: " + Utility.getCurrentTimeAsString(), false);
+		// identify already got result
 		try {
 			Files.walk(Paths.get(alreadyGotResultPath)).filter(f -> f.toFile().isFile()).
 			filter(f -> f.toFile().getAbsolutePath().endsWith(".txt")).forEach(f->{
@@ -723,10 +706,10 @@ public class Explanation {
 		}catch(Exception ex){
 			Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(ex), true);
 		}
-		
+
 		OWLOntology _onto;
 		try {
-			
+
 			// start with root folder
 			Files.walk(Paths.get(explanationForPath)).filter(d -> d.toFile().isDirectory()).forEach(d -> {
 				try {
@@ -739,26 +722,26 @@ public class Explanation {
 					System.exit(0);
 				}
 			});
-			
+
 //			_onto = Utility.loadOntology(new File(backgroundOntology));
 //			reasonerFactory = new PelletReasonerFactory();
 //			owlReasoner = reasonerFactory.createNonBufferingReasoner(_onto);
-//			
+//
 //			String confFilePath = "/home/sarker/MegaCloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_v3_txts_as_dirs_owl_without_score_without_wordnet/Bathroom/bathroom_ADE_train_00000006.conf";
 //			readExamplesFromConf(confFilePath);
 //			Set<OWLNamedIndividual> allExamples = new HashSet<OWLNamedIndividual>();
 //			allExamples.addAll(posExamples);
 //			allExamples.addAll(negExamples);
-//			
+//
 //			OWLOntology mod_onto = Utility.removeNonRelatedIndividuals(_onto, owlReasoner, allExamples, null);
 //			owlReasoner = reasonerFactory.createNonBufferingReasoner(mod_onto);
-//			
+//
 //			OWLOntology _mod_onto = Utility.removeNonRelatedConcepts(mod_onto,owlReasoner);
-//			
+//
 //			String saveTo = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo_aligned/without_scores/sumo_with_imgContains_without_score_without_wordnet_minimal_rnr__.owl";
-//			
+//
 //			Utility.saveOntology(_mod_onto, saveTo);
-		} 
+		}
 //		catch (OWLOntologyCreationException e1) {
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
@@ -770,7 +753,7 @@ public class Explanation {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 
 		if (i == 0)
 			return;
