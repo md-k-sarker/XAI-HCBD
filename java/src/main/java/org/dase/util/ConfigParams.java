@@ -23,6 +23,7 @@ public final class ConfigParams {
     public static String confFilePath;
     public static String ontoPath;
     public static String outputOntPath;
+    // this logPath is different from slf4j log file.
     public static String logPath;
     public static String dllearnerResultPath;
     public static String miniDlLearnerResultPath;
@@ -72,10 +73,13 @@ public final class ConfigParams {
 
             String[] inpPaths = confFilePath.split(File.separator);
             String name = inpPaths[inpPaths.length - 1].replace(".conf", ".txt");
-            logPath = prop.getProperty("path.outputLogPath") + "_log_" + name;
-            dllearnerResultPath = prop.getProperty("path.confFilePath") + "__result__dl__" + name;
-            miniDlLearnerResultPath = prop.getProperty("path.confFilePath") + "__result__miniDl__" + name;
-            eciiResultesultPath = prop.get("path.confFilePath") + "__result_ecii__" + name;
+            if(!name.endsWith(".txt")){
+                name = name+".txt";
+            }
+            logPath = prop.getProperty("path.outputLogPath") + "monitor_" + name;
+            dllearnerResultPath = prop.getProperty("path.confFilePath") + "__result_dl_" + name;
+            miniDlLearnerResultPath = prop.getProperty("path.confFilePath") + "__result_minidl_" + name;
+            eciiResultesultPath = prop.get("path.confFilePath") + "__result_ecii_" + name;
 
             //            posIndiPath = prop.getProperty("path.posImages");
             //            negIndiPath = prop.getProperty("path.negImages");

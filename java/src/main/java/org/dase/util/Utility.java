@@ -8,6 +8,7 @@ import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -87,8 +88,8 @@ public class Utility {
         }
         // manually set defaultOntologyIRIPrefix
         // defaultOntologyIRIPrefix = "http://www.adampease.org/OP/SUMO.owl#";
-//        if (!defaultOntologyIRIPrefix.endsWith("#"))
-//            defaultOntologyIRIPrefix = defaultOntologyIRIPrefix + "#";
+        if (!defaultOntologyIRIPrefix.endsWith("#"))
+            defaultOntologyIRIPrefix = defaultOntologyIRIPrefix + "#";
         logger.info("DefaultIRIPrefix: " + defaultOntologyIRIPrefix);
 
         return defaultOntologyIRIPrefix;
@@ -555,6 +556,11 @@ public class Utility {
         return _negIndivs;
     }
 
+    public static String getCurrentDateTimeAsString(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
 
     /**
      * @param args

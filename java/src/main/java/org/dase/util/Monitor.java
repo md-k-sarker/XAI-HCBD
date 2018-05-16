@@ -73,8 +73,8 @@ public class Monitor {
         if (message.trim() != "") {
             displayMessage(message, write);
         }
-        displayMessage("End Time:" + dateFormat.format(date), write);
-        displayMessage("Duration:" + (end - startTime) / 1000 + " sec", write);
+        displayMessage("End Time: " + dateFormat.format(date), write);
+        displayMessage("Duration: " + (end - startTime) / 1000 + " sec", write);
     }
 
     public void stopSystem(String message, boolean write) {

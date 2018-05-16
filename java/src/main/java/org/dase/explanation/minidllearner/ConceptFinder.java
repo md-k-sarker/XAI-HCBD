@@ -94,10 +94,12 @@ public class ConceptFinder {
         // find the corresponding objects/indivs which appeared in the positive images
         for (OWLNamedIndividual posIndiv : posIndivs) {
             logger.info("Individual " + Utility.getShortName(posIndiv) + " has below objects in his image: ");
-            reasoner.getObjectPropertyValues(posIndiv, imgContains).getFlattened().forEach(eachIndi -> {
-                indivsAppearedInPosImages.add(eachIndi);
-                logger.info("\tObject: " + Utility.getShortName(eachIndi));
-            });
+            logger.info("rootOntology of the reasoner: " + reasoner.getRootOntology().getOntologyID().toString());
+            reasoner.getObjectPropertyValues(posIndiv, imgContains);
+//            .getFlattened().forEach(eachIndi -> {
+//                indivsAppearedInPosImages.add(eachIndi);
+//                logger.info("\tObject: " + Utility.getShortName(eachIndi));
+//            });
         }
 
         // find the corresponding indivs which appeared in the negative images
@@ -128,8 +130,8 @@ public class ConceptFinder {
             });
         }
 
-        for(OWLNamedIndividual indi: indivsAppearedInNegImages){
-            reasoner.getTypes(indi, true).getFlattened().forEach(eachType ->{
+        for (OWLNamedIndividual indi : indivsAppearedInNegImages) {
+            reasoner.getTypes(indi, true).getFlattened().forEach(eachType -> {
                 negativeTypes.add(eachType);
             });
         }

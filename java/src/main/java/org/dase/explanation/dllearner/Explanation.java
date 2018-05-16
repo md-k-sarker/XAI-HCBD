@@ -724,7 +724,7 @@ public class Explanation {
                     System.out.println("Error occurred");
                     ex.printStackTrace();
                     Writer.writeInDisk(logFile, "\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(ex), true);
-                    System.exit(0);
+                    System.exit(1);
                 }
             });
 
