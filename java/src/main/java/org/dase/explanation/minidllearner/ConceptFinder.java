@@ -2,6 +2,7 @@ package org.dase.explanation.minidllearner;
 
 
 import org.dase.util.Monitor;
+import org.dase.util.SharedDataHolder;
 import org.dase.util.Utility;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
@@ -33,9 +34,9 @@ public class ConceptFinder {
     /**
      * Constructor
      */
-    public ConceptFinder(PrintStream _printStream, Monitor _monitor,OWLReasoner owlReasoner, OWLOntology owlOntology) {
-        this.reasoner = owlReasoner;
-        this.ontology = owlOntology;
+    public ConceptFinder(PrintStream _printStream, Monitor _monitor) {
+        this.reasoner = SharedDataHolder.owlReasoner;
+        this.ontology = SharedDataHolder.owlOntology;
         this.out = _printStream;
         this.monitor = _monitor;
     }
@@ -84,6 +85,7 @@ public class ConceptFinder {
 
         HashSet<OWLClass> positiveTypes = new HashSet<>();
         HashSet<OWLClass> negativeTypes = new HashSet<>();
+
 
         HashSet<OWLNamedIndividual> indivsAppearedInPosImages = new HashSet<OWLNamedIndividual>();
 

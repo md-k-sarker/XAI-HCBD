@@ -212,8 +212,11 @@ public class Explanation {
         Writer.writeInDisk(writeTo, "\n loading background Ontology...", true);
 
         // just load background ontology
-        combinedOntology = Utility.loadOntology(new File(backgroundOntology));
-
+        try {
+            combinedOntology = Utility.loadOntology(backgroundOntology);
+        }catch (Exception ex){
+            logger.error("error in ontology loading. program exiting....\n"+Utility.getStackTraceAsString(ex));
+        }
         logger.info(" loading background Ontology finished");
         System.out.println(" loading background Ontology finished");
         Writer.writeInDisk(writeTo, "\n loading background Ontology finished", true);
@@ -414,7 +417,7 @@ public class Explanation {
             /**
              * load background ontology
              */
-            OWLOntology _onto = Utility.loadOntology(new File(backgroundOntology));
+            OWLOntology _onto = Utility.loadOntology(backgroundOntology);
             reasonerFactory = new PelletReasonerFactory();
             owlReasoner = reasonerFactory.createNonBufferingReasoner(_onto);
 

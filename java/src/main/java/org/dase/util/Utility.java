@@ -79,7 +79,7 @@ public class Utility {
         } else {
             ontoIRI = ontology.getOntologyID().getOntologyIRI();
             if (ontoIRI.isPresent()) {
-                defaultOntologyIRIPrefix = ontoIRI.get().toQuotedString();
+                defaultOntologyIRIPrefix = ontoIRI.get().toString();
                 logger.info("getDefaultDocumentIRI is not present. DefaultIRIPrefix: " + defaultOntologyIRIPrefix);
             } else {
                 defaultOntologyIRIPrefix = "";
@@ -87,8 +87,8 @@ public class Utility {
         }
         // manually set defaultOntologyIRIPrefix
         // defaultOntologyIRIPrefix = "http://www.adampease.org/OP/SUMO.owl#";
-        if (!defaultOntologyIRIPrefix.endsWith("#"))
-            defaultOntologyIRIPrefix = defaultOntologyIRIPrefix + "#";
+//        if (!defaultOntologyIRIPrefix.endsWith("#"))
+//            defaultOntologyIRIPrefix = defaultOntologyIRIPrefix + "#";
         logger.info("DefaultIRIPrefix: " + defaultOntologyIRIPrefix);
 
         return defaultOntologyIRIPrefix;
@@ -448,11 +448,21 @@ public class Utility {
      * @param filePath
      * @throws IOException
      */
-    public static HashSet<OWLNamedIndividual> readPosExamplesFromConf(String filePath) throws IOException {
+    public static HashSet<OWLNamedIndividual> readPosExamplesFromConf(String filePath) throws IOException{
+        return readPosExamplesFromConf(new File(filePath));
+    }
 
+    /**
+     * Read pos examples from the conf file
+     *
+     * @param file
+     * @throws IOException
+     */
+    public static HashSet<OWLNamedIndividual> readPosExamplesFromConf(File file) throws IOException {
+        logger.info("Reading posExamples from: "+ file);
         HashSet<OWLNamedIndividual> _posIndivs = new HashSet<OWLNamedIndividual>();
 
-        try (BufferedReader buffRead = new BufferedReader(new FileReader(new File(filePath)))) {
+        try (BufferedReader buffRead = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = buffRead.readLine()) != null) {
                 if (line.startsWith("lp.positiveExamples")) {
@@ -464,8 +474,10 @@ public class Utility {
                 }
             }
         } catch (Exception ex) {
-            System.out.println("Error reading posExamples... ");
-            throw new IOException();
+            logger.error("Error reading posExamples... \n"+ getStackTraceAsString(ex));
+            //System.out.println("Error reading posExamples... ");
+            logger.error("Program exiting.....");
+            System.exit(-1);
         }
 
         // just for debug print
@@ -492,17 +504,29 @@ public class Utility {
         return indivsSet;
     }
 
+
     /**
      * Read neg examples from the conf file
      *
      * @param filePath
      * @throws IOException
      */
-    public static HashSet<OWLNamedIndividual> readNegExamplesFromConf(String filePath) throws IOException {
+    public static HashSet<OWLNamedIndividual> readNegExamplesFromConf(String filePath) throws IOException{
+        return readNegExamplesFromConf(new File(filePath));
+    }
 
+    /**
+     * Read neg examples from the conf file
+     *
+     * @param file
+     * @throws IOException
+     */
+    public static HashSet<OWLNamedIndividual> readNegExamplesFromConf(File file) throws IOException {
+
+        logger.info("Reading negExamples from: "+ file);
         HashSet<OWLNamedIndividual> _negIndivs = new HashSet<OWLNamedIndividual>();
 
-        try (BufferedReader buffRead = new BufferedReader(new FileReader(new File(filePath)))) {
+        try (BufferedReader buffRead = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = buffRead.readLine()) != null) {
                 if (line.startsWith("lp.negativeExamples")) {

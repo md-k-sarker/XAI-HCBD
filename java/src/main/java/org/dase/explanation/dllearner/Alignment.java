@@ -45,9 +45,9 @@ public class Alignment {
 
 		// Explanation.init();
 
-		OWLOntology ontA = Utility.loadOntology(new File(pathA));
+		OWLOntology ontA = Utility.loadOntology(pathA);
 		System.out.println("Loaded ontology: " + ontA.getOntologyID());
-		OWLOntology ontB = Utility.loadOntology(new File(pathB));
+		OWLOntology ontB = Utility.loadOntology(pathB);
 		System.out.println("Loaded ontology: " + ontB.getOntologyID());
 		OWLReasonerFactory reasonerFactory = new PelletReasonerFactory();
 		OWLReasoner owlReasoner = reasonerFactory.createNonBufferingReasoner(ontA);
