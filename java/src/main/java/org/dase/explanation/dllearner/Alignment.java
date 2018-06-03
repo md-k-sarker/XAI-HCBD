@@ -29,6 +29,10 @@ import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 import org.dase.util.Constants;
 import org.dase.util.Utility;
 
+
+/**
+ * Do alignment for Class, Object Properties and Data Properties.
+ */
 public class Alignment {
 
 	static OWLOntology targetOnto;
@@ -83,8 +87,7 @@ public class Alignment {
 				// need to preprocess
 				// System.out.println(lblA);
 
-				 similarity = Utility.computeConfidence(lblA,
-						lblB.startsWith("WN_") ? lblB.substring(3) : lblB);
+				 similarity = Utility.computeConfidence(lblA, lblB.startsWith("WN_") ? lblB.substring(3) : lblB);
 				if (similarity >= threshold) {
 					matchedClass = a;
 					break;
@@ -110,7 +113,7 @@ public class Alignment {
 						changeApplied = ontoManager.addAxiom(targetOnto,
 								ontoDataFactory.getOWLSubClassOfAxiom(b, immediateSuperClass));
 					}else {
-						// make it subclass of immediateSuperClass
+						// make it subclass of owlThing
 						changeApplied = ontoManager.addAxiom(targetOnto,
 								ontoDataFactory.getOWLSubClassOfAxiom(b, ontoDataFactory.getOWLThing()));
 					}

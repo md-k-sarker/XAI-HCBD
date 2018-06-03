@@ -125,7 +125,7 @@ public class Utility {
         OWLOntology owlOntology = owlOntologyManager.loadOntologyFromOntologyDocument(ontoFile);
 
         // Report information about the owlOntology
-        logger.info("Ontology Loaded");
+        logger.info("Ontology Loaded.");
         logger.info("Ontology path: " + ontoFile.getAbsolutePath());
         logger.info("Ontology id : " + owlOntology.getOntologyID());
         OWLProfileReport report = Profiles.OWL2_EL.checkOntology(owlOntology);
@@ -494,18 +494,6 @@ public class Utility {
         return _posIndivs;
     }
 
-    private static HashSet<OWLNamedIndividual> addIndivsToList(String[] indivs, HashSet<OWLNamedIndividual> indivsSet) {
-        for (String eachIndi : indivs) {
-            eachIndi = eachIndi.trim();
-            // remove "ex: and last "
-            eachIndi = eachIndi.substring(eachIndi.indexOf(":") + 1, eachIndi.length() - 1);
-            IRI iri = IRI.create(ConfigParams.namespace + "#" + eachIndi);
-            indivsSet.add(OWLManager.getOWLDataFactory().getOWLNamedIndividual(iri));
-        }
-        return indivsSet;
-    }
-
-
     /**
      * Read neg examples from the conf file
      *
@@ -555,6 +543,19 @@ public class Utility {
 //		}
         return _negIndivs;
     }
+
+
+    private static HashSet<OWLNamedIndividual> addIndivsToList(String[] indivs, HashSet<OWLNamedIndividual> indivsSet) {
+        for (String eachIndi : indivs) {
+            eachIndi = eachIndi.trim();
+            // remove "ex: and last "
+            eachIndi = eachIndi.substring(eachIndi.indexOf(":") + 1, eachIndi.length() - 1);
+            IRI iri = IRI.create(ConfigParams.namespace + "#" + eachIndi);
+            indivsSet.add(OWLManager.getOWLDataFactory().getOWLNamedIndividual(iri));
+        }
+        return indivsSet;
+    }
+
 
     public static String getCurrentDateTimeAsString(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

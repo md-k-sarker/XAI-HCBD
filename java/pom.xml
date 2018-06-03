@@ -6,7 +6,7 @@
 	<version>0.0.1</version>
 
 	<properties>
-		<finalAppName>explainability</finalAppName>
+		<finalAppName>XAI-HCBD-JAVA</finalAppName>
 
 		<jdk.source.version>1.8</jdk.source.version>
 		<jdk.target.version>1.8</jdk.target.version>

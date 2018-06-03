@@ -2,7 +2,8 @@ package org.dase.util;
 
 public final class Constants {
 
-	public static final String ade20kRootDirTest = "/Users/sarker/Dropbox/HCBD-Project/DL-Learner Approach/experiments/sumowithADE20K/updated/w/";
+	public static final String ade20kRootDirTest = "/Users/sarker/Dropbox/HCBD-Project/DL-Learner Approach/" +
+            "experiments/sumowithADE20K/updated/w/";
 
 	public static final String ade20kRootDir = "/Users/sarker/Desktop/ProjectHCBD/Datas/ADE20K_2016_07_26/images/training/m/";
 

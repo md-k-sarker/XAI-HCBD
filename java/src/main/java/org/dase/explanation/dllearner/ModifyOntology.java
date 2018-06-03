@@ -2,6 +2,7 @@ package org.dase.explanation.dllearner;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,10 +39,16 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
 
-
+/**
+ * Modify ontology by:
+ * 1. Removing existing individuals.
+ * 2. Creating 3 individuals per class.
+ * 3. Rename existing entities.
+ * 4.
+ */
 public class ModifyOntology {
 
-    private static final Logger logger = LoggerFactory.getLogger(ModifyOntology.class);
+    final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     protected OWLOntology ontology;
     protected OWLDataFactory datafactory;
@@ -51,8 +58,8 @@ public class ModifyOntology {
     protected String defaultOntologyIRIPrefix;
     protected List<OWLOntologyChange> ontologyChanges;
 
-    String ontoOrgnlFileName = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo/SUMO.owl";
-    String ontoModFileName = "/home/sarker/MegaCloud/ProjectHCBD/datas/sumo/sumo_without_indi.owl";
+    String ontoOrgnlFileName = "/Users/sarker/Workspaces/ProjectHCBD/datas/sumo_may_13_2018/sumo_without_indi_fresh.owl";
+    String ontoModFileName = "/Users/sarker/Workspaces/ProjectHCBD/datas/sumo_may_13_2018/sumo_without_indi_mod.owl";
 
     /**
      * @return the ontologyChanges
@@ -196,6 +203,11 @@ public class ModifyOntology {
         ontologyManager.applyChanges(entityRemover.getChanges());
     }
 
+    /**
+     * For each class creating 3 new individuals
+     *
+     * @throws OWLOntologyStorageException
+     */
     public void attachIndividual() throws OWLOntologyStorageException {
 
         logger.info("started attachIndividual()");
@@ -220,17 +232,17 @@ public class ModifyOntology {
     }
 
     protected void saveOntology(OWLOntology ontology, File modifiedFileName) throws OWLOntologyStorageException {
-        ontologyManager.saveOntology(ontology, IRI.create(ontoModFile));
+        ontologyManager.saveOntology(ontology, IRI.create(modifiedFileName));
     }
 
     public void loadOntology() throws OWLOntologyCreationException {
-
         ontology = ontologyManager.loadOntologyFromOntologyDocument(ontoOrgnFile);
-
         defaultOntologyIRIPrefix = Utility.getOntologyPrefix(ontology);
-
     }
 
+    /**
+     * Rename entities (class, property, individuals etc..) of the ontology to new naming conventions.
+     */
     public void renameIRIs() {
         logger.info("Renaming started");
         Set<OWLOntology> ontologySet = new HashSet<OWLOntology>();
