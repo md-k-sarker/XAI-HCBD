@@ -147,8 +147,8 @@ public class OWLUtility {
 	 * Removes concepts which do not have a single instance. alternatively keep
 	 * those concepts which have at-least a single instance. TO-DO: FIX
 	 */
-	public static OWLOntology removeNonRelatedConcepts(OWLOntology combinedOntology, OWLReasoner owlReasoner
-			) {
+	public static OWLOntology removeNonRelatedConcepts(OWLOntology combinedOntology,
+													   OWLReasoner owlReasoner) {
 
 		OWLEntityRemover entityRemover = new OWLEntityRemover(Collections.singleton(combinedOntology));
 

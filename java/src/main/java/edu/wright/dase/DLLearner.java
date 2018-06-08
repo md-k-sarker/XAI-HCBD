@@ -140,11 +140,11 @@ public class DLLearner {
 		ks.init();
 		logger.info("finished initializing knowledge source");
 		System.out.println("finished initializing knowledge source");
-		Writer.writeInDisk(writeTo, "\nfinished initializing knowledge source", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing knowledge source", true);
 
 		logger.info("initializing reasoner...");
 		System.out.println("initializing reasoner...");
-		Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
 		OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
 
 		baseReasoner.setReasonerImplementation(ReasonerImplementation.HERMIT);
@@ -153,11 +153,11 @@ public class DLLearner {
 		// Logger.getLogger(HermitReasoner.class).setLevel(Level.INFO);
 		logger.info("finished initializing reasoner");
 		System.out.println("finished initializing reasoner");
-		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
 
 		logger.info("initializing reasoner component...");
 		System.out.println("initializing reasoner component...");
-		Writer.writeInDisk(writeTo, "\ninitializing reasoner component...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing reasoner component...", true);
 		ClosedWorldReasoner rc = new ClosedWorldReasoner(ks);
 
 		// rc.setReasonerComponent(baseReasoner);
@@ -166,11 +166,11 @@ public class DLLearner {
 		rc.init();
 		logger.info("finished initializing reasoner");
 		System.out.println("finished initializing reasoner");
-		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
 
 		logger.info("initializing learning problem...");
 		System.out.println("initializing learning problem...");
-		Writer.writeInDisk(writeTo, "\ninitializing learning problem...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing learning problem...", true);
 		// PosOnlyLP lp = new PosOnlyLP(rc);
 		PosNegLPStandard lp = new PosNegLPStandard(rc);
 		lp.setPositiveExamples(posExamples);
@@ -178,11 +178,11 @@ public class DLLearner {
 		lp.init();
 		logger.info("finished initializing learning problem");
 		System.out.println("finished initializing learning problem");
-		Writer.writeInDisk(writeTo, "\nfinished initializing learning problem", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing learning problem", true);
 
 		logger.info("initializing learning algorithm...");
 		System.out.println("initializing learning algorithm...");
-		Writer.writeInDisk(writeTo, "\ninitializing learning algorithm...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing learning algorithm...", true);
 
 		AbstractCELA la;
 		// OEHeuristicRuntime heuristic = new OEHeuristicRuntime();
@@ -209,14 +209,14 @@ public class DLLearner {
 		((CELOE) la).init();
 		logger.info("finished initializing learning algorithm");
 		System.out.println("finished initializing learning algorithm");
-		Writer.writeInDisk(writeTo, "\nfinished initializing learning algorithm", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing learning algorithm", true);
 
 		long startTime = System.currentTimeMillis();
 		la.start();
 		long endTime = System.currentTimeMillis();
 		logger.info("Algorithm run for: " + (endTime - startTime) / 1000 + " seconds");
 		System.out.println("Algorithm run for: " + (endTime - startTime) / 1000 + " seconds");
-		Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime) / 1000 + " seconds", true);
+		//Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime) / 1000 + " seconds", true);
 
 		return (CELOE) la;
 	}
@@ -233,37 +233,37 @@ public class DLLearner {
 		ks.init();
 		logger.info("finished initializing knowledge source");
 		System.out.println("finished initializing knowledge source");
-		Writer.writeInDisk(writeTo, "\n\n\nfinished initializing knowledge source", true);
+		//Writer.writeInDisk(writeTo, "\n\n\nfinished initializing knowledge source", true);
 
 		logger.info("initializing reasoner...");
 		System.out.println("initializing reasoner...");
-		Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing reasoner...", true);
 		OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
 
-		baseReasoner.setReasonerImplementation(ReasonerImplementation.HERMIT);
+		baseReasoner.setReasonerImplementation(ReasonerImplementation.JFACT);
 		// baseReasoner.setUseFallbackReasoner(true);
 		baseReasoner.init();
 		// Logger.getLogger(HermitReasoner.class).setLevel(Level.INFO);
 		logger.info("finished initializing reasoner");
 		System.out.println("finished initializing reasoner");
-		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
 
 		logger.info("initializing reasoner component...");
 		System.out.println("initializing reasoner component...");
-		Writer.writeInDisk(writeTo, "\ninitializing reasoner component...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing reasoner component...", true);
 		ClosedWorldReasoner rc = new ClosedWorldReasoner(ks);
 
-		// rc.setReasonerComponent(baseReasoner);
+		 rc.setReasonerComponent(baseReasoner);
 		// rc.setHandlePunning(true);
 		// rc.setMaterializeExistentialRestrictions(true);
 		rc.init();
 		logger.info("finished initializing reasoner");
 		System.out.println("finished initializing reasoner");
-		Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing reasoner", true);
 
 		logger.info("initializing learning problem...");
 		System.out.println("initializing learning problem...");
-		Writer.writeInDisk(writeTo, "\ninitializing learning problem...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing learning problem...", true);
 		PosOnlyLP lp = new PosOnlyLP(rc);
 		//PosNegLPStandard lp = new PosNegLPStandard(rc);
 		lp.setPositiveExamples(posExamples);
@@ -271,11 +271,11 @@ public class DLLearner {
 		lp.init();
 		logger.info("finished initializing learning problem");
 		System.out.println("finished initializing learning problem");
-		Writer.writeInDisk(writeTo, "\nfinished initializing learning problem", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing learning problem", true);
 
 		logger.info("initializing learning algorithm...");
 		System.out.println("initializing learning algorithm...");
-		Writer.writeInDisk(writeTo, "\ninitializing learning algorithm...", true);
+		//Writer.writeInDisk(writeTo, "\ninitializing learning algorithm...", true);
 
 		AbstractCELA la;
 		// OEHeuristicRuntime heuristic = new OEHeuristicRuntime();
@@ -293,7 +293,7 @@ public class DLLearner {
 		((CELOE) la).setMaxExecutionTimeInSeconds(maxExecutionTimeInSeconds);
 		// ((CELOE) la).setNrOfThreads(maxNoOfThreads);
 		//((CELOE) la).setNoisePercentage(80);
-		((CELOE) la).setMaxNrOfResults(1000);
+		((CELOE) la).setMaxNrOfResults(500);
 		//((CELOE) la).setMaxClassExpressionTests(10);
 		// ((CELOE) la).setWriteSearchTree(false);
 		// ((CELOE) la).setReplaceSearchTree(true);
@@ -302,14 +302,14 @@ public class DLLearner {
 		((CELOE) la).init();
 		logger.info("finished initializing learning algorithm");
 		System.out.println("finished initializing learning algorithm");
-		Writer.writeInDisk(writeTo, "\nfinished initializing learning algorithm", true);
+		//Writer.writeInDisk(writeTo, "\nfinished initializing learning algorithm", true);
 
 		long startTime = System.currentTimeMillis();
 		la.start();
 		long endTime = System.currentTimeMillis();
 		logger.info("Algorithm run for: " + (endTime - startTime) / 1000 + " seconds");
 		System.out.println("Algorithm run for: " + (endTime - startTime) / 1000 + " seconds");
-		Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime) / 1000 + " seconds", true);
+		// Writer.writeInDisk(writeTo, "\nAlgorithm run for: " + (endTime - startTime) / 1000 + " seconds", true);
 
 		return (CELOE) la;
 	}
