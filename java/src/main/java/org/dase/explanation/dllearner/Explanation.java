@@ -675,7 +675,8 @@ public class Explanation {
 
         try {
             // iterate over the files of a folder
-            Files.walk(path).filter(f -> f.toFile().isFile()).filter(f -> f.toFile().getAbsolutePath().endsWith(".conf")).forEach(f -> {
+            Files.walk(path).filter(f -> f.toFile().isFile()).filter(f -> f.toFile().getAbsolutePath().
+                    endsWith(".conf")).forEach(f -> {
                 // will get each file
                 if (alreadyGotResult.contains(f.toFile().getName())) {
                     System.out.println(f.toString() + " already has result not running it");

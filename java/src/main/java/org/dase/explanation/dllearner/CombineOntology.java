@@ -33,7 +33,7 @@ public class CombineOntology {
 
     private static final Logger logger = LoggerFactory.getLogger(CombineOntology.class);
 
-    static String rootPath = "/Users/sarker/Workspaces/ProjectHCBD/datas/ade20k/validation/z/";
+    static String rootPath = "/Users/sarker/Workspaces/ProjectHCBD/datas/ade20k/training/z/";
 
     static String customLogFile = "/Users/sarker/Workspaces/ProjectHCBD/experiments/may_13_2018/logs/";
 
