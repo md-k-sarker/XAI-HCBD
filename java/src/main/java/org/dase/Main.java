@@ -5,14 +5,12 @@ Written at 5/7/18.
 */
 
 
-import edu.wright.dase.explanation.dllearner.DLLearner;
-import org.dase.util.Monitor;
+import org.dase.explanation.dllearner.DLLearner;
+import org.dase.explanation.minidllearner.ConceptFinder;
 import org.dase.util.*;
-import edu.wright.dase.explanation.minidllearner.*;
 import org.dllearner.algorithms.celoe.CELOE;
-import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,58 +22,22 @@ import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class Main {
 
     final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     // log level: ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
 
-    private static PrintStream printStream;
-    private static Monitor programMonitor;
-    private static Monitor eciiMonitor;
-    private static Monitor dlMonitor;
-    private static Monitor miniDlMonitor;
-    //private static ConceptFinderComplex conceptFinderComplex;
+    private static OWLOntology ontology;
+    private static OWLOntologyManager manager;
+    private static OWLDataFactory dataFacotry;
+    private static OWLReasoner owlReasoner;
+    private static PrintStream outPutStream;
+    private static Monitor monitor;
 
-    /**
-     * Generate explanation using minidl learner
-     *
-     * @throws IOException
-     */
-    public static void explanationUsingMiniDlLearner(Path confPath) throws IOException {
+    static ArrayList<String> alreadyGotResult = new ArrayList<String>();
 
-        /**
-         * For the examples to run: I'd say simply pick a pre-defined scene class for the positive examples (take all images from a given scene),
-         * and pick negative examples from other scenes (and I'd say pick many more than the positive examples).
-         * Run a few dozen of these at least. In order to have time to ingest this,
-         * I would really need this soon (say, end of next week if possible).
-         */
-        // create objProperty
-        IRI objectPropIri = IRI.create("http://www.daselab.org/ontologies/ADE20K/hcbdwsu#", "imageContains");
-        OWLObjectProperty imgContains = SharedDataHolder.owlDataFactory.getOWLObjectProperty(objectPropIri);
-
-
-        // result file for org.dase.minidllearner to write. will write in log file now.
-        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(ConfigParams.miniDlLearnerResultPath));
-        PrintStream printStream = new PrintStream(bos);
-
-        miniDlMonitor = new Monitor(printStream);
-
-        // Create a new ConceptFinder object with the given owlReasoner.
-        ConceptFinder findConceptsObj = new ConceptFinder(printStream, miniDlMonitor);
-
-        logger.info("\nExplanation_old using Mini DL Learner started..........");
-        miniDlMonitor.start("", true);
-        try {
-            findConceptsObj.findConcepts(SharedDataHolder.posIndivs, SharedDataHolder.negIndivs, ConfigParams.tolerance, imgContains);
-            logger.info("Explanation_old using Mini DL Learner finished successfully.");
-        } catch (Exception ex) {
-            logger.error("\n!!!!!!!!!!Explanation_old using Mini DL Learner crashed!!!!!!!!!! while explaining: " + confPath.toString() + "\n");
-            logger.error(Utility.getStackTraceAsString(ex));
-            logger.error("\nreturning control to parent caller.........");
-        }
-
-    }
 
     /**
      *
@@ -93,83 +55,6 @@ public class Main {
                 SharedDataHolder.owlThing, false).getFlattened().size());
     }
 
-    /**
-     * Operations for minimal dl-learner
-     *
-     * @throws OWLOntologyCreationException
-     * @throws IOException
-     */
-    public static void doOpsMiniDLLearner() throws OWLOntologyCreationException, IOException {
-
-
-        // load ontotology
-        logger.info("\nloading base ontology started........ ");
-        SharedDataHolder.owlOntology = Utility.loadOntology(ConfigParams.ontoPath, programMonitor);
-        SharedDataHolder.owlOntologyManager = SharedDataHolder.owlOntology.getOWLOntologyManager();
-        SharedDataHolder.owlDataFactory = SharedDataHolder.owlOntologyManager.getOWLDataFactory();
-        logger.info("loading base ontology finished.");
-
-        // String reasonerFactoryClassName = null;
-        //OWLReasonerFactory reasonerFactory = new Reasoner.ReasonerFactory();
-        // initiate owlReasoner
-        //owlReasoner = reasonerFactory.createNonBufferingReasoner(owlOntology);
-        /**
-         * Problem of reasoners: https://github.com/stardog-union/pellet/wiki/FAQ#how-can-i-use-pellet-with-owl--api
-         */
-
-        // create the jfact++ owlReasoner
-        //owlReasoner = Utility.initReasoner("jfact", owlOntology);
-
-
-        // create the Pellet owlReasoner
-        //reasoner = PelletReasonerFactory.getInstance().createNonBufferingReasoner(owlOntology);
-
-        logger.info("\nInitializing reasoner on base ontology........ ");
-        SharedDataHolder.owlReasoner = Utility.initReasoner("jfact", SharedDataHolder.owlOntology);
-        logger.info("Initializing reasoner on base ontology finished.");
-
-
-        // are being loaded by readExamplesFromConf
-        //        HashSet<OWLNamedIndividual> posIndivs = getPosIndivs();
-        //        HashSet<OWLNamedIndividual> negIndivs = getNegIndivs();
-
-
-        try {
-            Files.walk(Paths.get(ConfigParams.confFilePath)).filter(f -> f.toFile().isFile()).
-                    filter(f -> f.toFile().getAbsolutePath().endsWith(".conf")).forEach(f -> {
-
-                logger.info("\nExplaining for " + f.toFile() + " started..........");
-
-                try {
-                    logger.info("\nloading pos/neg examples from conf........ ");
-                    SharedDataHolder.posIndivs = Utility.readPosExamplesFromConf(f.toFile());
-                    SharedDataHolder.negIndivs = Utility.readNegExamplesFromConf(f.toFile());
-                    logger.info("\nloading pos/neg examples from conf finished.");
-
-                    logger.info("\nPositive Individuals: ");
-                    SharedDataHolder.posIndivs.forEach(owlNamedIndividual -> {
-                        logger.info("\t" + owlNamedIndividual.getIRI().getShortForm(), true);
-                    });
-                    logger.info("\nNegative Individuals: ");
-                    SharedDataHolder.negIndivs.forEach(owlNamedIndividual -> {
-                        logger.info("\t" + owlNamedIndividual.getIRI().getShortForm(), true);
-                    });
-
-                    //explanationUsingDlLearner();
-
-                    // this minidl functionanlity is in conceptmathcer project now.
-                    //explanationUsingMiniDlLearner(f);
-
-                } catch (IOException iex) {
-                    logger.error("\n\n!!!!!!!IOException occurred while explaining: " + f.toString() + " !!!!!!!\n" + Utility.getStackTraceAsString(iex));
-                }
-            });
-        } catch (Exception ex) {
-            logger.error("\n\n!!!!!!!Fatal error occurred while iterating dirs: " + ConfigParams.confFilePath + " !!!!!!!\n");
-            logger.error(Utility.getStackTraceAsString(ex));
-        }
-
-    }
 
 
     public static void doOpsDLLearner(Path confPath) {
@@ -230,9 +115,91 @@ public class Main {
         }
     }
 
+
+    /**
+     * @param outputResultPath
+     */
+    private static void initiateSingleDoOps(String outputResultPath) {
+
+        try {
+            // file to write
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputResultPath));
+            PrintStream printStream = new PrintStream(bos, true);
+            outPutStream = printStream;
+
+            monitor = new Monitor(outPutStream);
+            monitor.start("Program started.............", true);
+            logger.info("Program started................");
+            doOps();
+
+            monitor.stop(System.lineSeparator() + "Program finished.", true);
+            logger.info("Program finished.");
+            outPutStream.close();
+        } catch (Exception e) {
+            logger.info("\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(e));
+            if (null != monitor) {
+                monitor.stopSystem("\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(e), true);
+            } else {
+                System.exit(0);
+            }
+        }
+    }
+
+
+    /**
+     * Will get a folder
+     */
+    private static void iterateOverFolders(Path path) {
+
+        if (explanationForPath.equals(path.toString() + "/")) {
+            // System.out.println("equal");
+            return;
+        }
+
+        //System.out.println("Folder: "+ path.toString());
+
+        try {
+            // iterate over the files of a folder
+            Files.walk(path).filter(f -> f.toFile().isFile()).filter(f -> f.toFile().getAbsolutePath().endsWith(".conf")).limit(1).forEach(f -> {
+                // will get each file
+                if (alreadyGotResult.contains(f.toFile().getName())) {
+                    System.out.println(f.toString() + " already has result not running it");
+                } else {
+                    //System.out.println("Not matched "+ f.toString());
+                    tryToCreateExplanationDemo(f);
+                }
+
+            });
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Writer.writeInDisk(logFile, "!!!!!!!Fatal error!!!!!!!\n" + OWLUtility.getStackTraceAsString(e), true);
+        }
+    }
+
+
     public static void main(String[] args) throws OWLOntologyCreationException, IOException {
 
-        ConfigParams.init();
+        if(ConfigParams.batch){
+
+            // start with root folder
+            Files.walk(Paths.get(ConfigParams.batchConfFilePath)).filter(d -> d.toFile().isDirectory()).forEach(d -> {
+                try {
+                    iterateOverFolders(d);
+                    logger.info("Running on folder: " + d.toString());
+                } catch (Exception e) {
+                    logger.info("\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(e));
+                    if (null != monitor) {
+                        monitor.stopSystem("\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(e), true);
+                    } else {
+                        System.exit(0);
+                    }
+                }
+            });
+
+        }else{
+            initiateSingleDoOps(ConfigParams.outputResultPath);
+        }
 
         // global log file to write. this is different from log4j log file.
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(ConfigParams.logPath));

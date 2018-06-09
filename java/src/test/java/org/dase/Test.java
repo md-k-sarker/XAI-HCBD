@@ -1,6 +1,6 @@
 package org.dase;
 
-import edu.wright.dase.explanation.dllearner.Explanation_old;
+import org.dase.explanation.dllearner.Explanation_old;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,3 +1,0 @@
-#To increase memory for java program in eclipse
-#give this argument as VM agrument
--XX:-UseGCOverheadLimit -Xms2048M -Xmx16144M

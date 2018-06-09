@@ -1,6 +1,6 @@
 package org.dase.util;
 
-import edu.wright.dase.datastructure.Trees;
+import org.dase.datastructure.Trees;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;

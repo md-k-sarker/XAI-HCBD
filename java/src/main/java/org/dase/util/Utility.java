@@ -3,22 +3,8 @@
  */
 package org.dase.util;
 
-import java.io.*;
-import java.lang.invoke.MethodHandles;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.TreeSet;
-
 import com.google.common.base.Optional;
+import com.wcohen.ss.Levenstein;
 import org.dllearner.algorithms.celoe.CELOE;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
@@ -27,12 +13,19 @@ import org.semanticweb.owlapi.profiles.OWLProfileReport;
 import org.semanticweb.owlapi.profiles.Profiles;
 import org.semanticweb.owlapi.reasoner.*;
 import org.semanticweb.owlapi.util.OWLEntityRemover;
-
-import com.wcohen.ss.Levenstein;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.ac.manchester.cs.jfact.JFactFactory;
 import uk.ac.manchester.cs.owl.owlapi.alternateimpls.ThreadSafeOWLReasoner;
+
+import java.io.*;
+import java.lang.invoke.MethodHandles;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author sarker
@@ -301,6 +294,53 @@ public class Utility {
         }
     }
 
+
+    /**
+     * Read ontology path from conf file
+     *
+     * @param confFilePath
+     * @throws IOException
+     */
+    public static String readOntologyPathConf(String confFilePath) {
+
+        return readOntologyPathConf(new File(confFilePath));
+    }
+
+    /**
+     * Read ontology path from conf confFile
+     *
+     * @param confFile
+     * @throws IOException
+     */
+    public static String readOntologyPathConf(File confFile) {
+
+        logger.info("Reading ontoPath from: " + confFile);
+        String ontoPath = "";
+        try (BufferedReader buffRead = new BufferedReader(new FileReader(confFile))) {
+            String line;
+            while ((line = buffRead.readLine()) != null) {
+                if (line.startsWith("ks.fileName")) {
+                    // remove first { and last }
+                    ontoPath = line.substring(line.indexOf("=") + 1, line.length() - 1).trim().replaceAll("\"", "");
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("Error reading ontoPath from confFile. program exiting");
+            System.exit(-1);
+        }
+
+        if (ontoPath.endsWith(".owl")) {
+            logger.info("OntoPath: " + ontoPath + " is valid ontoPath.");
+            return ontoPath;
+        } else {
+            logger.error("OntoPath " + ontoPath + " is not valid ontoPath. program exiting");
+            System.exit(-1);
+        }
+
+        return ontoPath;
+    }
+
+
     /**
      * Write statistics to file/disk
      *
@@ -562,6 +602,8 @@ public class Utility {
         Date date = new Date();
         return dateFormat.format(date);
     }
+
+
 
     /**
      * @param args

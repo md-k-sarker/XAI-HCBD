@@ -49,10 +49,10 @@ public class Monitor {
         if (message.trim() != "") {
             displayMessage(message, write);
         }
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy  HH.mm.ss a");
         Date date = new Date();
         startTime = System.currentTimeMillis();
-        displayMessage("Start Time: " + dateFormat.format(date), write);
+        displayMessage("Program starts at: " + dateFormat.format(date), write);
     }
 
     public void displayMessageWithTime(String message, boolean write) {
@@ -67,14 +67,14 @@ public class Monitor {
     }
 
     public void stop(String message, boolean write) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy  HH.mm.ss a");
         Date date = new Date();
         Long end = System.currentTimeMillis();
         if (message.trim() != "") {
             displayMessage(message, write);
         }
-        displayMessage("End Time: " + dateFormat.format(date), write);
-        displayMessage("Duration: " + (end - startTime) / 1000 + " sec", write);
+        displayMessage("Program ends at: " + dateFormat.format(date), write);
+        displayMessage("Program duration: " + (end - startTime) / 1000 + " sec", write);
     }
 
     public void stopSystem(String message, boolean write) {
