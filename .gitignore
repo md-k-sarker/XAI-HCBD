@@ -4,6 +4,7 @@ bin/
 tmp/
 *.tmp
 *.bak
+*.iml
 *.swp
 *~.nib
 *.class
@@ -15,6 +16,7 @@ local.properties
 
 #idea IDE
 java/.idea/
+.idea/
 
 # Eclipse Core
 .project

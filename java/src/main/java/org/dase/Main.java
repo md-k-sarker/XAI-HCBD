@@ -5,10 +5,10 @@ Written at 5/7/18.
 */
 
 
-import org.dase.explanation.dllearner.DLLearner;
+import edu.wright.dase.explanation.dllearner.DLLearner;
 import org.dase.util.Monitor;
 import org.dase.util.*;
-import org.dase.explanation.minidllearner.*;
+import edu.wright.dase.explanation.minidllearner.*;
 import org.dllearner.algorithms.celoe.CELOE;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -64,13 +64,13 @@ public class Main {
         // Create a new ConceptFinder object with the given owlReasoner.
         ConceptFinder findConceptsObj = new ConceptFinder(printStream, miniDlMonitor);
 
-        logger.info("\nExplanation using Mini DL Learner started..........");
+        logger.info("\nExplanation_old using Mini DL Learner started..........");
         miniDlMonitor.start("", true);
         try {
             findConceptsObj.findConcepts(SharedDataHolder.posIndivs, SharedDataHolder.negIndivs, ConfigParams.tolerance, imgContains);
-            logger.info("Explanation using Mini DL Learner finished successfully.");
+            logger.info("Explanation_old using Mini DL Learner finished successfully.");
         } catch (Exception ex) {
-            logger.error("\n!!!!!!!!!!Explanation using Mini DL Learner crashed!!!!!!!!!! while explaining: " + confPath.toString() + "\n");
+            logger.error("\n!!!!!!!!!!Explanation_old using Mini DL Learner crashed!!!!!!!!!! while explaining: " + confPath.toString() + "\n");
             logger.error(Utility.getStackTraceAsString(ex));
             logger.error("\nreturning control to parent caller.........");
         }
@@ -219,9 +219,9 @@ public class Main {
             Utility.writeStatistics(expl, writeToDLLearnerResult);
 
 
-            Writer.writeInDisk(writeToDLLearnerResult, "\nExplanation for: " + confPath.toFile().getAbsolutePath() +
+            Writer.writeInDisk(writeToDLLearnerResult, "\nExplanation_old for: " + confPath.toFile().getAbsolutePath() +
                     "\n finished at: " + Utility.getCurrentTimeAsString(), true);
-            System.out.println("Explanation for: " + confPath.toFile().getAbsolutePath() +
+            System.out.println("Explanation_old for: " + confPath.toFile().getAbsolutePath() +
                     "\n finished at: " + Utility.getCurrentTimeAsString());
 
         } catch (Exception ex) {

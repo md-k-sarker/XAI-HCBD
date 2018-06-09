@@ -1,4 +1,4 @@
-package org.dase.util;
+package edu.wright.dase.util;
 
 import edu.wright.dase.datastructure.Trees;
 import org.semanticweb.owlapi.apibinding.OWLManager;
