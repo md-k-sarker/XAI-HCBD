@@ -6,10 +6,40 @@
 	<version>0.0.1</version>
 
 	<properties>
-		<slf4j.version>1.7.21</slf4j.version>
+		<finalAppName>XAI-HCBD-JAVA</finalAppName>
+
+		<jdk.source.version>1.8</jdk.source.version>
+		<jdk.target.version>1.8</jdk.target.version>
+
+		<owlapi.version>4.5.0</owlapi.version>
+		<!-- owlapi used by dl-learner version  4.5.0.
+        latest version: 5.x.y-->
+		<jfact.version>4.0.4</jfact.version>
+		<!-- jfact used by dl-learner version  4.0.4.
+         latest version: 5.0.1-->
+		<hermit.version>1.4.1.513</hermit.version>
+		<!-- hermit used by dl-learner 1.3.8.413-->
+		<factpp-owlapi.version>1.6.2</factpp-owlapi.version>
+		<elk-owlapi.version>0.5.0-SNAPSHOT</elk-owlapi.version>
+		<owllink.version>1.2.2</owllink.version>
+		<pellet.version>2.5.0-dllearner</pellet.version>
+		<secondstring.version>0.1</secondstring.version>
+
+		<slf4j.version>1.7.25</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
+		<testng.version>6.11</testng.version>
+		<junit.version>4.12</junit.version>
+
+		<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
+		<maven-shade-plugin.version>3.0.0</maven-shade-plugin.version>
+		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+
+		<mainclass>org.dase.Main</mainclass>
+		<!--<slf4j.version>1.7.21</slf4j.version>-->
 	</properties>
 
-	<name>Explainability</name>
+	<name>${finalAppName}</name>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.dllearner</groupId>
@@ -28,17 +58,50 @@
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-log4j12</artifactId>
 				</exclusion>
+                <exclusion>
+                    <groupId>net.sourceforge.owlapi</groupId>
+                    <artifactId>jfact</artifactId>
+                </exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- OWL api latest version http://search.maven.org/#artifactdetails%7Cnet.sourceforge.owlapi%7Cowlapi-parent%7C5.1.4%7Cpom-->
+
+        <!-- JFact -->
+        <dependency>
+            <!-- OWL api latest version http://search.maven.org/#artifactdetails%7Cnet.sourceforge.owlapi%7Cowlapi-parent%7C5.1.4%7Cpom-->
+            <groupId>net.sourceforge.owlapi</groupId>
+            <artifactId>jfact</artifactId>
+            <version>${jfact.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sourceforge.owlapi</groupId>
+                    <artifactId>owlapi-distribution</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.sf.trove4j</groupId>
+                    <artifactId>trove4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.wcohen/com.wcohen.secondstring -->
-		<dependency>
-			<groupId>com.wcohen</groupId>
-			<artifactId>com.wcohen.secondstring</artifactId>
-			<version>0.1</version>
-		</dependency>
+        <!-- String matching -->
+        <dependency>
+            <!-- https://mvnrepository.com/artifact/com.wcohen/com.wcohen.secondstring -->
+            <groupId>com.wcohen</groupId>
+            <artifactId>com.wcohen.secondstring</artifactId>
+            <version>${secondstring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
 
+		<!--Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -46,6 +109,7 @@
 		</dependency>
 
 		<dependency>
+			<!--slf4j-log4j12 is just apibinding of the real logging framework log4j. -->
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
@@ -64,11 +128,11 @@
 			<dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-slf4j-impl</artifactId> 
 			<version>2.8.1</version> </dependency> -->
 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>apache-log4j-extras</artifactId>
-			<version>1.2.17</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>log4j</groupId>-->
+			<!--<artifactId>apache-log4j-extras</artifactId>-->
+			<!--<version>1.2.17</version>-->
+		<!--</dependency>-->
 
 		<!-- add local jar as maven dependency -->
 <!-- 		<dependency>
@@ -79,11 +143,27 @@
 			<systemPath>${project.basedir}/src/main/resources/lib/align.jar</systemPath>
 		</dependency> -->
 
+        <!--Testing -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+		
 	</dependencies>
 
 	<build>
 
-		<finalName>Explainability</finalName>
+		<finalName>${finalAppName}</finalName>
 		<plugins>
 
 			<!-- download source code in Eclipse -->
@@ -138,7 +218,7 @@
 								<!-- add Main-Class to manifest file -->
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>edu.wright.cs.pdfRenamer</mainClass>
+									<!-- Define main class later as needed <mainClass>edu.wright.cs.pdfRenamer</mainClass> -->
 								</transformer>
 							</transformers>
 						</configuration>
@@ -165,5 +245,21 @@
 			Leipzig, AKSW Maven2 Repository</name> <url>http://maven.aksw.org/repository/snapshots/</url> 
 			</repository> -->
 
+		<!-- Maven central -->
+	<repository>
+			<id>maven.central</id>
+			<name>Maven central</name>
+			<url>https://repo.maven.apache.org/maven2/</url>
+		</repository> 
+
 	</repositories>
+<!-- 	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>net.sourceforge.owlapi</groupId>
+				<artifactId>owlapi-distribution</artifactId>
+				<version>5.1.3</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement> -->
 </project>
