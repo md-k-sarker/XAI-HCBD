@@ -1058,6 +1058,9 @@ public class Explanation {
     public static void main(String[] args) {
 
         int i = 0;
+        if(i==0)
+            return;
+
         Writer.writeInDisk(logFile, "Main Program started at: " + OWLUtility.getCurrentTimeAsString(), false);
 //        try {
 //            Files.walk(Paths.get(alreadyGotResultPath)).filter(f -> f.toFile().isFile()).
