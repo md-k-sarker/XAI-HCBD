@@ -188,7 +188,7 @@ public class Utility {
         OWLEntityRemover entityRemover = new OWLEntityRemover(Collections.singleton(combinedOntology));
         Set<OWLAxiom> relatedAxioms = new HashSet<OWLAxiom>();
 
-        IRI iri = IRI.create(Constants.prefix + "imageContains");
+        IRI iri = IRI.create(ConfigParams.namespace + "imageContains");
         // System.out.println("objProp: "+ iri);
         OWLObjectProperty objProp = OWLManager.getOWLDataFactory().getOWLObjectProperty(iri);
 
@@ -249,7 +249,7 @@ public class Utility {
 
                 // add to negIndivs
                 String name = f.getFileName().toString().replaceAll(".owl", "");
-                IRI iriIndi = IRI.create(Constants.prefix + name);
+                IRI iriIndi = IRI.create(ConfigParams.namespace + name);
                 OWLNamedIndividual namedIndi = OWLManager.getOWLDataFactory().getOWLNamedIndividual(iriIndi);
                 posExamples.add(namedIndi);
                 posIndiCounter++;
@@ -281,7 +281,7 @@ public class Utility {
 
                 // add to negIndivs
                 String name = f.getFileName().toString().replaceAll(".owl", "");
-                IRI iriIndi = IRI.create(Constants.prefix + name);
+                IRI iriIndi = IRI.create(ConfigParams.namespace + name);
                 OWLNamedIndividual namedIndi = OWLManager.getOWLDataFactory().getOWLNamedIndividual(iriIndi);
                 negExamples.add(namedIndi);
                 negIndiCounter++;

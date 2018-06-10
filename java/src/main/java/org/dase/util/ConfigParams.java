@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 public final class ConfigParams {
@@ -32,9 +34,14 @@ public final class ConfigParams {
     public static boolean batch;
     public static String batchOutputResult;
     public static String batchConfFilePath;
+    public static int maxNoOfThreads;
+    public static int maxExecutionTimeInSeconds;
+    public static  int maxNrOfResults;
+
+    public static DateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy  HH.mm.ss a");
 
     // used in createontologyfromade20k
-    public static final String ontologyIRI = "http://www.daselab.org/ontologies/ADE20K/hcbdwsu/";
+    // public static final String ontologyIRI = "http://www.daselab.org/ontologies/ADE20K/hcbdwsu/";
 
     static {
         prop = new Properties();
@@ -58,15 +65,15 @@ public final class ConfigParams {
         });
 
         batch = Boolean.valueOf(prop.getProperty("batch"));
-        if(batch){
-            batchConfFilePath=prop.getProperty("path.batchConfFilePath");
-            batchOutputResult=prop.getProperty("path.batchOutputResult");
+        if (batch) {
+            batchConfFilePath = prop.getProperty("path.batchConfFilePath");
+            batchOutputResult = prop.getProperty("path.batchOutputResult");
             // ontoPath will be determined at runtime
-        }else{
+        } else {
             confFilePath = prop.getProperty("path.confFilePath");
             ontoPath = Utility.readOntologyPathConf(confFilePath);
             String[] inpPaths = confFilePath.split(File.separator);
-            String name = inpPaths[inpPaths.length - 1].replace(".conf", "_expl_by_ecii.txt");
+            String name = inpPaths[inpPaths.length - 1].replace(".conf", "_expl_by_dl_learner.txt");
             outputResultPath = prop.getProperty("path.outputResult") + "" + name;
         }
 
@@ -76,19 +83,25 @@ public final class ConfigParams {
         tolerance = Double.valueOf(prop.getProperty("tolerance"));
         combinationK1 = Integer.valueOf(prop.getProperty("combinationK1"));
         combinationThreshold = Double.valueOf(prop.getProperty("combinationThreshold"));
+        maxExecutionTimeInSeconds = Integer.valueOf(prop.getProperty("maxExecutionTimeInSeconds"));
+        maxNoOfThreads = Integer.valueOf(prop.getProperty("maxNoOfThreads"));
+        maxNrOfResults = Integer.valueOf(prop.getProperty("maxNrOfResults"));
 
         logger.info("Config properties: ");
         printConfigProperties();
     }
 
-    private static void printConfigProperties(){
-        logger.info("\tconfFilePath: "+ confFilePath);
-        logger.info("\tontoPath: "+ ontoPath);
-        logger.info("\toutputResultPath: "+ outputResultPath);
-        logger.info("\tnamespace: "+ namespace);
-        logger.info("\ttolerance: "+ tolerance);
-        logger.info("\tcombinationK1: "+ combinationK1);
-        logger.info("\tcombinationThreshold: "+ combinationThreshold);
+    private static void printConfigProperties() {
+        logger.info("\tconfFilePath: " + confFilePath);
+        logger.info("\tontoPath: " + ontoPath);
+        logger.info("\toutputResultPath: " + outputResultPath);
+        logger.info("\tnamespace: " + namespace);
+        logger.info("\ttolerance: " + tolerance);
+        logger.info("\tcombinationK1: " + combinationK1);
+        logger.info("\tcombinationThreshold: " + combinationThreshold);
+        logger.info("\tmaxExecutionTimeInSeconds: " + maxExecutionTimeInSeconds);
+        logger.info("\tmaxNoOfThreads: " + maxNoOfThreads);
+        logger.info("\tmaxNrOfResults: " + maxNrOfResults);
 
     }
 
