@@ -5,12 +5,9 @@ import java.lang.invoke.MethodHandles;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.dase.util.*;
-import org.dase.util.Writer;
 import org.dllearner.algorithms.celoe.CELOE;
 import org.dllearner.core.EvaluatedDescription;
 import org.dllearner.core.Score;
@@ -78,7 +75,7 @@ public class Explanation {
      *
      * @throws OWLOntologyCreationException
      */
-    public static void init() throws OWLOntologyCreationException {
+    public static void initVariables() throws OWLOntologyCreationException {
         owlOntologyManager = OWLManager.createConcurrentOWLOntologyManager();
         owlDataFactory = owlOntologyManager.getOWLDataFactory();
         IRI ontoIRI = IRI.create(ConfigParams.namespace);
@@ -89,7 +86,6 @@ public class Explanation {
         // http://dl.kr.org/ore2015/vip.cs.man.ac.uk_8008/results.html
         // jfact is based on fact++
         // reasonerFactory = new JFactFactory();
-
     }
 
     /**
@@ -167,6 +163,7 @@ public class Explanation {
     }
 
 
+    static int solutionCounter = 0;
     /**
      * Sort the solutions
      *
@@ -215,8 +212,6 @@ public class Explanation {
 
     }
 
-
-    static int solutionCounter = 0;
 
 
     /**
@@ -337,18 +332,16 @@ public class Explanation {
     private static void iterateOverFolders(Path dirPath) {
 
         if (ConfigParams.batchConfFilePath.equals(dirPath.toString() + "/")) {
-            // System.out.println("equal");
+            logger.info("not running for dirPath: "+ dirPath.toString());
             return;
         }
-
-        //System.out.println("Folder: "+ dirPath.toString());
 
         try {
             // iterate over the files of a folder
             Files.walk(dirPath).filter(f -> f.toFile().isFile()).filter(f -> f.toFile().getAbsolutePath().endsWith(".conf")).limit(1).forEach(f -> {
                 // will get each file
                 if (alreadyGotResult.contains(f.toFile().getName())) {
-                    System.out.println(f.toString() + " already has result not running it");
+                    logger.info(f.toString() + " already has result not running it");
                 } else {
                     // set parameters
                     ConfigParams.confFilePath = f.toString();
@@ -381,9 +374,7 @@ public class Explanation {
 
         try {
 
-            Long programStartTime = System.currentTimeMillis();
-
-            init();
+            initVariables();
 
             // file to write
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputResultPath));
@@ -396,14 +387,15 @@ public class Explanation {
 
             createExplanationUsingDlLearner(Paths.get(ConfigParams.confFilePath));
 
+            // Long programEndTime = System.currentTimeMillis();
+            // monitor.displayMessage("\nProgram ends at: " + ConfigParams.dateFormat.format(new Date()), true);
+            // monitor.displayMessage("\nProgram duration: " + (programEndTime - programStartTime) / 1000 + " sec", true);
+
             monitor.stop(System.lineSeparator() + "Program finished.", true);
             logger.info("Program finished.");
 
-            Long programEndTime = System.currentTimeMillis();
-            monitor.displayMessage("\nProgram ends at: " + ConfigParams.dateFormat.format(new Date()), true);
-            monitor.displayMessage("\nProgram duration: " + (programEndTime - programStartTime) / 1000 + " sec", true);
-
             outPutStream.close();
+
         } catch (Exception e) {
             logger.info("\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(e));
             if (null != monitor) {
@@ -430,8 +422,8 @@ public class Explanation {
                 // start with root folder
                 Files.walk(Paths.get(ConfigParams.batchConfFilePath)).filter(d -> d.toFile().isDirectory()).forEach(d -> {
                     try {
-                        iterateOverFolders(d);
                         logger.info("Running on folder: " + d.toString());
+                        iterateOverFolders(d);
                     } catch (Exception e) {
                         logger.info("\n\n!!!!!!!Fatal error!!!!!!!\n" + Utility.getStackTraceAsString(e));
                         if (null != monitor) {

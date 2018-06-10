@@ -550,7 +550,7 @@ public class MapADEToSumo extends ModifyOntology {
 
 //            MapADEToSumo mapADEToSumo = new MapADEToSumo();
 //
-//            mapADEToSumo.init();
+//            mapADEToSumo.initVariables();
 //            mapADEToSumo.loadOntology();
 //            mapADEToSumo.createObjectProperty();
 //            mapADEToSumo.iteratedOverFiles();

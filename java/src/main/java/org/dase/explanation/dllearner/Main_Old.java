@@ -76,13 +76,13 @@ package org.dase.explanation.dllearner;
 //
 //		logger.debug("initializing knowledge source...");
 //		KnowledgeSource ks = new OWLAPIOntology(ontology);
-//		ks.init();
+//		ks.initVariables();
 //		logger.debug("finished initializing knowledge source");
 //
 //		logger.debug("initializing reasoner...");
 //		OWLAPIReasoner baseReasoner = new OWLAPIReasoner(ks);
 //		baseReasoner.setUseFallbackReasoner(true);
-//		baseReasoner.init();
+//		baseReasoner.initVariables();
 //		Logger.getLogger(ElkReasoner.class).setLevel(Level.OFF);
 //		logger.debug("finished initializing reasoner");
 //		logger.debug("initializing reasoner component...");
@@ -90,7 +90,7 @@ package org.dase.explanation.dllearner;
 //		rc.setReasonerComponent(baseReasoner);
 //		rc.setHandlePunning(true);
 //		rc.setMaterializeExistentialRestrictions(true);
-//		rc.init();
+//		rc.initVariables();
 //		logger.debug("finished initializing reasoner");
 //
 //		// Reasoner myObject = (Reasoner) MonProxyFactory.monitor(rc);
@@ -99,7 +99,7 @@ package org.dase.explanation.dllearner;
 //		PosNegLPStandard lp = new PosNegLPStandard(rc);
 //		lp.setPositiveExamples(posExamples);
 //		lp.setNegativeExamples(negExamples);
-//		lp.init();
+//		lp.initVariables();
 //		logger.debug("finished initializing learning problem");
 //
 //		logger.debug("initializing learning algorithm...");
@@ -134,7 +134,7 @@ package org.dase.explanation.dllearner;
 //		op.setSubHierarchy(rc.getClassHierarchy());
 //		op.setObjectPropertyHierarchy(rc.getObjectPropertyHierarchy());
 //		op.setDataPropertyHierarchy(rc.getDatatypePropertyHierarchy());
-//		op.init();
+//		op.initVariables();
 //		logger.debug("finished initializing operator");
 //		((CELOE) la).setOperator(op);
 //
@@ -164,7 +164,7 @@ package org.dase.explanation.dllearner;
 //		// System.out.println(cls);
 //		// }
 //
-//		la.init();
+//		la.initVariables();
 //		la.start();
 //	}
 //

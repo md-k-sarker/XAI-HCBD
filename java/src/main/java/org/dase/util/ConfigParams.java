@@ -61,7 +61,7 @@ public final class ConfigParams {
         System.out.println("Printing config file before parsing: ");
         // print property values
         prop.forEach((k, v) -> {
-            logger.info(k + ": " + v);
+            logger.info("\t"+k + ": " + v);
         });
 
         batch = Boolean.valueOf(prop.getProperty("batch"));
@@ -87,7 +87,7 @@ public final class ConfigParams {
         maxNoOfThreads = Integer.valueOf(prop.getProperty("maxNoOfThreads"));
         maxNrOfResults = Integer.valueOf(prop.getProperty("maxNrOfResults"));
 
-        logger.info("Config properties: ");
+        logger.info("\nConfig properties after parsing: ");
         printConfigProperties();
     }
 

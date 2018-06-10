@@ -45,7 +45,7 @@ public class Testing {
 
 //	public static void doAlignMent() throws Exception {
 //		
-//		Explanation_old.init();
+//		Explanation_old.initVariables();
 //
 //		OWLOntology ontB = Explanation_old.loadOntology(new File("/Users/sarker/Mega_Cloud/ProjectHCBD/datas/ning_manual/DL_tensorflow_save_2_txts_as_dirs/AirportTerminal_/airport_terminal_ADE_train_00001092.owl"));
 //		OWLOntology ontA = Explanation_old.loadOntology(new File("/Users/sarker/Desktop/test/_aligned__.owl"));

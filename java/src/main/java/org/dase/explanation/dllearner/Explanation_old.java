@@ -279,8 +279,8 @@ public class Explanation_old {
         }
 
         // call to run dl-learner
-        DLLearner dlLearner = new DLLearner(combinedOntology, posExamples, posExamples, writeTo, maxExecutionTimeInSeconds);
-        CELOE expl = dlLearner.run();
+        DLLearner dlLearner = new DLLearner(combinedOntology, posExamples, posExamples, writeTo);
+        CELOE expl = dlLearner.run(false);
 
         counter++;
 
@@ -369,8 +369,8 @@ public class Explanation_old {
         }
 
         // call to run dl-learner
-        DLLearner dlLearner = new DLLearner(combinedOntology, posExamples, posExamples, writeTo, maxExecutionTimeInSeconds);
-        CELOE expl = dlLearner.run();
+        DLLearner dlLearner = new DLLearner(combinedOntology, posExamples, posExamples, writeTo);
+        CELOE expl = dlLearner.run(false);
 
         Utility.writeStatistics(expl, writeTo);
         printStatus(explanationFor);
@@ -452,7 +452,7 @@ public class Explanation_old {
             Writer.writeInDisk(writeToPosOnly, "\n\n", true);
 
             // call to run dl-learner
-            DLLearner dlLearner = new DLLearner(_mod_onto, posExamples, posExamples, writeToPosOnly, maxExecutionTimeInSeconds);
+            DLLearner dlLearner = new DLLearner(_mod_onto, posExamples, posExamples, writeToPosOnly);
             CELOE expl = dlLearner.run(true);
 
             counter++;

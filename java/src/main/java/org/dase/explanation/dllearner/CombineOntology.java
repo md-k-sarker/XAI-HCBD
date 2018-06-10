@@ -301,7 +301,7 @@ public class CombineOntology {
 
             doOps();
 
-            //init();
+            //initVariables();
 
             //runOneByOne();
 

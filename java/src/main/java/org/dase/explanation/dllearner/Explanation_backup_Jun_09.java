@@ -32,7 +32,7 @@ import java.util.Set;
  * @author sarker
  */
 
-public class MainDL {
+public class Explanation_backup_Jun_09 {
 
     final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     // log level: ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
@@ -161,7 +161,7 @@ public class MainDL {
             Writer.writeInDisk(writeToDLLearnerResult, "\n\n", true);
 
             // call to run dl-learner
-            DLLearner dlLearner = new DLLearner(_onto, posExamples, posExamples, writeToDLLearnerResult, maxExecutionTimeInSeconds);
+            DLLearner dlLearner = new DLLearner(_onto, posExamples, posExamples, writeToDLLearnerResult);
             CELOE expl = dlLearner.run(true);
 
             counter++;
@@ -253,7 +253,7 @@ public class MainDL {
 //		for(OWLNamedIndividual indi: posExamples) {
 //			System.out.println(indi);
 //		}
-//		
+//
 //		System.out.println("\nNegExamples: ");
 //		for(OWLNamedIndividual indi: negExamples) {
 //			System.out.println(indi);

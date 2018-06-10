@@ -47,7 +47,7 @@ public class Alignment {
 
 	public static void doAlignMent(String pathA, String pathB, String pathTarget) throws Exception {
 
-		// Explanation_old.init();
+		// Explanation_old.initVariables();
 
 		OWLOntology ontA = Utility.loadOntology(pathA);
 		System.out.println("Loaded ontology: " + ontA.getOntologyID());

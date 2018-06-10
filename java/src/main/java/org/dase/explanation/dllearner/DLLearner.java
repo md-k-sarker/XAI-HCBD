@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.dase.util.ConfigParams;
 import org.dllearner.algorithms.celoe.CELOE;
 import org.dllearner.core.AbstractCELA;
 import org.dllearner.core.ComponentInitException;
@@ -92,7 +93,10 @@ public class DLLearner {
 	 * 
 	 */
 	//@formatter:on
+    public CELOE run(boolean posOnly) throws ComponentInitException {
 
+        return run(posOnly, ReasonerImplementation.JFACT, ConfigParams.maxNrOfResults, ConfigParams.maxExecutionTimeInSeconds);
+    }
 
     /**
      * @param posOnly

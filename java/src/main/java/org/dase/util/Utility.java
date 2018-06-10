@@ -179,8 +179,7 @@ public class Utility {
     }
 
     /**
-     * Removes concepts which do not have a single instance. alternatively keep
-     * those concepts which have at-least a single instance. TO-DO: FIX
+     * Removes individuals which are not related to the experiments.
      */
     public static OWLOntology removeNonRelatedIndividuals(OWLOntology combinedOntology, OWLReasoner owlReasoner,
                                                           Set<OWLNamedIndividual> excludedIndivs, String writeTo) {
@@ -189,7 +188,6 @@ public class Utility {
         Set<OWLAxiom> relatedAxioms = new HashSet<OWLAxiom>();
 
         IRI iri = IRI.create(ConfigParams.namespace + "imageContains");
-        // System.out.println("objProp: "+ iri);
         OWLObjectProperty objProp = OWLManager.getOWLDataFactory().getOWLObjectProperty(iri);
 
         for (OWLNamedIndividual owlIndi : combinedOntology.getIndividualsInSignature()) {
@@ -489,7 +487,7 @@ public class Utility {
      * @param filePath
      * @throws IOException
      */
-    public static HashSet<OWLNamedIndividual> readPosExamplesFromConf(String filePath) throws IOException{
+    public static HashSet<OWLNamedIndividual> readPosExamplesFromConf(String filePath) throws IOException {
         return readPosExamplesFromConf(new File(filePath));
     }
 
@@ -500,7 +498,7 @@ public class Utility {
      * @throws IOException
      */
     public static HashSet<OWLNamedIndividual> readPosExamplesFromConf(File file) throws IOException {
-        logger.info("Reading posExamples from: "+ file);
+        logger.info("Reading posExamples from: " + file);
         HashSet<OWLNamedIndividual> _posIndivs = new HashSet<OWLNamedIndividual>();
 
         try (BufferedReader buffRead = new BufferedReader(new FileReader(file))) {
@@ -515,7 +513,7 @@ public class Utility {
                 }
             }
         } catch (Exception ex) {
-            logger.error("Error reading posExamples... \n"+ getStackTraceAsString(ex));
+            logger.error("Error reading posExamples... \n" + getStackTraceAsString(ex));
             //System.out.println("Error reading posExamples... ");
             logger.error("Program exiting.....");
             System.exit(-1);
@@ -540,7 +538,7 @@ public class Utility {
      * @param filePath
      * @throws IOException
      */
-    public static HashSet<OWLNamedIndividual> readNegExamplesFromConf(String filePath) throws IOException{
+    public static HashSet<OWLNamedIndividual> readNegExamplesFromConf(String filePath) throws IOException {
         return readNegExamplesFromConf(new File(filePath));
     }
 
@@ -552,7 +550,7 @@ public class Utility {
      */
     public static HashSet<OWLNamedIndividual> readNegExamplesFromConf(File file) throws IOException {
 
-        logger.info("Reading negExamples from: "+ file);
+        logger.info("Reading negExamples from: " + file);
         HashSet<OWLNamedIndividual> _negIndivs = new HashSet<OWLNamedIndividual>();
 
         try (BufferedReader buffRead = new BufferedReader(new FileReader(file))) {
@@ -586,23 +584,28 @@ public class Utility {
 
 
     private static HashSet<OWLNamedIndividual> addIndivsToList(String[] indivs, HashSet<OWLNamedIndividual> indivsSet) {
+
         for (String eachIndi : indivs) {
             eachIndi = eachIndi.trim();
             // remove "ex: and last "
             eachIndi = eachIndi.substring(eachIndi.indexOf(":") + 1, eachIndi.length() - 1);
-            IRI iri = IRI.create(ConfigParams.namespace + "#" + eachIndi);
+            IRI iri;
+            if (ConfigParams.namespace.endsWith("#")) {
+                iri = IRI.create(ConfigParams.namespace + eachIndi);
+            } else {
+                iri = IRI.create(ConfigParams.namespace + "#" + eachIndi);
+            }
             indivsSet.add(OWLManager.getOWLDataFactory().getOWLNamedIndividual(iri));
         }
         return indivsSet;
     }
 
 
-    public static String getCurrentDateTimeAsString(){
+    public static String getCurrentDateTimeAsString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         return dateFormat.format(date);
     }
-
 
 
     /**

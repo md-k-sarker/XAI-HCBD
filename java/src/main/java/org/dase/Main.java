@@ -51,7 +51,7 @@
 //        logger.info("total axioms: " + SharedDataHolder.owlOntology.getAxiomCount());
 //        logger.info("total named class: " + SharedDataHolder.owlOntology.getClassesInSignature().size());
 //        logger.info("total named individuals: " + SharedDataHolder.owlOntology.getIndividualsInSignature().size());
-//        logger.info("instances of owl:Thing using reasoner after init reasoning: " + SharedDataHolder.owlReasoner.getInstances(
+//        logger.info("instances of owl:Thing using reasoner after initVariables reasoning: " + SharedDataHolder.owlReasoner.getInstances(
 //                SharedDataHolder.owlThing, false).getFlattened().size());
 //    }
 //
