@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>wdu.wright.dase</groupId>
-	<artifactId>explainability</artifactId>
+	<artifactId>explainability_by_dl_learner</artifactId>
 	<version>0.0.1</version>
 
 	<properties>
-		<finalAppName>explainability</finalAppName>
+		<finalAppName>${artifactId}</finalAppName>
 
 		<jdk.source.version>1.8</jdk.source.version>
 		<jdk.target.version>1.8</jdk.target.version>

@@ -104,7 +104,8 @@ public class DLLearner {
      * @return
      * @throws ComponentInitException
      */
-    public CELOE run(boolean posOnly, ReasonerImplementation reasonerName, int maxNumberOfResults, int maxExecutionTimeInSeconds) throws ComponentInitException {
+    public CELOE run(boolean posOnly, ReasonerImplementation reasonerName, int maxNumberOfResults, int maxExecutionTimeInSeconds)
+            throws ComponentInitException {
         KnowledgeSource ks = new OWLAPIOntology(this.owlOntology);
 
         ks.init();
