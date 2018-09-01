@@ -6,7 +6,6 @@ Written at 5/7/18.
 
 
 import org.dase.explanation.dllearner.DLLearner;
-import org.dase.explanation.minidllearner.ConceptFinder;
 import org.dase.util.*;
 import org.dllearner.algorithms.celoe.CELOE;
 import org.semanticweb.owlapi.model.*;

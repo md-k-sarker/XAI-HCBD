@@ -51,6 +51,7 @@ public class Explanation_old {
     final static Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     // log level: ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
 
+
     final static int maxNegativeInstances = 200;
     static int totalInstances = 0;
     static int totalClasses = 0;
